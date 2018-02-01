@@ -1,0 +1,16 @@
+{
+  "name": "0xbitcoin-miner",
+  "version": "0.0.2",
+  "description": "Find hashes ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "js-sha3": "^0.7.0",
+    "leftpad": "^0.0.1",
+    "web3-utils": "^1.0.0-beta.29"
+  }
+}
