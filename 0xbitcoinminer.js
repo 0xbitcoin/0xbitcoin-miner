@@ -5,14 +5,19 @@ var web3utils =  require('web3-utils');
 
 var leftpad =  require('leftpad');
 
+var miningDifficulty = 4;
+var challengeNumber = 'aaa';
+
+var tokenContract;
+
 module.exports =  {
 
 
 
-    init(difficuly)
+    async init(web3, contract, eth_account)
     {
+      tokenContract = contract;
 
-      console.log('starting ')
       var mining=true;
       this.triesThisCycle = 0;
 
@@ -22,14 +27,18 @@ module.exports =  {
         var index = 0;
 
         var self = this;
-        var latestMiningBlockHash = '0x1234'
-        var minerEthAddress = '0x5678'
+
+        var difficulty = miningDifficulty;
+        var latestMiningBlockHash = challengeNumber;
+        var minerEthAddress = eth_account;
 
        function mineStuff(){
          //console.log('mine stuff')
 
+
+
             if( mining){
-              self.mineCoins( latestMiningBlockHash,minerEthAddress,difficuly )
+              self.mineCoins( latestMiningBlockHash,minerEthAddress,difficulty )
               self.triesThisCycle+=1;
 
               index++;
@@ -37,33 +46,35 @@ module.exports =  {
             }
         }
 
+        setTimeout(self.collectDataFromContract,10000);
+        await self.collectDataFromContract();
+
+        console.log("Mining for  "+ eth_account)
         mineStuff();
 
 
 
     },
 
-     keccak256(...args) {
-      args = args.map(arg => {
-        if (typeof arg === 'string') {
-          if (arg.substring(0, 2) === '0x') {
-              return arg.slice(2)
-          } else {
-              return web3utils.toHex(arg).slice(2)
-          }
-        }
+    async collectDataFromContract()
+    {
 
-        if (typeof arg === 'number') {
-          return leftpad((arg).toString(16), 64, 0)
-        } else {
-          return ''
-        }
-      })
+      console.log('collecting data from smartcontract');
+    //  miningDifficulty = 4;
+    //  challengeNumber = 'aaa';
 
-      args = args.join('')
 
-      return web3utils.sha3(args, { encoding: 'hex' })
+      var diff = await tokenContract.methods.getMiningDifficulty().call({} ) ;
+      miningDifficulty = parseInt(diff);
+
+      var chall = await tokenContract.methods.getChallengeNumber().call({} ) ;
+      challengeNumber = chall;
+
+      console.log(miningDifficulty,challengeNumber);
+
     },
+
+
 
     /*
     The challenge word will be...
@@ -77,7 +88,7 @@ module.exports =  {
     mineCoins(latestMiningBlockHash,minerEthAddress,difficulty)
     {
         //may need a second nonce !!
-        
+
                var nonce = this.getRandomInt(Math.pow(2,32))  //nonce like bitcoin
 
                 var digest =  web3utils.soliditySha3( latestMiningBlockHash , minerEthAddress, nonce )
@@ -93,7 +104,7 @@ module.exports =  {
 
                  console.log('found a good one')
 
-                 console.log(combinedResult,digest)
+                console.log(nonce,digest)
               //   this.mining=false;
                }
 
