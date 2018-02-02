@@ -1259,7 +1259,7 @@ web3-eth-personal@1.0.0-beta.29:
     web3-net "1.0.0-beta.29"
     web3-utils "1.0.0-beta.29"
 
-web3-eth@^1.0.0-beta.29:
+web3-eth@^1.0.0-beta.20:
   version "1.0.0-beta.29"
   resolved "https://registry.yarnpkg.com/web3-eth/-/web3-eth-1.0.0-beta.29.tgz#153a2f61370ce7441ce3f24ae5e1520b42b93d24"
   dependencies:

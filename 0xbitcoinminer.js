@@ -2,6 +2,7 @@
 
 var web3utils =  require('web3-utils');
 
+var solidityHelper = require('./solidity-helper')
 
 var leftpad =  require('leftpad');
 
@@ -9,6 +10,11 @@ var miningDifficulty = 4;
 var challengeNumber = 'aaa';
 
 var tokenContract;
+
+
+// 164892630 '00004fd994cbd58363bdfe0809d1a6d58e1646b56d1bb59154e45d555a6615aa'
+
+
 
 module.exports =  {
 
@@ -59,6 +65,7 @@ module.exports =  {
     async collectDataFromContract()
     {
 
+
       console.log('collecting data from smartcontract');
     //  miningDifficulty = 4;
     //  challengeNumber = 'aaa';
@@ -70,7 +77,23 @@ module.exports =  {
       var chall = await tokenContract.methods.getChallengeNumber().call({} ) ;
       challengeNumber = chall;
 
-      console.log(miningDifficulty,challengeNumber);
+      console.log('difficulty:', miningDifficulty);
+      console.log('challenge number:', challengeNumber)
+
+    },
+
+    async submitNewMinedBlock(nonce,digest_bytes)
+    {
+       console.log('Submitting block for reward')
+       console.log(nonce,digest_bytes)
+
+
+
+      tokenContract.methods.mint(nonce,digest_bytes).send({}, function(error,result){
+         console.log(error,result)
+       } ) ;
+      //  console.log('success',success)
+
 
     },
 
@@ -102,10 +125,10 @@ module.exports =  {
                if ( zeroesCount >= difficulty )
                {
 
-                 console.log('found a good one')
 
-                console.log(nonce,digest)
-              //   this.mining=false;
+
+                this.submitNewMinedBlock(nonce,solidityHelper.stringToSolidityBytes32(digest));
+
                }
 
 
