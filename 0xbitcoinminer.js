@@ -71,10 +71,10 @@ module.exports =  {
     //  challengeNumber = 'aaa';
 
 
-      var diff = await tokenContract.methods.getMiningDifficulty().call({} ) ;
+      var diff = await tokenContract.getMiningDifficulty() ;
       miningDifficulty = parseInt(diff);
 
-      var chall = await tokenContract.methods.getChallengeNumber().call({} ) ;
+      var chall = await tokenContract.getChallengeNumber() ;
       challengeNumber = chall;
 
       console.log('difficulty:', miningDifficulty);
