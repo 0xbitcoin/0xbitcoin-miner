@@ -49,10 +49,10 @@ var account_address =  process.argv[2] ;
 */
 
 var contract =  new web3.eth.Contract(tokenContract.abi,smartContractAddress)
- 
 
 
- NetworkInterface.submitMiningSolution(web3,addressFrom,contract, Vault,function(error,result){
+
+ NetworkInterface.submitMiningSolution(web3,addressFrom,contract, Vault,function(result){
    console.log('submit mining soln:' , error,result)
  })
 
