@@ -20,9 +20,15 @@ module.exports =  {
 
 
 
-    async init(web3, contract, eth_account)
+    async init(web3, contract, vault, networkInterface)
     {
       tokenContract = contract;
+
+      this.networkInterface = networkInterface;
+
+      this.vault=vault;
+
+      var eth_account_address = vault.getAccount().public_address;
 
       var mining=true;
       this.triesThisCycle = 0;
@@ -36,7 +42,7 @@ module.exports =  {
 
         var difficulty = miningDifficulty;
         var latestMiningBlockHash = challengeNumber;
-        var minerEthAddress = eth_account;
+        var minerEthAddress = eth_account_address;
 
        function mineStuff(){
          //console.log('mine stuff')
@@ -44,7 +50,7 @@ module.exports =  {
 
 
             if( mining){
-              self.mineCoins( latestMiningBlockHash,minerEthAddress,difficulty )
+              self.mineCoins(web3, latestMiningBlockHash,minerEthAddress,difficulty )
               self.triesThisCycle+=1;
 
               index++;
@@ -55,7 +61,7 @@ module.exports =  {
         setTimeout(self.collectDataFromContract,10000);
         await self.collectDataFromContract();
 
-        console.log("Mining for  "+ eth_account)
+        console.log("Mining for  "+ eth_account_address)
         mineStuff();
 
 
@@ -71,10 +77,11 @@ module.exports =  {
     //  challengeNumber = 'aaa';
 
 
-      var diff = await tokenContract.getMiningDifficulty() ;
+
+      var diff = await tokenContract.methods.getMiningDifficulty().call() ;
       miningDifficulty = parseInt(diff);
 
-      var chall = await tokenContract.getChallengeNumber() ;
+      var chall = await tokenContract.methods.getChallengeNumber().call() ;
       challengeNumber = chall;
 
       console.log('difficulty:', miningDifficulty);
@@ -82,16 +89,25 @@ module.exports =  {
 
     },
 
-    async submitNewMinedBlock(nonce,digest_bytes)
+    async submitNewMinedBlock( addressFrom, nonce,digest_bytes)
     {
        console.log('Submitting block for reward')
        console.log(nonce,digest_bytes)
 
 
 
+
+       this.networkInterface.submitMiningSolution( addressFrom, nonce , digest_bytes ,
+         function(result){
+          console.log('submit mining soln:' , error,result)
+        })
+
+
+        /*
       tokenContract.methods.mint(nonce,digest_bytes).send({}, function(error,result){
          console.log(error,result)
        } ) ;
+       */
       //  console.log('success',success)
 
 
@@ -108,7 +124,7 @@ module.exports =  {
 
 
     */
-    mineCoins(latestMiningBlockHash,minerEthAddress,difficulty)
+    mineCoins(web3, latestMiningBlockHash,minerEthAddress,difficulty)
     {
         //may need a second nonce !!
 
@@ -127,7 +143,7 @@ module.exports =  {
 
 
 
-                this.submitNewMinedBlock(nonce,solidityHelper.stringToSolidityBytes32(digest));
+                this.submitNewMinedBlock( minerEthAddress, nonce,solidityHelper.stringToSolidityBytes32(digest));
 
                }
 

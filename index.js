@@ -1,4 +1,7 @@
 var Web3 = require('web3')
+
+var web3Utils = require('web3-utils')
+
 const Miner = require("./0xbitcoinminer");
 
 const Vault = require("./lib/vault");
@@ -12,7 +15,7 @@ var INFURA_ROPSTEN_URL = 'https://ropsten.infura.io/gmXEVo5luMPUGPqg6mhy';
 var web3 = new Web3(new Web3.providers.HttpProvider(INFURA_ROPSTEN_URL));
 
 
-console.log(web3)
+//console.log(web3)
 //var web3 = new Web3();
 //web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545'));
 
@@ -37,7 +40,7 @@ console.log(addressFrom)
 const smartContractAddress = ContractInterface.contracts._0xbitcointoken.blockchain_address;
 
 
-var tokenContract = require('./contracts/_0xBitcoinToken.json');
+var tokenContractJSON = require('./contracts/_0xBitcoinToken.json');
 
 /*
 if (process.argv.length <= 2) {
@@ -48,15 +51,15 @@ process. exit(-1);
 var account_address =  process.argv[2] ;
 */
 
-var contract =  new web3.eth.Contract(tokenContract.abi,smartContractAddress)
+var contract =  new web3.eth.Contract(tokenContractJSON.abi,smartContractAddress)
 
+  NetworkInterface.init(web3,contract, Vault);
 
+/*
+  NetworkInterface.submitMiningSolution( addressFrom, 999 , web3Utils.sha3('hiii') ,
+    function(result){
+     console.log('submit mining soln:' , error,result)
+   });
+*/
 
- NetworkInterface.submitMiningSolution(web3,addressFrom,contract, Vault,function(result){
-   console.log('submit mining soln:' , error,result)
- })
-
-
-
-
-//  Miner.init( web3 , contract, Vault.getAccount().public_address )
+Miner.init( web3 , contract, Vault, NetworkInterface );
