@@ -9,6 +9,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "ethereumjs-tx": "^1.3.3",
     "js-sha3": "^0.7.0",
     "leftpad": "^0.0.1",
     "web3": "^0.14.0",
