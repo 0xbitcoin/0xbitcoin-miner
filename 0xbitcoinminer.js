@@ -6,8 +6,8 @@ var solidityHelper = require('./solidity-helper')
 
 var leftpad =  require('leftpad');
 
-var miningDifficulty = 4;
-var challengeNumber = 'aaa';
+//var miningDifficulty = 4;
+//var challengeNumber = 'aaa';
 
 var tokenContract;
 
@@ -30,7 +30,7 @@ module.exports =  {
 
       var eth_account_address = vault.getAccount().public_address;
 
-      var mining=true;
+       this.mining=true;
       this.triesThisCycle = 0;
 
 
@@ -40,29 +40,29 @@ module.exports =  {
 
         var self = this;
 
-        var difficulty = miningDifficulty;
-        var latestMiningBlockHash = challengeNumber;
+        //var difficulty = miningDifficulty;
+      //  var latestMiningBlockHash = challengeNumber;
         var minerEthAddress = eth_account_address;
 
-       function mineStuff(){
+       function mineStuff(contractData){
          //console.log('mine stuff')
 
 
 
-            if( mining){
-              self.mineCoins(web3, latestMiningBlockHash,minerEthAddress,difficulty )
+            if( self.mining){
+              self.mineCoins(web3, contractData.challengeNumber,minerEthAddress,contractData.miningDifficulty )
               self.triesThisCycle+=1;
 
               index++;
-              setTimeout(mineStuff,0)
+              setTimeout(function(){mineStuff(contractData)},0)
             }
         }
 
         setTimeout(self.collectDataFromContract,10000);
-        await self.collectDataFromContract();
+        collectedContractData = await self.collectDataFromContract();
 
         console.log("Mining for  "+ eth_account_address)
-        mineStuff();
+        mineStuff( collectedContractData );
 
 
 
@@ -73,38 +73,43 @@ module.exports =  {
 
 
       console.log('collecting data from smartcontract');
-    //  miningDifficulty = 4;
-    //  challengeNumber = 'aaa';
 
 
 
-      var diff = await tokenContract.methods.getMiningDifficulty().call() ;
-      miningDifficulty = parseInt(diff);
+      var miningDifficultyString = await tokenContract.methods.getMiningDifficulty().call()  ;
+      var miningDifficulty = parseInt(miningDifficultyString)
 
-      var chall = await tokenContract.methods.getChallengeNumber().call() ;
-      challengeNumber = chall;
+      var challengeNumber = await tokenContract.methods.getChallengeNumber().call() ;
+
 
       console.log('difficulty:', miningDifficulty);
       console.log('challenge number:', challengeNumber)
 
+      return {
+        miningDifficulty: miningDifficulty,
+        challengeNumber: challengeNumber
+      }
+
     },
 
-    async submitNewMinedBlock( addressFrom, nonce,digest_bytes)
+    async submitNewMinedBlock( addressFrom, solution_number,digest_bytes)
     {
        console.log('Submitting block for reward')
-       console.log(nonce,digest_bytes)
+       console.log(solution_number,digest_bytes)
 
+    /*   this.networkInterface.checkMiningSolution( addressFrom, solution_number , digest_bytes ,
+         function(result){
+          console.log('submit mining soln:' , error,result)
+        })
+*/
 
-
-
-       this.networkInterface.submitMiningSolution( addressFrom, nonce , digest_bytes ,
+      this.networkInterface.submitMiningSolution( addressFrom, solution_number , digest_bytes ,
          function(result){
           console.log('submit mining soln:' , error,result)
         })
 
-
         /*
-      tokenContract.methods.mint(nonce,digest_bytes).send({}, function(error,result){
+      tokenContract.methods.mint(solution_number,digest_bytes).send({}, function(error,result){
          console.log(error,result)
        } ) ;
        */
@@ -120,48 +125,75 @@ module.exports =  {
 
     //we have to find the latest mining hash by asking the contract
 
-    sha3( latestMiningBlockHash , minerEthAddress , nonce )
+    sha3( latestMiningBlockHash , minerEthAddress , solution_number )
 
 
     */
     mineCoins(web3, latestMiningBlockHash,minerEthAddress,difficulty)
     {
-        //may need a second nonce !!
+        //may need a second solution_number !!
 
-               var nonce = this.getRandomInt(Math.pow(2,32))  //nonce like bitcoin
+               var solution_number = this.getRandomInt(Math.pow(2,32))  //solution_number like bitcoin
 
-                var digest =  web3utils.soliditySha3( latestMiningBlockHash , minerEthAddress, nonce )
+                var digest =  web3utils.soliditySha3( latestMiningBlockHash , minerEthAddress, solution_number )
 
 
-                if(digest.startsWith('0x')) //3078 is 0x
-                {
-                   var trimmedDigest = digest.substring(2);
-                }else {
-                  var trimmedDigest = digest;
-                }
+              //  console.log(web3utils.hexToBytes('0x0'))
+              var digestBytes32 = web3utils.hexToBytes(digest)
 
-            var digestBytes32 = solidityHelper.stringToSolidityBytes32(trimmedDigest);
+            //  console.log('digestBytes32',digestBytes32);
+
+          //  var digestBytes32 = solidityHelper.stringToSolidityBytes32(digest);
 
 
             // digestBytes32 is 64 characters, 32 bytes.  Every 2 characters is a byte!
 
-                var zeroesCount = this.countZeroCharactersInFront(digestBytes32)
+                var zeroesCount = this.countZeroBytesInFront(digestBytes32)
 
               //  console.log(trimmedDigestBytes32)
- 
+
 
                    if ( zeroesCount >= 2 )
                    {
                        console.log(zeroesCount)
+                       console.log('------')
+                        console.log(latestMiningBlockHash)
+                         console.log(minerEthAddress)
+                          console.log(solution_number)
+                      console.log('------')
+                       console.log( web3utils.bytesToHex(digestBytes32))
                    }
 
-               if ( zeroesCount >= difficulty )
+               if ( zeroesCount >= difficulty && !this.foundSolution )
                {
                  //pass in digest bytes or trimmed ?
-                this.submitNewMinedBlock( minerEthAddress, nonce, digestBytes32);
+                 this.mining = false;
+                this.submitNewMinedBlock( minerEthAddress, solution_number,   web3utils.bytesToHex( digestBytes32 ) );
 
                }
 
+
+    },
+
+    countZeroBytesInFront(array)
+    {
+      var zero_char_code = '30'
+
+      var char;
+      var count = 0;
+      var length = array.length;
+
+      for(var i=0;i<array.length;i+=1)
+      {
+        if(array[i] === 0)
+        {
+          count++;
+        }else{
+          break
+        }
+      }
+
+      return count;
 
     },
 

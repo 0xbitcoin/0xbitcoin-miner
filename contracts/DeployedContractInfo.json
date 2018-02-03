@@ -2,6 +2,6 @@
 {
   "network-name":"Ropsten",
   "contracts": {
-      "_0xbitcointoken": {"name":"0xBitcoinToken", "blockchain_address":"0x255AFE70e642912Bd98a6Ea712D4199ab1917143"}
+      "_0xbitcointoken": {"name":"0xBitcoinToken", "blockchain_address":"0x176b4340486350dbf780a55f164a849b623a7c9a"}
   }
 }
