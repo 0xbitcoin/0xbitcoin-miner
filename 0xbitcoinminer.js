@@ -132,33 +132,50 @@ module.exports =  {
 
                 var digest =  web3utils.soliditySha3( latestMiningBlockHash , minerEthAddress, nonce )
 
-               if(digest.startsWith('0x'))
-               {
-                  digest = digest.substring(2);
-               }
 
-                var zeroesCount = this.countZeroesInFront(digest)
+                if(digest.startsWith('0x')) //3078 is 0x
+                {
+                   var trimmedDigest = digest.substring(2);
+                }else {
+                  var trimmedDigest = digest;
+                }
+
+            var digestBytes32 = solidityHelper.stringToSolidityBytes32(trimmedDigest);
+
+
+            // digestBytes32 is 64 characters, 32 bytes.  Every 2 characters is a byte!
+
+                var zeroesCount = this.countZeroCharactersInFront(digestBytes32)
+
+              //  console.log(trimmedDigestBytes32)
+ 
+
+                   if ( zeroesCount >= 2 )
+                   {
+                       console.log(zeroesCount)
+                   }
+
                if ( zeroesCount >= difficulty )
                {
-
-
-
-                this.submitNewMinedBlock( minerEthAddress, nonce,solidityHelper.stringToSolidityBytes32(digest));
+                 //pass in digest bytes or trimmed ?
+                this.submitNewMinedBlock( minerEthAddress, nonce, digestBytes32);
 
                }
 
 
     },
 
-    countZeroesInFront(s)
+    countZeroCharactersInFront(s)
     {
+      var zero_char_code = '30'
+
       var char;
       var count = 0;
       var length = s.length;
 
-      for(var i=0;i<s.length;i++)
+      for(var i=0;i<s.length;i+=2)
       {
-        if(s[i] === '0')
+        if(s.substring(i,i+2) === zero_char_code)
         {
           count++;
         }else{

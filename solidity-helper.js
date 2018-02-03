@@ -8,7 +8,7 @@ module.exports =  {
 
 stringToSolidityBytes32(string)
 {
-  var result = "0x";
+  var result = "";
   var i = 0;
 
   for(i=0;i<32;i++)
