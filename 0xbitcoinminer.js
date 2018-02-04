@@ -36,14 +36,7 @@ module.exports =  {
       this.triesThisCycle = 0;
 
 
-
-
-
-
-
-
-      var eth_account_address = vault.getAccount();
-
+      var eth_account  = vault.getAccount();
 
 
       setInterval(function(){ this.printMiningStats()}.bind(this), 5000)
@@ -54,7 +47,7 @@ module.exports =  {
 
         //var difficulty = miningDifficulty;
       //  var challenge_number = challengeNumber;
-        var minerEthAddress = eth_account_address;
+        var minerEthAddress = eth_account.address;
 
         let contractData = {}; //passed around as a reference and edited globally
 
@@ -75,7 +68,7 @@ module.exports =  {
 
         setTimeout(function(){self.collectDataFromContract(contractData)},10000);
 
-        console.log("Mining for  "+ eth_account_address)
+        console.log("Mining for  "+ minerEthAddress)
         console.log("contractData Target  "+ contractData.miningTarget)
         mineStuff( contractData );
 
@@ -88,9 +81,7 @@ module.exports =  {
 
 
       console.log('collecting data from smartcontract');
-
-
-
+ 
 
       var miningDifficultyString = await tokenContract.methods.getMiningDifficulty().call()  ;
       var miningDifficulty = parseInt(miningDifficultyString)

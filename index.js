@@ -68,9 +68,10 @@ async function init()
 
   if(subsystem_name == 'mine')
   {
-    await Vault.init();
+    await Vault.init(web3);
 
     NetworkInterface.init(web3,contract, Vault);
+
     Miner.init( web3 , contract, subsystem_command, Vault, NetworkInterface );
   }
 
