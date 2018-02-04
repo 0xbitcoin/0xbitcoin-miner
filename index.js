@@ -31,8 +31,8 @@ var web3 = new Web3(new Web3.providers.HttpProvider(INFURA_ROPSTEN_URL));
 
 
 // the address that will send the test transaction
-const addressFrom = Vault.getAccount().public_address // '0x1889EF49cDBaad420EB4D6f04066CA4093088Bbd'
-const privKey = Vault.getAccount().private_key
+//const addressFrom = Vault.getAccount().public_address // '0x1889EF49cDBaad420EB4D6f04066CA4093088Bbd'
+//const privKey = Vault.getAccount().private_key
 
 
 // the destination address
@@ -49,6 +49,7 @@ process. exit(-1);
 
 var subsystem_name =  process.argv[2] ;
 var subsystem_command =  process.argv[3] ;
+var subsystem_option =  process.argv[4] ;
 
 var contract =  new web3.eth.Contract(tokenContractJSON.abi,smartContractAddress)
 
@@ -62,7 +63,7 @@ async function init()
   {
     await Vault.init(web3);
 
-    Vault.handleCommand(subsystem_command)
+    Vault.handleCommand(subsystem_command,subsystem_option)
   }
 
   if(subsystem_name == 'mine')
