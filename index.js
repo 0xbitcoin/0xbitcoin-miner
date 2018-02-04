@@ -28,7 +28,7 @@ var web3 = new Web3(new Web3.providers.HttpProvider(INFURA_ROPSTEN_URL));
 
 // Build a wallet vault ??
 
-Vault.init();
+
 
 // the address that will send the test transaction
 const addressFrom = Vault.getAccount().public_address // '0x1889EF49cDBaad420EB4D6f04066CA4093088Bbd'
@@ -53,28 +53,35 @@ var subsystem_command =  process.argv[3] ;
 var contract =  new web3.eth.Contract(tokenContractJSON.abi,smartContractAddress)
 
 
-/*
-  NetworkInterface.submitMiningSolution( addressFrom, 999 , web3Utils.sha3('hiii') ,
-    function(result){
-     console.log('submit mining soln:' , error,result)
-   });
-*/
-if(subsystem_name == 'account')
-{
-  Vault.handleCommand(subsystem_command)
-}
 
-if(subsystem_name == 'mine')
+async function init()
 {
-  NetworkInterface.init(web3,contract, Vault);
-  Miner.init( web3 , contract, subsystem_command, Vault, NetworkInterface );
-}
 
-if(subsystem_name == 'help')
-{
-  console.log('--0xBitcoin Miner Help--')
-  console.log('Available commands:')
-  console.log('"npm run account new" - Create a new mining account "')
-  console.log('"npm run account list" - List all mining accounts "')
-  console.log('"npm run account #" - Select a mining account by number "')
+
+  if(subsystem_name == 'account')
+  {
+    await Vault.init(web3);
+
+    Vault.handleCommand(subsystem_command)
+  }
+
+  if(subsystem_name == 'mine')
+  {
+    await Vault.init();
+
+    NetworkInterface.init(web3,contract, Vault);
+    Miner.init( web3 , contract, subsystem_command, Vault, NetworkInterface );
+  }
+
+  if(subsystem_name == 'help')
+  {
+    console.log('--0xBitcoin Miner Help--')
+    console.log('Available commands:')
+    console.log('"npm run account new" - Create a new mining account "')
+    console.log('"npm run account list" - List all mining accounts "')
+    console.log('"npm run account #" - Select a mining account by number "')
+  }
+
+
 }
+init();
