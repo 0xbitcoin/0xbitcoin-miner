@@ -30,12 +30,20 @@ module.exports =  {
       this.vault=vault;
 
       this.testMode = (subsystem_command === 'test');
+      this.debugMode = (subsystem_command === 'debug');
 
-
-      var eth_account_address = vault.getAccount().public_address;
-
-       this.mining=true;
+      this.mining=true;
       this.triesThisCycle = 0;
+
+
+
+
+
+
+
+
+      var eth_account_address = vault.getAccount();
+
 
 
       setInterval(function(){ this.printMiningStats()}.bind(this), 5000)

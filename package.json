@@ -1,26 +1,27 @@
 {
   "name": "0xbitcoin-miner",
   "version": "0.0.2",
-   "engines" : { "node" : ">=0.12" },
-
+  "engines": {
+    "node": ">=0.12"
+  },
   "description": "Find hashes, get money ",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "MIT",
-  "dependencies": {
-    "ethereumjs-tx": "^1.3.3",
-    "js-sha3": "^0.7.0",
-    "leftpad": "^0.0.1",
-    "web3": "^1.0.0-beta.29",
-    "web3-eth": "^1.0.0-beta.20",
-    "web3-utils": "^1.0.0-beta.20"
-  },
   "scripts": {
     "account": "node index.js account",
     "mine": "node index.js mine",
     "help": "node index.js help"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "appdata": "^1.1.0",
+    "ethereumjs-tx": "^1.3.3",
+    "js-sha3": "^0.7.0",
+    "leftpad": "^0.0.1",
+    "mkdirp": "^0.5.1",
+    "node-localstorage": "^1.3.0",
+    "web3": "^1.0.0-beta.29",
+    "web3-eth": "^1.0.0-beta.20",
+    "web3-utils": "^1.0.0-beta.20"
   }
 }

@@ -28,7 +28,7 @@ var web3 = new Web3(new Web3.providers.HttpProvider(INFURA_ROPSTEN_URL));
 
 // Build a wallet vault ??
 
-
+Vault.init();
 
 // the address that will send the test transaction
 const addressFrom = Vault.getAccount().public_address // '0x1889EF49cDBaad420EB4D6f04066CA4093088Bbd'
