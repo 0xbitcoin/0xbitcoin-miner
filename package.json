@@ -1,6 +1,8 @@
 {
   "name": "0xbitcoin-miner",
   "version": "0.0.2",
+   "engines" : { "node" : ">=0.12" },
+
   "description": "Find hashes, get money ",
   "main": "index.js",
   "scripts": {
@@ -15,5 +17,10 @@
     "web3": "^1.0.0-beta.29",
     "web3-eth": "^1.0.0-beta.20",
     "web3-utils": "^1.0.0-beta.20"
+  },
+  "scripts": {
+    "account": "node index.js account",
+    "mine": "node index.js mine",
+    "help": "node index.js help"
   }
 }

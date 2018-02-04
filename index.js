@@ -34,7 +34,6 @@ var web3 = new Web3(new Web3.providers.HttpProvider(INFURA_ROPSTEN_URL));
 const addressFrom = Vault.getAccount().public_address // '0x1889EF49cDBaad420EB4D6f04066CA4093088Bbd'
 const privKey = Vault.getAccount().private_key
 
-console.log(addressFrom)
 
 // the destination address
 const smartContractAddress = ContractInterface.contracts._0xbitcointoken.blockchain_address;
@@ -42,18 +41,17 @@ const smartContractAddress = ContractInterface.contracts._0xbitcointoken.blockch
 
 var tokenContractJSON = require('./contracts/_0xBitcoinToken.json');
 
-/*
+
 if (process.argv.length <= 2) {
-console. log("Please add a difficulty parameter (1-64)");
+console. log("Please add a subsystem parameter (use 'npm run help' for help)");
 process. exit(-1);
 }
 
-var account_address =  process.argv[2] ;
-*/
+var subsystem_name =  process.argv[2] ;
+var subsystem_command =  process.argv[3] ;
 
 var contract =  new web3.eth.Contract(tokenContractJSON.abi,smartContractAddress)
 
-  NetworkInterface.init(web3,contract, Vault);
 
 /*
   NetworkInterface.submitMiningSolution( addressFrom, 999 , web3Utils.sha3('hiii') ,
@@ -61,5 +59,22 @@ var contract =  new web3.eth.Contract(tokenContractJSON.abi,smartContractAddress
      console.log('submit mining soln:' , error,result)
    });
 */
+if(subsystem_name == 'account')
+{
+  Vault.handleCommand(subsystem_command)
+}
 
-Miner.init( web3 , contract, Vault, NetworkInterface );
+if(subsystem_name == 'mine')
+{
+  NetworkInterface.init(web3,contract, Vault);
+  Miner.init( web3 , contract, subsystem_command, Vault, NetworkInterface );
+}
+
+if(subsystem_name == 'help')
+{
+  console.log('--0xBitcoin Miner Help--')
+  console.log('Available commands:')
+  console.log('"npm run account new" - Create a new mining account "')
+  console.log('"npm run account list" - List all mining accounts "')
+  console.log('"npm run account #" - Select a mining account by number "')
+}
