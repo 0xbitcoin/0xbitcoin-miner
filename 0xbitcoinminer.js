@@ -81,7 +81,7 @@ module.exports =  {
 
 
       console.log('collecting data from smartcontract');
- 
+
 
       var miningDifficultyString = await tokenContract.methods.getMiningDifficulty().call()  ;
       var miningDifficulty = parseInt(miningDifficultyString)
@@ -157,6 +157,11 @@ module.exports =  {
 
               // var miningTargetString =  '2.6959946667150639794667015087019630673637144422540572481103610249216e+67' ;
                var miningTarget = web3utils.toBN(target).mul(new BN(1)) ;
+
+
+               //should make difficulty about 2^4 times easier !!
+
+
 
 
               //  console.log('digestBigNumber',digestBigNumber.toString())
