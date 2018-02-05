@@ -1,4 +1,3 @@
-//var sha3_256 = require('js-sha3').sha3_256;
 
 var web3utils =  require('web3-utils');
 
