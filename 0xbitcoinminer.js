@@ -10,6 +10,9 @@ const BN = require('bn.js');
 //var miningDifficulty = 4;
 //var challengeNumber = 'aaa';
 
+var tokenContractJSON = require('./contracts/_0xBitcoinToken.json');
+
+
 var tokenContract;
 
 
@@ -21,9 +24,12 @@ module.exports =  {
 
 
 
-    async init(web3, contract, subsystem_command, vault, networkInterface)
+    async init(web3,  subsystem_command, vault, networkInterface)
     {
-      tokenContract = contract;
+
+
+      tokenContract =  new web3.eth.Contract(tokenContractJSON.abi,vault.getTokenContractAddress())
+
 
       this.networkInterface = networkInterface;
 
@@ -38,15 +44,13 @@ module.exports =  {
 
       var eth_account  = vault.getAccount();
 
-
       setInterval(function(){ this.printMiningStats()}.bind(this), 5000)
 
         var index = 0;
 
         var self = this;
 
-        //var difficulty = miningDifficulty;
-      //  var challenge_number = challengeNumber;
+
         var minerEthAddress = eth_account.address;
 
         let contractData = {}; //passed around as a reference and edited globally

@@ -8,7 +8,7 @@ const Vault = require("./lib/vault");
 
 var NetworkInterface = require("./lib/network-interface");
 
-var ContractInterface = require("./contracts/DeployedContractInfo")
+//var ContractInterface = require("./contracts/DeployedContractInfo")
 
 var INFURA_ROPSTEN_URL = 'https://ropsten.infura.io/gmXEVo5luMPUGPqg6mhy';
 
@@ -36,10 +36,9 @@ var web3 = new Web3(new Web3.providers.HttpProvider(INFURA_ROPSTEN_URL));
 
 
 // the destination address
-const smartContractAddress = ContractInterface.contracts._0xbitcointoken.blockchain_address;
+//const smartContractAddress = ContractInterface.contracts._0xbitcointoken.blockchain_address;
 
 
-var tokenContractJSON = require('./contracts/_0xBitcoinToken.json');
 
 
 if (process.argv.length <= 2) {
@@ -51,7 +50,6 @@ var subsystem_name =  process.argv[2] ;
 var subsystem_command =  process.argv[3] ;
 var subsystem_option =  process.argv[4] ;
 
-var contract =  new web3.eth.Contract(tokenContractJSON.abi,smartContractAddress)
 
 
 
@@ -70,9 +68,10 @@ async function init()
   {
     await Vault.init(web3);
 
-    NetworkInterface.init(web3,contract, Vault);
 
-    Miner.init( web3 , contract, subsystem_command, Vault, NetworkInterface );
+    NetworkInterface.init(web3, Vault);
+   
+    Miner.init( web3 ,  subsystem_command, Vault, NetworkInterface );
   }
 
   if(subsystem_name == 'help')
