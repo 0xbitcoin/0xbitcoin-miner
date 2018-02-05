@@ -58,7 +58,7 @@ module.exports =  {
 
 
             if( self.mining){
-              self.mineCoins(web3, contractData.challengeNumber,minerEthAddress,contractData.miningTarget )
+              self.mineCoins(web3, contractData,minerEthAddress )
               self.triesThisCycle+=1;
 
               index++;
@@ -66,7 +66,7 @@ module.exports =  {
             }
         }
 
-        setTimeout(function(){self.collectDataFromContract(contractData)},10000);
+        setInterval(function(){self.collectDataFromContract(contractData)},10000);
 
         console.log("Mining for  "+ minerEthAddress)
         console.log("contractData Target  "+ contractData.miningTarget)
@@ -105,12 +105,12 @@ module.exports =  {
 
     },
 
-    async submitNewMinedBlock( addressFrom, solution_number,digest_bytes)
+    async submitNewMinedBlock( addressFrom, solution_number,digest_bytes,challenge_number)
     {
        console.log('Submitting block for reward')
        console.log(solution_number,digest_bytes)
 
-       this.networkInterface.queueMiningSolution( addressFrom, solution_number , digest_bytes )
+       this.networkInterface.queueMiningSolution( addressFrom, solution_number , digest_bytes , challenge_number)
 
 
 
@@ -128,13 +128,14 @@ module.exports =  {
 
 
     */
-    mineCoins(web3, challenge_number,minerEthAddress,target)
+    mineCoins(web3, contractData , minerEthAddress)
     {
         //may need a second solution_number !!
 
                var solution_number = web3utils.randomHex(32)  //solution_number like bitcoin
 
-
+               var challenge_number = contractData.challengeNumber;
+               var target = contractData.miningTarget;
 
                 var digest =  web3utils.soliditySha3( challenge_number , minerEthAddress, solution_number )
 
@@ -193,7 +194,8 @@ module.exports =  {
                       console.log('checked mining soln:' ,result)
                     })
                 }else {
-                  this.submitNewMinedBlock( minerEthAddress, solution_number,   web3utils.bytesToHex( digestBytes32 ) );
+                  console.log('submit mined solution with challenge ', challenge_number)
+                  this.submitNewMinedBlock( minerEthAddress, solution_number,   web3utils.bytesToHex( digestBytes32 ) , challenge_number);
                 }
                }
 
