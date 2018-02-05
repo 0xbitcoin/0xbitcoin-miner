@@ -8,6 +8,7 @@
   "main": "index.js",
   "scripts": {
     "account": "node index.js account",
+    "contract": "node index.js contract",
     "mine": "node index.js mine",
     "help": "node index.js help"
   },
