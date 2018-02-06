@@ -4,15 +4,12 @@
 ## Running the packaged executables
 
 #### Linux
-1. Download /dist/0xbtcminer-linux
+1. Download /dist/linux/0xbtcminer-linux and unzip
 2. Run this file with ./0xbtcminer-linux {command}
-3. For example, /0xbtcminer-linux account new
+3. For example, ./0xbtcminer-linux account new
 
-#### Windows
-1. Download /dist/0xbtcminer-win.exe
-2. Run this file from a command prompt with  0xbtcminer-win.exe {command}
-3. For example, 0xbtcminer-win.exe account new
-
+#### Windows/Mac
+1. (Please build from source, see below)
 
 
 ## Building from Source
