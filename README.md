@@ -21,6 +21,24 @@
 4. run 'yarn' to install dependencies for 0xbitcoin-miner
 
 
+### Commands
+If you compiled from source, run commands with "npm run {command}"
+
+If using a compiled binary such as 0xbtcminer-linux, run commands with "./0xbtcminer-linux {command}"
+
+{commands}
+" help" - Show the help menu
+" account new" - Create a new mining account 
+" account list" - List all mining accounts 
+" account select 0x####" - Select a primary mining account by address 
+" contract list" - List the selected token contract to mine
+" contract select 0x####" - Select a PoW token contract to mine 
+" config gasprice #" - Set the gasprice used to submit PoW to the token smartcontract 
+" config cpu_threads #" - Set the number of CPU cores to use for mining 
+" config web3provider http://----:####" - Set the web3 provider url for submitting ethereum transactions 
+" mine" - Begin mining 
+
+
 
 
 ---------------
