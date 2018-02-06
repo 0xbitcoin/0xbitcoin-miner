@@ -1,44 +1,19 @@
-var Web3 = require('web3')
 
-var web3Utils = require('web3-utils')
 
 const Miner = require("./0xbitcoinminer");
 
 const Vault = require("./lib/vault");
 
+
+var Web3 = require('web3')
+
 var NetworkInterface = require("./lib/network-interface");
 
-//var ContractInterface = require("./contracts/DeployedContractInfo")
 
-var INFURA_ROPSTEN_URL = 'https://ropsten.infura.io/gmXEVo5luMPUGPqg6mhy';
-
-var web3 = new Web3(new Web3.providers.HttpProvider(INFURA_ROPSTEN_URL));
+var web3 = new Web3( );
 
 
-//console.log(web3)
-//var web3 = new Web3();
 //web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545'));
-
-
-
-//send tx
-// https://gist.github.com/raineorshine/c8b30db96d7532e15f85fcfe72ac719c
-// providers https://github.com/MetaMask/provider-engine
-
-
-// Build a wallet vault ??
-
-
-
-// the address that will send the test transaction
-//const addressFrom = Vault.getAccount().public_address // '0x1889EF49cDBaad420EB4D6f04066CA4093088Bbd'
-//const privKey = Vault.getAccount().private_key
-
-
-// the destination address
-//const smartContractAddress = ContractInterface.contracts._0xbitcointoken.blockchain_address;
-
-
 
 
 if (process.argv.length <= 2) {
@@ -71,10 +46,19 @@ async function init()
     Vault.handleContractCommand(subsystem_command,subsystem_option)
   }
 
+  if(subsystem_name == 'config')
+  {
+    await Vault.init(web3);
+
+    Vault.handleConfigCommand(subsystem_command,subsystem_option)
+  }
+
   if(subsystem_name == 'mine')
   {
     await Vault.init(web3);
 
+    //be careful! There is no web3 provider before this line
+    web3.setProvider(Vault.getWeb3Provider());
 
     NetworkInterface.init(web3, Vault);
 
@@ -83,17 +67,21 @@ async function init()
 
   if(subsystem_name == 'help')
   {
-    console.log('--0xBitcoin Miner Help--')
-    console.log('Available commands:')
-    console.log('"npm run account new" - Create a new mining account "')
-    console.log('"npm run account list" - List all mining accounts "')
-    console.log('"npm run account select #" - Select a mining account by number "')
+    console.log('\n\n')
+    console.log('--0xBitcoin Miner Help--\n')
+    console.log('Available commands:\n')
+    console.log('"npm run account new" - Create a new mining account ')
+    console.log('"npm run account list" - List all mining accounts ')
+    console.log('"npm run account select 0x####" - Select a primary mining account by address ')
 
-    console.log('"npm run contract list" - List the selected token contract to mine"')
-    console.log('"npm run contract select #" - Select a PoW token contract to mine "')
+    console.log('"npm run contract list" - List the selected token contract to mine')
+    console.log('"npm run contract select 0x####" - Select a PoW token contract to mine ')
 
+    console.log('"npm run config gasprice #" - Set the gasprice used to submit PoW to the token smartcontract ')
+    console.log('"npm run config web3provider http://----:####" - Set the web3 provider url for submitting ethereum transactions ')
 
-    console.log('"npm run mine" - Begin mining "')
+    console.log('"npm run mine" - Begin mining ')
+    console.log('\n\n')
   }
 
 

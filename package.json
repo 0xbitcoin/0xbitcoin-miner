@@ -9,6 +9,7 @@
   "scripts": {
     "account": "node index.js account",
     "contract": "node index.js contract",
+    "config": "node index.js config",
     "mine": "node index.js mine",
     "help": "node index.js help",
     "package": "nexe index.js "
@@ -22,9 +23,11 @@
     "js-sha3": "^0.7.0",
     "leftpad": "^0.0.1",
     "mkdirp": "^0.5.1",
-    "nexe": "^2.0.0-rc.22",
+
+
     "node-localstorage": "^1.3.0",
     "prompt": "^1.0.0",
+
     "web3": "^1.0.0-beta.29",
     "web3-eth": "^1.0.0-beta.20",
     "web3-utils": "^1.0.0-beta.20"

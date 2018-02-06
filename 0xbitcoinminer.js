@@ -147,46 +147,24 @@ module.exports =  {
               var digestBytes32 = web3utils.hexToBytes(digest)
                 var digestBigNumber = web3utils.toBN(digest)
 
+                var miningTarget = web3utils.toBN(target) ;
 
-            //  console.log('digestBytes32',digestBytes32);
-
-          //  var digestBytes32 = solidityHelper.stringToSolidityBytes32(digest);
-
-
-            // digestBytes32 is 64 characters, 32 bytes.  Every 2 characters is a byte!
-
-              //  var zeroesCount = this.countZeroBytesInFront(digestBytes32)
-
-              //  console.log(trimmedDigestBytes32)
-
-              // var miningTargetString =  '2.6959946667150639794667015087019630673637144422540572481103610249216e+67' ;
-               var miningTarget = web3utils.toBN(target).mul(new BN(1)) ;
-
-
-               //should make difficulty about 2^4 times easier !!
-
-
-
+ 
 
               //  console.log('digestBigNumber',digestBigNumber.toString())
                 // console.log('miningTarget',miningTarget.toString())
 
-                   if ( digestBigNumber.lt(miningTarget) )
-                   {
-
-
-                      console.log(minerEthAddress)
-                       console.log('------')
-                       console.log(solution_number)
-                        console.log(challenge_number)
-                          console.log(solution_number)
-                      console.log('------')
-                       console.log( web3utils.bytesToHex(digestBytes32))
-                   }
-
-
                if ( digestBigNumber.lt(miningTarget)  )
                {
+
+                 console.log(minerEthAddress)
+                  console.log('------')
+                  console.log(solution_number)
+                   console.log(challenge_number)
+                     console.log(solution_number)
+                 console.log('------')
+                  console.log( web3utils.bytesToHex(digestBytes32))
+
                  //pass in digest bytes or trimmed ?
 
                  if(this.testMode){
