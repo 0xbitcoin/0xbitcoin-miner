@@ -72,6 +72,7 @@ module.exports =  {
         setInterval(function(){self.collectDataFromContract(contractData)},10000);
 
         console.log("Mining for  "+ minerEthAddress)
+        console.log("Gas price is "+ vault.getGasPriceGwei() + ' gwei')
         console.log("contractData Target  "+ contractData.miningTarget)
         mineStuff( contractData );
 
@@ -83,9 +84,6 @@ module.exports =  {
     {
 
 
-      console.log('collecting data from smartcontract');
-
-
       var miningDifficultyString = await tokenContract.methods.getMiningDifficulty().call()  ;
       var miningDifficulty = parseInt(miningDifficultyString)
 
@@ -95,9 +93,9 @@ module.exports =  {
       var challengeNumber = await tokenContract.methods.getChallengeNumber().call() ;
 
 
-      console.log('difficulty:', miningDifficulty);
-      console.log('target:', miningTarget);
-      console.log('challenge number:', challengeNumber)
+      console.log('Mining difficulty:', miningDifficulty);
+      //console.log('target:', miningTarget);
+      console.log('Challenge number:', challengeNumber)
 
       contractData.miningDifficulty= miningDifficulty;
         contractData.challengeNumber= challengeNumber;
@@ -110,12 +108,8 @@ module.exports =  {
 
     async submitNewMinedBlock( addressFrom, solution_number,digest_bytes,challenge_number)
     {
-       console.log('Submitting block for reward')
-       console.log(solution_number,digest_bytes)
 
        this.networkInterface.queueMiningSolution( addressFrom, solution_number , digest_bytes , challenge_number)
-
-
 
 
     },
@@ -149,7 +143,7 @@ module.exports =  {
 
                 var miningTarget = web3utils.toBN(target) ;
 
- 
+
 
               //  console.log('digestBigNumber',digestBigNumber.toString())
                 // console.log('miningTarget',miningTarget.toString())
@@ -157,17 +151,18 @@ module.exports =  {
                if ( digestBigNumber.lt(miningTarget)  )
                {
 
-                 console.log(minerEthAddress)
-                  console.log('------')
-                  console.log(solution_number)
-                   console.log(challenge_number)
-                     console.log(solution_number)
-                 console.log('------')
-                  console.log( web3utils.bytesToHex(digestBytes32))
+                  if(this.testMode){
+                    console.log(minerEthAddress)
+                    console.log('------')
+                    console.log(solution_number)
+                    console.log(challenge_number)
+                    console.log(solution_number)
+                    console.log('------')
+                    console.log( web3utils.bytesToHex(digestBytes32))
 
                  //pass in digest bytes or trimmed ?
 
-                 if(this.testMode){
+
                    this.mining = false;
 
                    this.networkInterface.checkMiningSolution( minerEthAddress, solution_number , web3utils.bytesToHex( digestBytes32 ),challenge_number,miningTarget,
