@@ -73,8 +73,16 @@ module.exports =  {
 
         console.log("Mining for  "+ minerEthAddress)
         console.log("Gas price is "+ vault.getGasPriceGwei() + ' gwei')
+        console.log("Configured CPU threadcount is "+ vault.getNumThreads() )
         console.log("contractData Target  "+ contractData.miningTarget)
-        mineStuff( contractData );
+
+        var threads = vault.getNumThreads();
+
+        for(var i=0;i<threads;i++)
+        {
+          mineStuff( contractData );
+        }
+
 
 
 

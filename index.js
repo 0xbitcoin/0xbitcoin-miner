@@ -78,6 +78,7 @@ async function init()
     console.log('"npm run contract select 0x####" - Select a PoW token contract to mine ')
 
     console.log('"npm run config gasprice #" - Set the gasprice used to submit PoW to the token smartcontract ')
+    console.log('"npm run config cpu_threads #" - Set the number of CPU cores to use for mining ')
     console.log('"npm run config web3provider http://----:####" - Set the web3 provider url for submitting ethereum transactions ')
 
     console.log('"npm run mine" - Begin mining ')
