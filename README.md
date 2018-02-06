@@ -1,5 +1,5 @@
 
-# 0xBitcoin Miner
+# 0xBitcoin ERC20 Token Miner
 
 ## Running the packaged executables
 
