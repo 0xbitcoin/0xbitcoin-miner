@@ -4,7 +4,7 @@
 ## Running the packaged executables
 
 #### Linux
-1. Download /dist/linux/0xbtcminer-linux and unzip
+1. Download [/dist/linux/0xbtcminer-linux](https://github.com/0xbitcoin/0xbitcoin-miner/raw/master/dist/0xbtcminer-linux.zip) and unzip
 2. Run this file with ./0xbtcminer-linux {command}
 3. For example, ./0xbtcminer-linux account new
 
