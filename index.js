@@ -81,6 +81,10 @@ async function init()
     console.log('"npm run config web3provider http://----:####" - Set the web3 provider url for submitting ethereum transactions ')
 
     console.log('"npm run mine" - Begin mining ')
+
+  //  console.log('\n')
+  //  console.log('Encrypted data vault stored at '+ Vault.get0xBitcoinLocalFolderPath())
+
     console.log('\n\n')
   }
 
