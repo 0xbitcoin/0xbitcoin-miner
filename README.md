@@ -5,12 +5,21 @@
 
 #### Linux
 1. Download [/dist/linux/0xbtcminer-linux](https://github.com/0xbitcoin/0xbitcoin-miner/raw/master/dist/0xbtcminer-linux.zip) and unzip
-2. Run this file with ./0xbtcminer-linux {command}
+2. Run this file in a terminal with ./0xbtcminer-linux {command}
 3. For example, ./0xbtcminer-linux account new
 
-#### Windows/Mac
-1. (Please build from source, see below)
+#### Windows
+1. Download [/dist/windows/0xbtcminer-win.exe](https://github.com/0xbitcoin/0xbitcoin-miner/raw/master/dist/0xbtcminer-windows.zip) and unzip
+2. Run this file in a terminal with 0xbtcminer-win.exe {command}
+3. For example, 0xbtcminer-win.exe account new
 
+
+#### Mac (build from source)
+1. Install Homebrew & Node8
+2. brew install yarn 
+3. clone/download this project
+4. open a terminal, cd into the project folder and run 'yarn' 
+5. run commands like 'npm run account new'
 
 ## Building from Source
 
