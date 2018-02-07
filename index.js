@@ -18,7 +18,7 @@ var NetworkInterface = require("./lib/network-interface");
 var web3 = new Web3( );
 
 
-prompt.start();
+
 
 var running = true;
 
@@ -27,7 +27,7 @@ async function initPrompt()
 
 
     var result = await promptForCommand();
-    console.log('keep going ?')
+
     initPrompt();
 
 }
@@ -35,12 +35,15 @@ async function initPrompt()
 async function promptForCommand()
 {
   return new Promise(function (fulfilled,rejected) {
+    prompt.start();
     prompt.get(['command'], function (err, result) {
 
       if(err){
         console.log(err);
+        rejected(err);
       }else{
-        handleCommand(result);
+        var response = handleCommand(result)
+        fulfilled( response );
       }
 
     });
