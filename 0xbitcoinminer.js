@@ -82,6 +82,9 @@ module.exports =  {
 
         setInterval(function(){self.collectDataFromContract(contractData)},10000);
 
+        this.miningLogger.appendToStandardLog("Begin mining for " + minerEthAddress + " gasprice " + vault.getGasPriceGwei() + " threads " + vault.getNumThreads())
+
+
         console.log("Mining for  "+ minerEthAddress)
         console.log("Gas price is "+ vault.getGasPriceGwei() + ' gwei')
         console.log("Configured CPU threadcount is "+ vault.getNumThreads() )

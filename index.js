@@ -6,7 +6,7 @@ const Miner = require("./0xbitcoinminer");
 const Vault = require("./lib/vault");
 
 
-const miningLogger = require("./mining-logger");
+const miningLogger = require("./lib/mining-logger");
 
 var prompt = require('prompt');
 
@@ -93,28 +93,28 @@ async function handleCommand(result)
 
   if(subsystem_name == 'account')
   {
-    await Vault.init(web3);
+    await Vault.init(web3,miningLogger);
 
     Vault.handleAccountCommand(subsystem_command,subsystem_option)
   }
 
   if(subsystem_name == 'contract')
   {
-    await Vault.init(web3);
+    await Vault.init(web3,miningLogger);
 
     Vault.handleContractCommand(subsystem_command,subsystem_option)
   }
 
   if(subsystem_name == 'config')
   {
-    await Vault.init(web3);
+    await Vault.init(web3,miningLogger);
 
     Vault.handleConfigCommand(subsystem_command,subsystem_option)
   }
 
   if(subsystem_name == 'mine')
   {
-    await Vault.init(web3);
+    await Vault.init(web3, miningLogger);
 
     //be careful! There is no web3 provider before this line
     web3.setProvider(Vault.getWeb3Provider());
