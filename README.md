@@ -1,18 +1,21 @@
 
 # 0xBitcoin ERC20 Token Miner
 
-## Running the packaged executables
+Solves proof of work to mine supported ERC20 tokens.  
 
 #### Linux
 1. Download [/dist/linux/0xbtcminer-linux](https://github.com/0xbitcoin/0xbitcoin-miner/raw/master/dist/0xbtcminer-linux.zip) and unzip
 2. Unzip the project and double click on the file '0xbtcminer-linux' to run
-2.1 If this does not work, run this file in a terminal with ./0xbtcminer-linux 
+
+If this does not work, run this file in a terminal with ./0xbtcminer-linux 
 
 
 #### Windows
-1. Download [/dist/windows/0xbtcminer-win](https://github.com/0xbitcoin/0xbitcoin-miner/raw/master/dist/0xbtcminer-win.zip) and unzip
+1. Download [/dist/windows/0xbtcminer-win](https://github.com/0xbitcoin/0xbitcoin-miner/raw/master/dist/0btcminer-win.zip)
+
 2. Unzip the project and double click on the file '0xbtcminer-win' to run
-2.1 If this does not work, run this file in a terminal with 0xbtcminer-win.exe 
+
+If this does not work, run this file in a terminal with 0xbtcminer-win.exe 
 
 
 #### Mac (build from source)
@@ -20,7 +23,7 @@
 2. brew install yarn 
 3. clone/download this project
 4. open a terminal, cd into the project folder and run 'yarn' 
-5. run commands like 'npm run account new'
+5. run with 'node index.js'
 
 ## Building from Source
 
@@ -58,7 +61,6 @@
 
 Note that it is necessary to fill the mining account (it is an Ethereum account) with a small amount of ether.  Typically 0.005 eth is good enough to get started.  The ether is used for gas to make function calls to the token smart contract when your miner finds a solution to the Proof of Work.  When the gas is spent that means that you have found a solution! If you were the first to find it, you will be rewarded with 0xbitcoin tokens.  
 
-## The Smart Contract
-Read the smart contract here:
-
-https://github.com/0xbitcoin/0xbitcoin-token
+## Tokens that can be mined using Proof of Work: 
+ 
+1. 0xBitcoin token - http://0xbitcoin.org - https://github.com/0xbitcoin/0xbitcoin-token
