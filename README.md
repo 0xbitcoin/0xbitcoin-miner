@@ -5,13 +5,14 @@
 
 #### Linux
 1. Download [/dist/linux/0xbtcminer-linux](https://github.com/0xbitcoin/0xbitcoin-miner/raw/master/dist/0xbtcminer-linux.zip) and unzip
-2. Run this file in a terminal with ./0xbtcminer-linux {command}
-3. For example, ./0xbtcminer-linux account new
+2. Unzip the project and double click on the file '0xbtcminer-linux' to run
+2.1 If this does not work, run this file in a terminal with ./0xbtcminer-linux 
+
 
 #### Windows
 1. Download [/dist/windows/0xbtcminer-win.exe](https://github.com/0xbitcoin/0xbitcoin-miner/raw/master/dist/0xbtcminer-win.zip) and unzip
-2. Run this file in a terminal with 0xbtcminer-win.exe {command}
-3. For example, 0xbtcminer-win.exe account new
+2. Unzip the project and double click on the file '0xbtcminer-win' to run
+2.1 If this does not work, run this file in a terminal with 0xbtcminer-win.exe 
 
 
 #### Mac (build from source)
@@ -31,10 +32,7 @@
 
 
 ### Commands
-If you compiled from source, run commands with "npm run {command}"
-
-If using a compiled binary such as 0xbtcminer-linux, run commands with "./0xbtcminer-linux {command}"
-
+ 
       {commands}
       " help" - Show the help menu
       " account new" - Create a new mining account 
@@ -53,11 +51,12 @@ If using a compiled binary such as 0xbtcminer-linux, run commands with "./0xbtcm
 ---------------
 
 ### Getting Started
-1. Build a new mining account with 'npm run account new'
-2. Write down these credentials
-3. Mine 0xbitcoin tokens with the command 'npm run mine'
+1. Build a new mining account with 'account new'
+2. View the private key with 'account list'
+3. Write down these credentials
+4. Mine 0xbitcoin tokens with the command 'mine'
 
-Note that it is necessary to fill the mining account with a small amount of ether.  Typically 0.005 eth is good enough to get started.  The ether is used for gas to make function calls to the token smart contract when your miner finds a solution to the Proof of Work.  When the gas is spent that means that you have found a solution! If you were the first to find it, you will be rewarded with 0xbitcoin tokens.  
+Note that it is necessary to fill the mining account (it is an Ethereum account) with a small amount of ether.  Typically 0.005 eth is good enough to get started.  The ether is used for gas to make function calls to the token smart contract when your miner finds a solution to the Proof of Work.  When the gas is spent that means that you have found a solution! If you were the first to find it, you will be rewarded with 0xbitcoin tokens.  
 
 ## The Smart Contract
 Read the smart contract here:
