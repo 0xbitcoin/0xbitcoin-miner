@@ -21,7 +21,7 @@ If this does not work, run this file in a terminal with 0xbtcminer-win.exe
 2. brew install yarn 
 3. clone/download this project
 4. open a terminal, cd into the project folder and run 'yarn' 
-5. run commands like 'npm run account new'
+5. run with 'node index.js'
 
 ## Building from Source
 
