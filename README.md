@@ -9,7 +9,7 @@
 3. For example, ./0xbtcminer-linux account new
 
 #### Windows
-1. Download [/dist/windows/0xbtcminer-win.exe](https://github.com/0xbitcoin/0xbitcoin-miner/raw/master/dist/0xbtcminer-windows.zip) and unzip
+1. Download [/dist/windows/0xbtcminer-win.exe](https://github.com/0xbitcoin/0xbitcoin-miner/raw/master/dist/0xbtcminer-win.zip) and unzip
 2. Run this file in a terminal with 0xbtcminer-win.exe {command}
 3. For example, 0xbtcminer-win.exe account new
 
