@@ -1,0 +1,48 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/home/andy/.nvm/versions/node/v7.6.0/bin/node',
+1 verbose cli   '/home/andy/.nvm/versions/node/v7.6.0/bin/npm',
+1 verbose cli   'run',
+1 verbose cli   'mine' ]
+2 info using npm@4.1.2
+3 info using node@v7.6.0
+4 verbose run-script [ 'premine', 'mine', 'postmine' ]
+5 info lifecycle 0xbitcoin-miner@1.1.1~premine: 0xbitcoin-miner@1.1.1
+6 silly lifecycle 0xbitcoin-miner@1.1.1~premine: no script for premine, continuing
+7 info lifecycle 0xbitcoin-miner@1.1.1~mine: 0xbitcoin-miner@1.1.1
+8 verbose lifecycle 0xbitcoin-miner@1.1.1~mine: unsafe-perm in lifecycle true
+9 verbose lifecycle 0xbitcoin-miner@1.1.1~mine: PATH: /home/andy/.nvm/versions/node/v7.6.0/lib/node_modules/npm/bin/node-gyp-bin:/home/andy/dev/0xbitcoin-miner/node_modules/.bin:/home/andy/bin:/home/andy/.local/bin:/home/andy/.nvm/versions/node/v7.6.0/bin:/home/andy/.rvm/gems/ruby-2.2.7/bin:/home/andy/.rvm/gems/ruby-2.2.7@global/bin:/usr/share/rvm/rubies/ruby-2.2.7/bin:/home/andy/bin:/home/andy/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/share/rvm/bin
+10 verbose lifecycle 0xbitcoin-miner@1.1.1~mine: CWD: /home/andy/dev/0xbitcoin-miner
+11 silly lifecycle 0xbitcoin-miner@1.1.1~mine: Args: [ '-c', 'node index.js mine' ]
+12 silly lifecycle 0xbitcoin-miner@1.1.1~mine: Returned: code: 1  signal: null
+13 info lifecycle 0xbitcoin-miner@1.1.1~mine: Failed to exec mine script
+14 verbose stack Error: 0xbitcoin-miner@1.1.1 mine: `node index.js mine`
+14 verbose stack Exit status 1
+14 verbose stack     at EventEmitter.<anonymous> (/home/andy/.nvm/versions/node/v7.6.0/lib/node_modules/npm/lib/utils/lifecycle.js:279:16)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at EventEmitter.emit (events.js:192:7)
+14 verbose stack     at ChildProcess.<anonymous> (/home/andy/.nvm/versions/node/v7.6.0/lib/node_modules/npm/lib/utils/spawn.js:40:14)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at ChildProcess.emit (events.js:192:7)
+14 verbose stack     at maybeClose (internal/child_process.js:890:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+15 verbose pkgid 0xbitcoin-miner@1.1.1
+16 verbose cwd /home/andy/dev/0xbitcoin-miner
+17 error Linux 4.13.0-32-generic
+18 error argv "/home/andy/.nvm/versions/node/v7.6.0/bin/node" "/home/andy/.nvm/versions/node/v7.6.0/bin/npm" "run" "mine"
+19 error node v7.6.0
+20 error npm  v4.1.2
+21 error code ELIFECYCLE
+22 error 0xbitcoin-miner@1.1.1 mine: `node index.js mine`
+22 error Exit status 1
+23 error Failed at the 0xbitcoin-miner@1.1.1 mine script 'node index.js mine'.
+23 error Make sure you have the latest version of node.js and npm installed.
+23 error If you do, this is most likely a problem with the 0xbitcoin-miner package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     node index.js mine
+23 error You can get information on how to open an issue for this project with:
+23 error     npm bugs 0xbitcoin-miner
+23 error Or if that isn't available, you can get their info via:
+23 error     npm owner ls 0xbitcoin-miner
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]
