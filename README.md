@@ -1,6 +1,7 @@
 
 # 0xBitcoin ERC20 Token Miner
 
+Solves proof of work to mine supported ERC20 tokens.  
 
 #### Linux
 1. Download [/dist/linux/0xbtcminer-linux](https://github.com/0xbitcoin/0xbitcoin-miner/raw/master/dist/0xbtcminer-linux.zip) and unzip
