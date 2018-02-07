@@ -24,7 +24,7 @@
 
 ## Building from Source
 
-### Setup
+### Setup (Windows/Mac/Linux)
 1. Install NodeJS 8.9
 2. Clone this repo
 3. run 'npm install yarn -g' to install yarn
