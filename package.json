@@ -28,5 +28,8 @@
     "web3": "^1.0.0-beta.29",
     "web3-eth": "^1.0.0-beta.20",
     "web3-utils": "^1.0.0-beta.20"
+  },
+  "pkg": {
+    "scripts": "node_modules/scrypt/index.js" 
   }
 }

@@ -1,4 +1,5 @@
 
+var scrypt = require('scrypt')
 
 const Miner = require("./0xbitcoinminer");
 
