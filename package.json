@@ -1,6 +1,6 @@
 {
   "name": "0xbitcoin-miner",
-  "version": "1.1.1",
+  "version": "1.2.1",
   "engines": {
     "node": ">=8.9"
   },
@@ -30,6 +30,6 @@
     "web3-utils": "^1.0.0-beta.20"
   },
   "pkg": {
-    "scripts": "node_modules/scrypt/index.js" 
+    "scripts": "node_modules/scrypt/index.js"
   }
 }

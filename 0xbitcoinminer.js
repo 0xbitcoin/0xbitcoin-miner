@@ -37,11 +37,19 @@ module.exports =  {
       this.testMode = (subsystem_command === 'test');
       this.debugMode = (subsystem_command === 'debug');
 
-      this.mining=true;
-      this.triesThisCycle = 0;
 
 
       var eth_account  = vault.getAccount();
+
+      if( eth_account ==  null || eth_account.address == null )
+      {
+        console.log("Please create a new account with 'account new' before mining.")
+        return false;
+      }
+
+      this.mining=true;
+      this.triesThisCycle = 0;
+
 
       setInterval(function(){ this.printMiningStats()}.bind(this), 5000)
 

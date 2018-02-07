@@ -9,6 +9,8 @@ const Vault = require("./lib/vault");
 var prompt = require('prompt');
 
 
+var pjson = require('./package.json');
+
 
 var Web3 = require('web3')
 
@@ -21,6 +23,12 @@ var web3 = new Web3( );
 
 
 var running = true;
+
+console.log('Welcome to 0xBitcoin Miner!')
+console.log('Version: ',pjson.version)
+console.log('\n')
+console.log('Type a command to get started.  Type "help" for a list of commands.')
+console.log('\n')
 
 async function initPrompt()
 {
@@ -71,10 +79,10 @@ var subsystem_option =  process.argv[4] ;
 
 async function handleCommand(result)
 {
-  console.log( result )
+
 
   var split_command = result.command.split(' ');
-  console.log( split_command )
+  //console.log( split_command )
 
   var subsystem_name =  split_command[0] ;
   var subsystem_command =  split_command[1] ;
@@ -119,18 +127,18 @@ async function handleCommand(result)
     console.log('\n\n')
     console.log('--0xBitcoin Miner Help--\n')
     console.log('Available commands:\n')
-    console.log('"npm run account new" - Create a new mining account ')
-    console.log('"npm run account list" - List all mining accounts ')
-    console.log('"npm run account select 0x####" - Select a primary mining account by address ')
+    console.log('"account new" - Create a new mining account ')
+    console.log('"account list" - List all mining accounts ')
+    console.log('"account select 0x####" - Select a primary mining account by address ')
 
-    console.log('"npm run contract list" - List the selected token contract to mine')
-    console.log('"npm run contract select 0x####" - Select a PoW token contract to mine ')
+    console.log('"contract list" - List the selected token contract to mine')
+    console.log('"contract select 0x####" - Select a PoW token contract to mine ')
 
-    console.log('"npm run config gasprice #" - Set the gasprice used to submit PoW to the token smartcontract ')
-    console.log('"npm run config cpu_threads #" - Set the number of CPU cores to use for mining ')
-    console.log('"npm run config web3provider http://----:####" - Set the web3 provider url for submitting ethereum transactions ')
+    console.log('"config gasprice #" - Set the gasprice used to submit PoW to the token smartcontract ')
+    console.log('"config cpu_threads #" - Set the number of CPU cores to use for mining ')
+    console.log('"config web3provider http://----:####" - Set the web3 provider url for submitting ethereum transactions ')
 
-    console.log('"npm run mine" - Begin mining ')
+    console.log('"mine" - Begin mining ')
 
   //  console.log('\n')
   //  console.log('Encrypted data vault stored at '+ Vault.get0xBitcoinLocalFolderPath())
