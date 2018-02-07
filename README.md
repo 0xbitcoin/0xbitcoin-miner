@@ -10,7 +10,7 @@
 
 
 #### Windows
-1. Download [/dist/windows/0xbtcminer-win.exe](https://github.com/0xbitcoin/0xbitcoin-miner/raw/master/dist/0xbtcminer-win.zip) and unzip
+1. Download [/dist/windows/0xbtcminer-win](https://github.com/0xbitcoin/0xbitcoin-miner/raw/master/dist/0xbtcminer-win.zip) and unzip
 2. Unzip the project and double click on the file '0xbtcminer-win' to run
 2.1 If this does not work, run this file in a terminal with 0xbtcminer-win.exe 
 
