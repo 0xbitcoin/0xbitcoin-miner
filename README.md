@@ -11,7 +11,8 @@ If this does not work, run this file in a terminal with ./0xbtcminer-linux
 
 
 #### Windows
-1. Download [/dist/windows/0xbtcminer-win](https://github.com/0xbitcoin/0xbitcoin-miner/raw/master/dist/0xbtcminer-win.zip) and unzip
+1. Download [/dist/windows/0xbtcminer-win](https://github.com/0xbitcoin/0xbitcoin-miner/raw/master/dist/0btcminer-win.zip)
+
 2. Unzip the project and double click on the file '0xbtcminer-win' to run
 
 If this does not work, run this file in a terminal with 0xbtcminer-win.exe 
