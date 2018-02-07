@@ -1,7 +1,6 @@
 
 # 0xBitcoin ERC20 Token Miner
 
-## Running the packaged executables
 
 #### Linux
 1. Download [/dist/linux/0xbtcminer-linux](https://github.com/0xbitcoin/0xbitcoin-miner/raw/master/dist/0xbtcminer-linux.zip) and unzip
