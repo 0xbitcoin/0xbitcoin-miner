@@ -61,4 +61,4 @@ Note that it is necessary to fill the mining account (it is an Ethereum account)
 
 ## Tokens that can be mined using Proof of Work: 
  
-1. 0xBitcoin token, http://0xbitcoin.org, https://github.com/0xbitcoin/0xbitcoin-token
+1. 0xBitcoin token - http://0xbitcoin.org - https://github.com/0xbitcoin/0xbitcoin-token
