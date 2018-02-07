@@ -6,6 +6,10 @@ const Miner = require("./0xbitcoinminer");
 const Vault = require("./lib/vault");
 
 
+var prompt = require('prompt');
+
+
+
 var Web3 = require('web3')
 
 var NetworkInterface = require("./lib/network-interface");
@@ -14,7 +18,40 @@ var NetworkInterface = require("./lib/network-interface");
 var web3 = new Web3( );
 
 
-//web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545'));
+prompt.start();
+
+var running = true;
+
+async function initPrompt()
+{
+
+
+    var result = await promptForCommand();
+    console.log('keep going ?')
+    initPrompt();
+
+}
+
+async function promptForCommand()
+{
+  return new Promise(function (fulfilled,rejected) {
+    prompt.get(['command'], function (err, result) {
+
+      if(err){
+        console.log(err);
+      }else{
+        handleCommand(result);
+      }
+
+    });
+  });
+}
+
+
+initPrompt();
+
+
+/*
 
 
 if (process.argv.length <= 2) {
@@ -26,11 +63,19 @@ var subsystem_name =  process.argv[2] ;
 var subsystem_command =  process.argv[3] ;
 var subsystem_option =  process.argv[4] ;
 
+*/
 
 
-
-async function init()
+async function handleCommand(result)
 {
+  console.log( result )
+
+  var split_command = result.command.split(' ');
+  console.log( split_command )
+
+  var subsystem_name =  split_command[0] ;
+  var subsystem_command =  split_command[1] ;
+  var subsystem_option =  split_command[2] ;
 
 
   if(subsystem_name == 'account')
@@ -92,4 +137,4 @@ async function init()
 
 
 }
-init();
+//init();
