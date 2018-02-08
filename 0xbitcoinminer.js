@@ -5,6 +5,8 @@ var solidityHelper = require('./solidity-helper')
 
 var leftpad =  require('leftpad');
 
+
+
 const BN = require('bn.js');
 //var miningDifficulty = 4;
 //var challengeNumber = 'aaa';
@@ -23,12 +25,13 @@ module.exports =  {
 
 
 
-    async init(web3,  subsystem_command, vault, networkInterface)
+    async init(web3,  subsystem_command, vault, networkInterface, miningLogger)
     {
 
 
       tokenContract =  new web3.eth.Contract(tokenContractJSON.abi,vault.getTokenContractAddress())
 
+      this.miningLogger = miningLogger;
 
       this.networkInterface = networkInterface;
 
@@ -79,6 +82,9 @@ module.exports =  {
 
         setInterval(function(){self.collectDataFromContract(contractData)},10000);
 
+        this.miningLogger.appendToStandardLog("Begin mining for " + minerEthAddress + " gasprice " + vault.getGasPriceGwei() + " threads " + vault.getNumThreads())
+
+
         console.log("Mining for  "+ minerEthAddress)
         console.log("Gas price is "+ vault.getGasPriceGwei() + ' gwei')
         console.log("Configured CPU threadcount is "+ vault.getNumThreads() )
@@ -124,10 +130,9 @@ module.exports =  {
 
     async submitNewMinedBlock( addressFrom, solution_number,digest_bytes,challenge_number)
     {
+       this.miningLogger.appendToStandardLog("Giving mined solution to network interface " + challenge_number)
 
        this.networkInterface.queueMiningSolution( addressFrom, solution_number , digest_bytes , challenge_number)
-
-
     },
 
 
@@ -187,6 +192,8 @@ module.exports =  {
                     })
                 }else {
                   console.log('submit mined solution with challenge ', challenge_number)
+
+
                   this.submitNewMinedBlock( minerEthAddress, solution_number,   web3utils.bytesToHex( digestBytes32 ) , challenge_number);
                 }
                }
