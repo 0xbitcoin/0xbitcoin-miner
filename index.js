@@ -46,13 +46,13 @@ async function promptForCommand()
 {
   return new Promise(function (fulfilled,rejected) {
     prompt.start();
-    prompt.get(['command'], function (err, result) {
+    prompt.get(['command'], async function (err, result) {
 
       if(err){
         console.log(err);
         rejected(err);
       }else{
-        var response = handleCommand(result)
+        var response = await handleCommand(result)
         fulfilled( response );
       }
 
@@ -95,21 +95,21 @@ async function handleCommand(result)
   {
     await Vault.init(web3,miningLogger);
 
-    Vault.handleAccountCommand(subsystem_command,subsystem_option)
+    await Vault.handleAccountCommand(subsystem_command,subsystem_option)
   }
 
   if(subsystem_name == 'contract')
   {
     await Vault.init(web3,miningLogger);
 
-    Vault.handleContractCommand(subsystem_command,subsystem_option)
+    await Vault.handleContractCommand(subsystem_command,subsystem_option)
   }
 
   if(subsystem_name == 'config')
   {
     await Vault.init(web3,miningLogger);
 
-    Vault.handleConfigCommand(subsystem_command,subsystem_option)
+    await Vault.handleConfigCommand(subsystem_command,subsystem_option)
   }
 
   if(subsystem_name == 'mine')
