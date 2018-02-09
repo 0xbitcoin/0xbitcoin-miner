@@ -1,17 +1,15 @@
 
 {
-  "networks": [
-      {
-        "name": "mainnet",
-        "contracts": {
-          "_0xbitcointoken": {"name":"0xBitcoinToken", "blockchain_address":"0xb6ed7644c69416d67b522e20bc294a9a9b405b31"}
-        }
-      },
-      {
-        "name": "testnet",
-        "contracts": {
-          "_0xbitcointoken": {"name":"0xBitcoinToken", "blockchain_address":"0x74960bcac083ed732215229811c8b8a353c7e4ba"}
-        }
-      }
-    ]
+  "networks": {
+      "mainnet": {
+              "contracts": {
+                "_0xbitcointoken": {"name":"0xBitcoinToken", "blockchain_address":"0xb6ed7644c69416d67b522e20bc294a9a9b405b31"}
+              }
+            },
+      "testnet": {
+              "contracts": {
+                "_0xbitcointoken": {"name":"0xBitcoinToken", "blockchain_address":"0x74960bcac083ed732215229811c8b8a353c7e4ba"}
+              }
+            } 
+    }
 }
