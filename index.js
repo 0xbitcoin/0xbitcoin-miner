@@ -136,9 +136,11 @@ async function handleCommand(result)
     console.log('"contract list" - List the selected token contract to mine')
     console.log('"contract select 0x####" - Select a PoW token contract to mine ')
 
+    console.log('"config list" - Show your current configuration')
     console.log('"config gasprice #" - Set the gasprice used to submit PoW to the token smartcontract ')
     console.log('"config cpu_threads #" - Set the number of CPU cores to use for mining ')
     console.log('"config web3provider http://----:####" - Set the web3 provider url for submitting ethereum transactions ')
+
 
     console.log('"mine" - Begin mining ')
 
