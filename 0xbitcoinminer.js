@@ -40,6 +40,9 @@ module.exports =  {
 
       var eth_account  = vault.getAccount();
 
+      console.log('Selected mining account:', eth_account )
+
+
       if( eth_account ==  null || eth_account.address == null )
       {
         console.log("Please create a new account with 'account new' before mining.")
@@ -144,7 +147,7 @@ module.exports =  {
     */
     mineCoins(web3, contractData , minerEthAddress)
     {
-       
+
                var solution_number = web3utils.randomHex(32)  //solution_number like bitcoin
 
                var challenge_number = contractData.challengeNumber;
