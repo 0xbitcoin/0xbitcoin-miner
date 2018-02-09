@@ -116,8 +116,7 @@ async function handleCommand(result)
   {
     await Vault.init(web3, miningLogger);
 
-    //be careful! There is no web3 provider before this line
-    web3.setProvider(Vault.getWeb3Provider());
+     
 
     NetworkInterface.init(web3, Vault, miningLogger);
 
