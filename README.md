@@ -61,6 +61,11 @@ If this does not work, run this file in a terminal with 0xbtcminer-win.exe
 
 Note that it is necessary to fill the mining account (it is an Ethereum account) with a small amount of ether.  Typically 0.005 eth is good enough to get started.  The ether is used for gas to make function calls to the token smart contract when your miner finds a solution to the Proof of Work.  When the gas is spent that means that you have found a solution! If you were the first to find it, you will be rewarded with 0xbitcoin tokens.  
 
+
+### Testing
+
+npm run test
+
 ## Tokens that can be mined using Proof of Work:
 
 1. 0xBitcoin token - http://0xbitcoin.org - https://github.com/0xbitcoin/0xbitcoin-token
