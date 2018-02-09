@@ -8,16 +8,12 @@ var leftpad =  require('leftpad');
 
 
 const BN = require('bn.js');
-//var miningDifficulty = 4;
-//var challengeNumber = 'aaa';
 
 var tokenContractJSON = require('./contracts/_0xBitcoinToken.json');
 
 
 var tokenContract;
 
-
-// 164892630 '00004fd994cbd58363bdfe0809d1a6d58e1646b56d1bb59154e45d555a6615aa'
 
 
 
@@ -148,8 +144,7 @@ module.exports =  {
     */
     mineCoins(web3, contractData , minerEthAddress)
     {
-        //may need a second solution_number !!
-
+       
                var solution_number = web3utils.randomHex(32)  //solution_number like bitcoin
 
                var challenge_number = contractData.challengeNumber;
