@@ -116,7 +116,7 @@ async function handleCommand(result)
   {
     await Vault.init(web3, miningLogger);
 
-     
+
 
     NetworkInterface.init(web3, Vault, miningLogger);
 
@@ -131,6 +131,7 @@ async function handleCommand(result)
     console.log('"account new" - Create a new mining account ')
     console.log('"account list" - List all mining accounts ')
     console.log('"account select 0x####" - Select a primary mining account by address ')
+    console.log('"account balance" - List the ether and token balance of your selected account ')
 
     console.log('"contract list" - List the selected token contract to mine')
     console.log('"contract select 0x####" - Select a PoW token contract to mine ')
