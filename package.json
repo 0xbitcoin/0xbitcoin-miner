@@ -21,6 +21,7 @@
     "appdata": "^1.1.0",
     "cryptr": "^3.0.0",
     "ethereumjs-tx": "^1.3.3",
+    "jayson": "^2.0.5",
     "js-sha3": "^0.7.0",
     "leftpad": "^0.0.1",
     "mkdirp": "^0.5.1",
