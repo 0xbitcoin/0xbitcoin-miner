@@ -21,26 +21,18 @@ module.exports =  {
 
 
 
-    async init(web3,  subsystem_command, vault, networkInterface, miningLogger)
+    async init(web3,  vault, miningLogger)
     {
-
 
       tokenContract =  new web3.eth.Contract(tokenContractJSON.abi,vault.getTokenContractAddress())
 
-      this.miningLogger = miningLogger;
+      this.web3 = web3;
 
-      this.networkInterface = networkInterface;
+      this.miningLogger = miningLogger;
 
       this.vault=vault;
 
-      this.testMode = (subsystem_command === 'test');
-      this.debugMode = (subsystem_command === 'debug');
-
-
-
       var eth_account  = vault.getAccount();
-
-      console.log('Selected mining account:', eth_account )
 
 
       if( eth_account ==  null || eth_account.address == null )
@@ -48,6 +40,37 @@ module.exports =  {
         console.log("Please create a new account with 'account new' before mining.")
         return false;
       }
+
+
+    },
+
+
+
+
+  setNetworkInterface(netInterface)
+  {
+      this.networkInterface = netInterface;
+  },
+
+  setMiningStyle(style)
+  {
+      this.miningStyle = style;
+  },
+
+  async mine(subsystem_command,subsystem_option){
+
+   console.log(  this.miningStyle )
+   console.log(  subsystem_option )
+      if( this.miningStyle == "pool" ){
+        if( subsystem_command != "mine" ){
+          return;
+        }
+      }
+
+      console.log('\n' )
+      console.log('Selected mining account:', this.vault.getAccount() )
+      console.log('\n' )
+
 
       this.mining=true;
       this.triesThisCycle = 0;
@@ -66,16 +89,16 @@ module.exports =  {
 
         await self.collectDataFromContract(contractData);
 
-       function mineStuff(contractData){
+       function mineCycle(contractData){
          //console.log('mine stuff')
 
 
             if( self.mining){
-              self.mineCoins(web3, contractData,minerEthAddress )
+              self.mineCoins(this.web3, contractData,minerEthAddress )
               self.triesThisCycle+=1;
 
               index++;
-              setTimeout(function(){mineStuff(contractData)},0)
+              setTimeout(function(){mineCycle(contractData)},0)
             }
         }
 
@@ -93,7 +116,7 @@ module.exports =  {
 
         for(var i=0;i<threads;i++)
         {
-          mineStuff( contractData );
+          mineCycle( contractData );
         }
 
 

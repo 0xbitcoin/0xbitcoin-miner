@@ -13,15 +13,13 @@ var prompt = require('prompt');
 
 var pjson = require('./package.json');
 
-
 var Web3 = require('web3')
 
 var NetworkInterface = require("./lib/network-interface");
 
+var PoolInterface = require("./lib/pool-interface");
 
 var web3 = new Web3( );
-
-
 
 
 var running = true;
@@ -116,11 +114,26 @@ async function handleCommand(result)
   {
     await Vault.init(web3, miningLogger);
 
-
-
     NetworkInterface.init(web3, Vault, miningLogger);
 
-    Miner.init( web3 ,  subsystem_command, Vault, NetworkInterface, miningLogger );
+    Miner.init( web3, Vault, miningLogger );
+    Miner.setNetworkInterface( NetworkInterface );
+    Miner.setMiningStyle("solo")
+    Miner.mine(subsystem_command,subsystem_option)
+  }
+
+  if(subsystem_name == 'pool')
+  {
+    await Vault.init(web3, miningLogger);
+
+    await PoolInterface.init(web3, subsystem_command, Vault, miningLogger);
+
+    await PoolInterface.handlePoolCommand(subsystem_command,subsystem_option)
+
+    Miner.init( web3 , Vault,  miningLogger );
+    Miner.setNetworkInterface( PoolInterface );
+    Miner.setMiningStyle("pool")
+    Miner.mine(subsystem_command,subsystem_option)
   }
 
   if(subsystem_name == 'help')
