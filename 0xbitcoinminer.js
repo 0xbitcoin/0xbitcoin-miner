@@ -32,10 +32,11 @@ module.exports =  {
 
       this.vault=vault;
 
-      var eth_account  = vault.getAccount();
+
+      this.eth_account  = vault.getAccount();
 
 
-      if( eth_account ==  null || eth_account.address == null )
+      if( this.eth_account ==  null || this.eth_account.address == null )
       {
         console.log("Please create a new account with 'account new' before mining.")
         return false;
@@ -59,10 +60,9 @@ module.exports =  {
 
   async mine(subsystem_command,subsystem_option){
 
-   console.log(  this.miningStyle )
-   console.log(  subsystem_option )
+
       if( this.miningStyle == "pool" ){
-        if( subsystem_command != "mine" ){
+        if( subsystem_option != "mine" ){
           return;
         }
       }
@@ -83,7 +83,7 @@ module.exports =  {
         var self = this;
 
 
-        var minerEthAddress = eth_account.address;
+        var minerEthAddress = this.eth_account.address;
 
         let contractData = {}; //passed around as a reference and edited globally
 
@@ -104,15 +104,15 @@ module.exports =  {
 
         setInterval(function(){self.collectDataFromContract(contractData)},10000);
 
-        this.miningLogger.appendToStandardLog("Begin mining for " + minerEthAddress + " gasprice " + vault.getGasPriceGwei() + " threads " + vault.getNumThreads())
+        this.miningLogger.appendToStandardLog("Begin mining for " + minerEthAddress + " gasprice " + this.vault.getGasPriceGwei() + " threads " + this.vault.getNumThreads())
 
 
         console.log("Mining for  "+ minerEthAddress)
-        console.log("Gas price is "+ vault.getGasPriceGwei() + ' gwei')
-        console.log("Configured CPU threadcount is "+ vault.getNumThreads() )
+        console.log("Gas price is "+ this.vault.getGasPriceGwei() + ' gwei')
+        console.log("Configured CPU threadcount is "+ this.vault.getNumThreads() )
         console.log("contractData Target  "+ contractData.miningTarget)
 
-        var threads = vault.getNumThreads();
+        var threads = this.vault.getNumThreads();
 
         for(var i=0;i<threads;i++)
         {
