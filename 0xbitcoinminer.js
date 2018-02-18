@@ -62,7 +62,7 @@ module.exports =  {
 
 
       if( this.miningStyle == "pool" ){
-        if( subsystem_option != "mine" ){
+        if( subsystem_command != "mine" ){
           return;
         }
       }
@@ -77,6 +77,9 @@ module.exports =  {
 
 
       setInterval(function(){ this.printMiningStats()}.bind(this), 5000)
+      setInterval(function(){self.collectMiningParameters(miningParameters,this.miningStyle)},2000);
+
+
 
         var index = 0;
 
@@ -85,24 +88,23 @@ module.exports =  {
 
         var minerEthAddress = this.eth_account.address;
 
-        let contractData = {}; //passed around as a reference and edited globally
+        let miningParameters = {}; //passed around as a reference and edited globally
 
-        await self.collectDataFromContract(contractData);
+        await self.collectMiningParameters(miningParameters,this.miningStyle);
 
-       function mineCycle(contractData){
+       function mineCycle(miningParameters){
          //console.log('mine stuff')
 
 
             if( self.mining){
-              self.mineCoins(this.web3, contractData,minerEthAddress )
+              self.mineCoins(this.web3, miningParameters,minerEthAddress )
               self.triesThisCycle+=1;
 
               index++;
-              setTimeout(function(){mineCycle(contractData)},0)
+              setTimeout(function(){mineCycle(miningParameters)},0)
             }
         }
 
-        setInterval(function(){self.collectDataFromContract(contractData)},10000);
 
         this.miningLogger.appendToStandardLog("Begin mining for " + minerEthAddress + " gasprice " + this.vault.getGasPriceGwei() + " threads " + this.vault.getNumThreads())
 
@@ -110,13 +112,13 @@ module.exports =  {
         console.log("Mining for  "+ minerEthAddress)
         console.log("Gas price is "+ this.vault.getGasPriceGwei() + ' gwei')
         console.log("Configured CPU threadcount is "+ this.vault.getNumThreads() )
-        console.log("contractData Target  "+ contractData.miningTarget)
+        console.log("miningParameters Target  "+ miningParameters.miningTarget)
 
         var threads = this.vault.getNumThreads();
 
         for(var i=0;i<threads;i++)
         {
-          mineCycle( contractData );
+          mineCycle( miningParameters );
         }
 
 
@@ -124,29 +126,26 @@ module.exports =  {
 
     },
 
-    async collectDataFromContract(contractData)
+    async collectMiningParameters(miningParameters,miningStyle)
     {
 
+      if(miningStyle == "pool")
+      {
 
-      var miningDifficultyString = await tokenContract.methods.getMiningDifficulty().call()  ;
-      var miningDifficulty = parseInt(miningDifficultyString)
-
-      var miningTargetString = await tokenContract.methods.getMiningTarget().call()  ;
-      var miningTarget = web3utils.toBN(miningTargetString)
-
-      var challengeNumber = await tokenContract.methods.getChallengeNumber().call() ;
+        var parameters = await this.networkInterface.collectMiningParameters();
 
 
-      console.log('Mining difficulty:', miningDifficulty);
-      //console.log('target:', miningTarget);
-      console.log('Challenge number:', challengeNumber)
+      }else{
 
-      contractData.miningDifficulty= miningDifficulty;
-        contractData.challengeNumber= challengeNumber;
-        contractData.miningTarget= miningTarget;
+        var parameters = await this.networkInterface.collectMiningParameters();
 
+      }
 
-      return contractData;
+      miningParameters.miningDifficulty = parameters.miningDifficulty;
+      miningParameters.challengeNumber = parameters.challengeNumber;
+      miningParameters.miningTarget = parameters.miningTarget;
+      miningParameters.poolEthAddress = parameters.poolEthAddress;
+
 
     },
 
@@ -168,13 +167,13 @@ module.exports =  {
 
 
     */
-    mineCoins(web3, contractData , minerEthAddress)
+    mineCoins(web3, miningParameters , minerEthAddress)
     {
 
                var solution_number = web3utils.randomHex(32)  //solution_number like bitcoin
 
-               var challenge_number = contractData.challengeNumber;
-               var target = contractData.miningTarget;
+               var challenge_number = miningParameters.challengeNumber;
+               var target = miningParameters.miningTarget;
 
                 var digest =  web3utils.soliditySha3( challenge_number , minerEthAddress, solution_number )
 

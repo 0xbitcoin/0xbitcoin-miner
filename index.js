@@ -1,6 +1,4 @@
-
-var scrypt = require('scrypt')
-
+ 
 const Miner = require("./0xbitcoinminer");
 
 const Vault = require("./lib/vault");
