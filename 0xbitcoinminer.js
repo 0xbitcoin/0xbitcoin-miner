@@ -112,7 +112,8 @@ module.exports =  {
         console.log("Mining for  "+ minerEthAddress)
         console.log("Gas price is "+ this.vault.getGasPriceGwei() + ' gwei')
         console.log("Configured CPU threadcount is "+ this.vault.getNumThreads() )
-        console.log("miningParameters Target  "+ miningParameters.miningTarget)
+        console.log("Mining Difficulty  "+ miningParameters.miningDifficulty)
+        console.log("Difficulty Target  "+ miningParameters.miningTarget)
 
 
         var threads = this.vault.getNumThreads();
@@ -142,7 +143,7 @@ module.exports =  {
 
       }
 
-      console.log('colleced mining params ', parameters)
+      //console.log('collected mining params ', parameters)
       miningParameters.miningDifficulty = parameters.miningDifficulty;
       miningParameters.challengeNumber = parameters.challengeNumber;
       miningParameters.miningTarget = parameters.miningTarget;
@@ -189,8 +190,8 @@ module.exports =  {
 
 
 
-              //  console.log('digestBigNumber',digestBigNumber.toString())
-                // console.log('miningTarget',miningTarget.toString())
+                //console.log('digestBigNumber',digestBigNumber.toString())
+                 //console.log('miningTarget',miningTarget.toString())
 
                if ( digestBigNumber.lt(miningTarget)  )
                {
@@ -213,11 +214,13 @@ module.exports =  {
                      function(result){
                       console.log('checked mining soln:' ,result)
                     })
-                }else {
-                  console.log('submit mined solution with challenge ', challenge_number)
 
-                  this.submitNewMinedBlock( minerEthAddress, solution_number,   web3utils.bytesToHex( digestBytes32 ) , challenge_number);
-                }
+
+                  }else {
+                    console.log('submit mined solution with challenge ', challenge_number)
+
+                    this.submitNewMinedBlock( minerEthAddress, solution_number,   web3utils.bytesToHex( digestBytes32 ) , challenge_number);
+                  }
                }
 
 
