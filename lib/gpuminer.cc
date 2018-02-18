@@ -70,8 +70,9 @@ void startMining(const FunctionCallbackInfo<Value>& args) {
   Isolate* isolate = args.GetIsolate();
   
     //start infinite loop
-  
+    // Needs to be VERY FAST and done in the GPU !!  (as much as possible) 
     while(true) {
+
       
       //generate random number -- nonce 
     //   int nonce = getRandomNumber();
@@ -98,11 +99,20 @@ void getSolutionsBuffer(const FunctionCallbackInfo<Value>& args) {
   Isolate* isolate = args.GetIsolate();
   args.GetReturnValue().Set(String::NewFromUtf8(isolate, "world"));
 }
+  
+  
+  
 
+  // Needs to be VERY FAST and done in the GPU !!  
+  // Needs to perform a keccak the same way that solidity/web3 does it!! Please see 
+  // https://web3js.readthedocs.io/en/1.0/web3-utils.html#utils-soliditysha3
+/*
+int keccak256(args[]) 
+{
+    return result
+}
   
-  
-  
-  
+  */ 
   
 
 //what am i doing ?
