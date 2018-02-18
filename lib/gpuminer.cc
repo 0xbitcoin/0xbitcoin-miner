@@ -10,9 +10,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <cuda.h>
+
 #include <curand.h>
 #include <curand_kernel.h>
+#include <cuda.h>
 
 namespace gpuminer {
 
@@ -103,7 +104,7 @@ void getRandomNumber()
 
 void init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "getRandomNumber", getRandomNumber);
-  
+
   NODE_SET_METHOD(exports, "setChallengeNumber", setChallengeNumber);
   NODE_SET_METHOD(exports, "setDifficultyTarget", setDifficultyTarget);
   NODE_SET_METHOD(exports, "startMining", startMining);
