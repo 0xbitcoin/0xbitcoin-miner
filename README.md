@@ -9,7 +9,7 @@ Solves proof of work to mine supported ERC20 tokens.
 
 ## GPU MINER DEVELOPMENT
 
-- Adding a 'c++ addon' at lib/gpuminer.cc
+- Adding a 'c++ addon' at lib/gpuminer.cc  (PLEASE VIEW THIS FILE) 
 - Use the command 'npm run build' to rebuild it
 - Use the command 'node indextest.js' to run basic tests for it
 
