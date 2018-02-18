@@ -7,7 +7,7 @@ Solves proof of work to mine supported ERC20 tokens.
 
 
 
-## GPU MINER DEVELOPMENT LOG
+## GPU MINER DEVELOPMENT
 
 - Adding a 'c++ addon' at lib/gpuminer.cc
 - Use the command 'npm run build' to rebuild it
@@ -19,8 +19,8 @@ PREREQS:
 Cuda Toolkit
 https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1604&target_type=runfilelocal
 
-
-
+ ### BOUNTY AWARDS 
+There are 2000 0xBTC tokens available as bounty for important code commits related to this GPU accelerated mining software branch. Therefore if you contribute production code, you will receive compensation. These tokens are situated in the deployers account 0x5294b9f7a71a97b703fa04ba3a415c8a136bdeb1 and were received from kind donations by the community.
 
 
 As of now:
@@ -37,11 +37,15 @@ Next to do:
   
     a. This loop will see if the results are smaller than the 'target'
     
-    b. If so, the result will be pushed into an array of solutions
+    b. If so, the result will be pushed into an array of solutions resising in the c++ addon
     
-  5. The javascript process will poll for the solutions and suck them out
+  5. The javascript process will poll for the solutions to acquire them and then send them off to the network as normal
+  
+  
+  
 
-  Tada we have a GPU accelerated miner !!
+
+
 
 
 
