@@ -13,8 +13,20 @@ Solves proof of work to mine supported ERC20 tokens.
 - Use the command 'npm run build' to rebuild it
 - Use the command 'node indextest.js' to run basic tests for it
 
+
+PREREQS:
+
+Cuda Toolkit
+https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1604&target_type=runfilelocal
+
+
+
+
+
 As of now:
+
   Can build the module
+  
   Can read and write integers to the c++ module
 
 Next to do:
@@ -22,8 +34,11 @@ Next to do:
   2. Finish the function to generate a random number
   3. Finish the function to perform a 'keccak'
   4. Write a loop that performs tons of keccaks on random numbers
+  
     a. This loop will see if the results are smaller than the 'target'
+    
     b. If so, the result will be pushed into an array of solutions
+    
   5. The javascript process will poll for the solutions and suck them out
 
   Tada we have a GPU accelerated miner !!
