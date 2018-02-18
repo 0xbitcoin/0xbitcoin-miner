@@ -11,16 +11,13 @@ DEFS_Debug := \
 	'-D_FILE_OFFSET_BITS=64' \
 	'-DBUILDING_NODE_EXTENSION' \
 	'-DDEBUG' \
-	'-D_DEBUG' \
-	'-DV8_ENABLE_CHECKS'
+	'-D_DEBUG'
 
 # Flags passed to all source files.
 CFLAGS_Debug := \
 	-fPIC \
-	-pthread \
 	-Wall \
-	-Wextra \
-	-Wno-unused-parameter \
+	-pthread \
 	-m64 \
 	-g \
 	-O0
@@ -31,14 +28,13 @@ CFLAGS_C_Debug :=
 # Flags passed to only C++ files.
 CFLAGS_CC_Debug := \
 	-fno-rtti \
-	-fno-exceptions \
-	-std=gnu++0x
+	-fno-exceptions
 
 INCS_Debug := \
-	-I/home/andy/.node-gyp/8.9.4/include/node \
-	-I/home/andy/.node-gyp/8.9.4/src \
-	-I/home/andy/.node-gyp/8.9.4/deps/uv/include \
-	-I/home/andy/.node-gyp/8.9.4/deps/v8/include
+	-I/home/andy/.node-gyp/0.8.9/include/node \
+	-I/home/andy/.node-gyp/0.8.9/src \
+	-I/home/andy/.node-gyp/0.8.9/deps/uv/include \
+	-I/home/andy/.node-gyp/0.8.9/deps/v8/include
 
 DEFS_Release := \
 	'-DNODE_GYP_MODULE_NAME=addon' \
@@ -52,13 +48,12 @@ DEFS_Release := \
 # Flags passed to all source files.
 CFLAGS_Release := \
 	-fPIC \
-	-pthread \
 	-Wall \
-	-Wextra \
-	-Wno-unused-parameter \
+	-pthread \
 	-m64 \
-	-O3 \
-	-fno-omit-frame-pointer
+	-O2 \
+	-fno-strict-aliasing \
+	-fno-tree-vrp
 
 # Flags passed to only C files.
 CFLAGS_C_Release :=
@@ -66,17 +61,16 @@ CFLAGS_C_Release :=
 # Flags passed to only C++ files.
 CFLAGS_CC_Release := \
 	-fno-rtti \
-	-fno-exceptions \
-	-std=gnu++0x
+	-fno-exceptions
 
 INCS_Release := \
-	-I/home/andy/.node-gyp/8.9.4/include/node \
-	-I/home/andy/.node-gyp/8.9.4/src \
-	-I/home/andy/.node-gyp/8.9.4/deps/uv/include \
-	-I/home/andy/.node-gyp/8.9.4/deps/v8/include
+	-I/home/andy/.node-gyp/0.8.9/include/node \
+	-I/home/andy/.node-gyp/0.8.9/src \
+	-I/home/andy/.node-gyp/0.8.9/deps/uv/include \
+	-I/home/andy/.node-gyp/0.8.9/deps/v8/include
 
 OBJS := \
-	$(obj).target/$(TARGET)/lib/hello.o
+	$(obj).target/$(TARGET)/lib/gpuminer.o
 
 # Add to the list of files we specially track dependencies for.
 all_deps += $(OBJS)

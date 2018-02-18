@@ -2,7 +2,7 @@
   "targets": [
     {
       "target_name": "addon",
-      "sources": [ "lib/hello.cc" ]
+      "sources": [ "lib/gpuminer.cc" ]
     }
   ]
 }

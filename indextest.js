@@ -1,5 +1,5 @@
 // hello.js
-const addon = require('./build/Release/addon');
+const GPUMiner = require('./build/Release/addon');
 
-console.log(addon.hello());
+console.log(GPUMiner.setChallengeNumber());
 // Prints: 'world'
