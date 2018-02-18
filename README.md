@@ -3,6 +3,34 @@
 
 Solves proof of work to mine supported ERC20 tokens.  
 
+
+
+
+
+## GPU MINER DEVELOPMENT LOG
+
+- Adding a 'c++ addon' at lib/gpuminer.cc
+- Use the command 'npm run build' to rebuild it
+- Use the command 'node indextest.js' to run basic tests for it
+
+As of now:
+  Can build the module
+  Can read and write integers to the c++ module
+
+Next to do:
+  1. Integrate the cuda.h library
+  2. Finish the function to generate a random number
+  3. Finish the function to perform a 'keccak'
+  4. Write a loop that performs tons of keccaks on random numbers
+    a. This loop will see if the results are smaller than the 'target'
+    b. If so, the result will be pushed into an array of solutions
+  5. The javascript process will poll for the solutions and suck them out
+
+  Tada we have a GPU accelerated miner !!
+
+
+
+
 #### Linux
 1. Download [/dist/linux/0xbtcminer-linux](https://github.com/0xbitcoin/0xbitcoin-miner/raw/master/dist/0xbtcminer-linux.zip) and unzip
 2. Unzip the project and double click on the file '0xbtcminer-linux' to run
