@@ -20,7 +20,7 @@ Cuda Toolkit
 https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1604&target_type=runfilelocal
 
  ### BOUNTY AWARDS 
-There are 2000 0xBTC tokens available as bounty for important code commits related to this GPU accelerated mining software branch. Therefore if you contribute production code, you will receive compensation. These tokens are situated in the deployers account 0x5294b9f7a71a97b703fa04ba3a415c8a136bdeb1 and were received from kind donations by the community.
+1 Ether and 1000 0xBTC tokens are the bounty for important code commits related to this GPU accelerated mining software branch. Therefore if you contribute production code, you will receive compensation. These tokens are situated in the deployers account 0x5294b9f7a71a97b703fa04ba3a415c8a136bdeb1 and were received from kind donations by the community.
 
 
 References:
