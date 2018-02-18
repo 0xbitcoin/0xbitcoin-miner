@@ -38,7 +38,8 @@ INCS_Debug := \
 	-I/home/andy/.node-gyp/8.9.4/include/node \
 	-I/home/andy/.node-gyp/8.9.4/src \
 	-I/home/andy/.node-gyp/8.9.4/deps/uv/include \
-	-I/home/andy/.node-gyp/8.9.4/deps/v8/include
+	-I/home/andy/.node-gyp/8.9.4/deps/v8/include \
+	-I$(srcdir)/node_modules/nan
 
 DEFS_Release := \
 	'-DNODE_GYP_MODULE_NAME=addon' \
@@ -73,7 +74,8 @@ INCS_Release := \
 	-I/home/andy/.node-gyp/8.9.4/include/node \
 	-I/home/andy/.node-gyp/8.9.4/src \
 	-I/home/andy/.node-gyp/8.9.4/deps/uv/include \
-	-I/home/andy/.node-gyp/8.9.4/deps/v8/include
+	-I/home/andy/.node-gyp/8.9.4/deps/v8/include \
+	-I$(srcdir)/node_modules/nan
 
 OBJS := \
 	$(obj).target/$(TARGET)/lib/gpuminer.o

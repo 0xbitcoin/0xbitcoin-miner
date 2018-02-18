@@ -16,6 +16,9 @@ var tokenContract;
 
 
 
+const GPUMiner = require('./build/Release/addon');
+
+
 
 module.exports =  {
 
