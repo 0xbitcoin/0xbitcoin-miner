@@ -114,6 +114,7 @@ module.exports =  {
         console.log("Configured CPU threadcount is "+ this.vault.getNumThreads() )
         console.log("miningParameters Target  "+ miningParameters.miningTarget)
 
+
         var threads = this.vault.getNumThreads();
 
         for(var i=0;i<threads;i++)
@@ -141,6 +142,7 @@ module.exports =  {
 
       }
 
+      console.log('colleced mining params ', parameters)
       miningParameters.miningDifficulty = parameters.miningDifficulty;
       miningParameters.challengeNumber = parameters.challengeNumber;
       miningParameters.miningTarget = parameters.miningTarget;
@@ -169,6 +171,7 @@ module.exports =  {
     */
     mineCoins(web3, miningParameters , minerEthAddress)
     {
+
 
                var solution_number = web3utils.randomHex(32)  //solution_number like bitcoin
 
@@ -212,7 +215,6 @@ module.exports =  {
                     })
                 }else {
                   console.log('submit mined solution with challenge ', challenge_number)
-
 
                   this.submitNewMinedBlock( minerEthAddress, solution_number,   web3utils.bytesToHex( digestBytes32 ) , challenge_number);
                 }
