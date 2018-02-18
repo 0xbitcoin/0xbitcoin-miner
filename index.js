@@ -1,4 +1,4 @@
- 
+
 const Miner = require("./0xbitcoinminer");
 
 const Vault = require("./lib/vault");
@@ -89,28 +89,32 @@ async function handleCommand(result)
 
   if(subsystem_name == 'account')
   {
-    await Vault.init(web3,miningLogger);
+    var unlocked = await Vault.init(web3,miningLogger);
+    if(!unlocked)return false;
 
     await Vault.handleAccountCommand(subsystem_command,subsystem_option)
   }
 
   if(subsystem_name == 'contract')
   {
-    await Vault.init(web3,miningLogger);
+    var unlocked = await Vault.init(web3,miningLogger);
+    if(!unlocked)return false;
 
     await Vault.handleContractCommand(subsystem_command,subsystem_option)
   }
 
   if(subsystem_name == 'config')
   {
-    await Vault.init(web3,miningLogger);
+    var unlocked = await Vault.init(web3,miningLogger);
+    if(!unlocked)return false;
 
     await Vault.handleConfigCommand(subsystem_command,subsystem_option)
   }
 
   if(subsystem_name == 'mine')
   {
-    await Vault.init(web3, miningLogger);
+    var unlocked = await Vault.init(web3,miningLogger);
+    if(!unlocked)return false;
 
     NetworkInterface.init(web3, Vault, miningLogger);
 
@@ -122,7 +126,8 @@ async function handleCommand(result)
 
   if(subsystem_name == 'pool')
   {
-    await Vault.init(web3, miningLogger);
+    var unlocked = await Vault.init(web3,miningLogger);
+    if(!unlocked)return false;
 
     await PoolInterface.init(web3, subsystem_command, Vault, miningLogger);
 

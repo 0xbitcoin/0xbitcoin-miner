@@ -88,6 +88,9 @@ module.exports =  {
 
         var minerEthAddress = this.eth_account.address;
 
+        var ethAddress;
+
+
         let miningParameters = {}; //passed around as a reference and edited globally
 
         await self.collectMiningParameters(miningParameters,this.miningStyle);
@@ -97,14 +100,21 @@ module.exports =  {
 
 
             if( self.mining){
-              self.mineCoins(this.web3, miningParameters,minerEthAddress )
+
+              if( self.miningStyle == "pool" ){
+                  ethAddress = miningParameters.poolEthAddress;
+              }else{
+                  ethAddress = minerEthAddress;
+              }
+
+
+              self.mineCoins(this.web3, miningParameters, ethAddress )
               self.triesThisCycle+=1;
 
               index++;
               setTimeout(function(){mineCycle(miningParameters)},0)
             }
         }
-
 
         this.miningLogger.appendToStandardLog("Begin mining for " + minerEthAddress + " gasprice " + this.vault.getGasPriceGwei() + " threads " + this.vault.getNumThreads())
 
@@ -152,11 +162,11 @@ module.exports =  {
 
     },
 
-    async submitNewMinedBlock( addressFrom, solution_number,digest_bytes,challenge_number)
+    async submitNewMinedBlock( addressFrom, solution_number,digest_bytes,challenge_number, target, difficulty)
     {
        this.miningLogger.appendToStandardLog("Giving mined solution to network interface " + challenge_number)
 
-       this.networkInterface.queueMiningSolution( addressFrom, solution_number , digest_bytes , challenge_number)
+       this.networkInterface.queueMiningSolution( addressFrom, solution_number , digest_bytes , challenge_number, target, difficulty)
     },
 
 
@@ -178,15 +188,16 @@ module.exports =  {
 
                var challenge_number = miningParameters.challengeNumber;
                var target = miningParameters.miningTarget;
+               var difficulty = miningParameters.miningDifficulty;
 
-                var digest =  web3utils.soliditySha3( challenge_number , minerEthAddress, solution_number )
+               var digest =  web3utils.soliditySha3( challenge_number , minerEthAddress, solution_number )
 
 
               //  console.log(web3utils.hexToBytes('0x0'))
-              var digestBytes32 = web3utils.hexToBytes(digest)
-                var digestBigNumber = web3utils.toBN(digest)
+               var digestBytes32 = web3utils.hexToBytes(digest)
+               var digestBigNumber = web3utils.toBN(digest)
 
-                var miningTarget = web3utils.toBN(target) ;
+               var miningTarget = web3utils.toBN(target) ;
 
 
 
@@ -219,7 +230,7 @@ module.exports =  {
                   }else {
                     console.log('submit mined solution with challenge ', challenge_number)
 
-                    this.submitNewMinedBlock( minerEthAddress, solution_number,   web3utils.bytesToHex( digestBytes32 ) , challenge_number);
+                    this.submitNewMinedBlock( minerEthAddress, solution_number,   web3utils.bytesToHex( digestBytes32 ) , challenge_number, target, difficulty );
                   }
                }
 
