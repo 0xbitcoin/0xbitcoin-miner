@@ -4,6 +4,8 @@
 //    node-gyp configure build --target=v8.9.4
 
 /* 
+There is a total bounty of 1 Ether and 1000 0xBTC tokens that will be split up and given to contributors to this as reward
+
 
 This c++ addon will be provided uint256 numbers: X, Y and T 
 Where X is an ethereum address
