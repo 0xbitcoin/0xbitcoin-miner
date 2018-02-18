@@ -14,7 +14,9 @@ Solves proof of work to mine supported ERC20 tokens.
 - Use the command 'node indextest.js' to run basic tests for it
 
 As of now:
+
   Can build the module
+  
   Can read and write integers to the c++ module
 
 Next to do:
