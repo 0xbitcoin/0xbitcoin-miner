@@ -47,8 +47,9 @@
     "v8_random_seed": 0,
     "v8_use_snapshot": "true",
     "want_separate_host_toolset": 0,
-    "nodedir": "/usr/include/nodejs",
+    "nodedir": "/home/andy/.node-gyp/8.9.4",
     "copy_dev_lib": "true",
-    "standalone_static_library": 1
+    "standalone_static_library": 1,
+    "target": "v8.9.4"
   }
 }

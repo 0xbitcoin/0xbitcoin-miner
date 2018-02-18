@@ -1,4 +1,9 @@
 // hello.cc
+
+//build with
+//    node-gyp configure build --target=v8.9.4
+
+
 #include <node.h>
 
 namespace demo {

@@ -11,7 +11,8 @@ DEFS_Debug := \
 	'-D_FILE_OFFSET_BITS=64' \
 	'-DBUILDING_NODE_EXTENSION' \
 	'-DDEBUG' \
-	'-D_DEBUG'
+	'-D_DEBUG' \
+	'-DV8_ENABLE_CHECKS'
 
 # Flags passed to all source files.
 CFLAGS_Debug := \
@@ -34,10 +35,10 @@ CFLAGS_CC_Debug := \
 	-std=gnu++0x
 
 INCS_Debug := \
-	-I/usr/include/nodejs/include/node \
-	-I/usr/include/nodejs/src \
-	-I/usr/include/nodejs/deps/uv/include \
-	-I/usr/include/nodejs/deps/v8/include
+	-I/home/andy/.node-gyp/8.9.4/include/node \
+	-I/home/andy/.node-gyp/8.9.4/src \
+	-I/home/andy/.node-gyp/8.9.4/deps/uv/include \
+	-I/home/andy/.node-gyp/8.9.4/deps/v8/include
 
 DEFS_Release := \
 	'-DNODE_GYP_MODULE_NAME=addon' \
@@ -57,8 +58,6 @@ CFLAGS_Release := \
 	-Wno-unused-parameter \
 	-m64 \
 	-O3 \
-	-ffunction-sections \
-	-fdata-sections \
 	-fno-omit-frame-pointer
 
 # Flags passed to only C files.
@@ -71,10 +70,10 @@ CFLAGS_CC_Release := \
 	-std=gnu++0x
 
 INCS_Release := \
-	-I/usr/include/nodejs/include/node \
-	-I/usr/include/nodejs/src \
-	-I/usr/include/nodejs/deps/uv/include \
-	-I/usr/include/nodejs/deps/v8/include
+	-I/home/andy/.node-gyp/8.9.4/include/node \
+	-I/home/andy/.node-gyp/8.9.4/src \
+	-I/home/andy/.node-gyp/8.9.4/deps/uv/include \
+	-I/home/andy/.node-gyp/8.9.4/deps/v8/include
 
 OBJS := \
 	$(obj).target/$(TARGET)/lib/hello.o
