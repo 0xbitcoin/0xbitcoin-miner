@@ -1,8 +1,9 @@
 {
   "targets": [
+     
     {
-      "target_name": "addon",
-      "sources": [ "lib/gpuminer.cc" ],
+      "target_name": "gpumineraddonsimple",
+      "sources": [ "cpp/gpuminersimple.cc" ],
        "include_dirs" : [
          "<!(node -e \"require('nan')\")"
          ]

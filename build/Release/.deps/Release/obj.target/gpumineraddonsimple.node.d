@@ -1,0 +1,1 @@
+cmd_Release/obj.target/gpumineraddonsimple.node := g++ -shared -pthread -rdynamic -m64  -Wl,-soname=gpumineraddonsimple.node -o Release/obj.target/gpumineraddonsimple.node -Wl,--start-group Release/obj.target/gpumineraddonsimple/cpp/gpuminersimple.o -Wl,--end-group 
