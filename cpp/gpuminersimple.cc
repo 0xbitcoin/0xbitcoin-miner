@@ -35,7 +35,7 @@ From javascript, we will provide X, Y , and T to this addon and we will read bac
 #include <stdio.h>
 #include <stdlib.h>
 
-
+#include <string>
 
 namespace gpuminer {
 
@@ -48,10 +48,12 @@ using v8::Value;
 using v8::Number;
 
 int difficultyTarget;
-int challengeNumber;
-//string minerEthAddress ;
+int challengeNumber; //should this be a string ?
+int minerEthAddress;
+//string minerEthAddress = ""; //should this be astring ?
 
-//int[]  solutions;
+int *solutions = new int[1000];
+int buffered_solutions_count = 0;
 
 void setChallengeNumber(const FunctionCallbackInfo<Value>& args) {
   Isolate* isolate = args.GetIsolate();
@@ -87,32 +89,18 @@ void getRandomNumberForNode(const FunctionCallbackInfo<Value>& args) {
 }
 
 
-  //PLEASE FILL ME IN- MOST IMPORTANT FUNCTION
-void startMining(const FunctionCallbackInfo<Value>& args) {
-  Isolate* isolate = args.GetIsolate();
-
-    //start infinite loop
-    // Needs to be VERY FAST and done in the GPU !!  (as much as possible)
-    while(true) {
 
 
-      //generate random number -- nonce
-      int nonce = getRandomNumber();
 
-      //int result = keccak256(nonce, minerEthAddress, challengeNumber )
-
-
-      /*if ( result < difficultyTarget)
-      {
-
-            Push the working nonce to an array !!
-            solutions.push( nonce  )
-      }
-
-      */
-
-
-    }
+void pushSolutionToBuffer(int nonce)
+{
+  if(buffered_solutions_count < 1000)
+  {
+      solutions[buffered_solutions_count] = nonce;
+      buffered_solutions_count++;
+  }else {
+    //too many queued solutions
+  }
 
 }
 
@@ -127,6 +115,9 @@ void getSolutionsBuffer(const FunctionCallbackInfo<Value>& args) {
 void clearSolutionsBuffer(const FunctionCallbackInfo<Value>& args) {
   Isolate* isolate = args.GetIsolate();
 
+   //clear array
+   std::fill_n(solutions, 1000, 0);
+   buffered_solutions_count = 0;
 
   args.GetReturnValue().Set(String::NewFromUtf8(isolate, "buffer cleared"));
 }
@@ -136,15 +127,43 @@ void clearSolutionsBuffer(const FunctionCallbackInfo<Value>& args) {
   // Needs to be VERY FAST and done in the GPU !!
   // Needs to perform a keccak the same way that solidity/web3 does it!! Please see
   // https://web3js.readthedocs.io/en/1.0/web3-utils.html#utils-soliditysha3
-/*
-int keccak256(args[])
+
+int keccak256(int args[])
 {
-    return result
+    int nonce = args[0];
+    int ethAddress = args[1];
+    int challengeNumber = args[2];
+
+    //fix me !  I dont actually work :[
+
+    return nonce;
 }
 
-  */
 
 
+//PLEASE FILL ME IN- MOST IMPORTANT FUNCTION
+void startMining(const FunctionCallbackInfo<Value>& args) {
+Isolate* isolate = args.GetIsolate();
+
+  //start infinite loop
+  // Needs to be VERY FAST and done in the GPU !!  (as much as possible)
+  while(true) {
+
+
+    //generate random number -- nonce
+    int nonce = getRandomNumber();
+
+    int keccak_args[3] = {nonce, minerEthAddress, challengeNumber};
+
+    int result = keccak256(keccak_args);
+
+    if ( result < difficultyTarget)
+    {
+        //  Push the working nonce to an array !!
+          pushSolutionToBuffer(nonce);
+    }
+  }
+}
 
 
 
