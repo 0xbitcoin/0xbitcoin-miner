@@ -74,6 +74,16 @@ void setDifficultyTarget(const FunctionCallbackInfo<Value>& args) {
 
   args.GetReturnValue().Set(difficultyTarget);
 }
+void setEthAddress(const FunctionCallbackInfo<Value>& args) {
+  Isolate* isolate = args.GetIsolate();
+
+  minerEthAddress = args[0]->IntegerValue();
+
+  args.GetReturnValue().Set(minerEthAddress);
+}
+
+
+
 
 
 
@@ -152,6 +162,22 @@ int keccak256(int args[])
     return nonce;
 }
 
+//for testing -- fix me !!!
+void printKeccak256(const FunctionCallbackInfo<Value>& args)
+{
+  Isolate* isolate = args.GetIsolate();
+
+
+  int difficultyTarget = args[0]->IntegerValue();
+  int challengeNumber = args[1]->IntegerValue();
+  int ethAddress = args[2]->IntegerValue();
+
+
+      //fix me !!
+      args.GetReturnValue().Set(String::NewFromUtf8(isolate, "keccak result --implement me  "));
+
+
+}
 
 
   //start infinite loop
@@ -163,7 +189,7 @@ void mine(){
   //PLEASE FILL ME IN- MOST IMPORTANT FUNCTION
   while(true) {
 
-    //generate random number -- nonce -- can we do this in the GPU -- should we ? 
+    //generate random number -- nonce -- can we do this in the GPU -- should we ?
     int nonce = getRandomNumber();
 
     int keccak_args[3] = {nonce, minerEthAddress, challengeNumber};
@@ -193,12 +219,16 @@ Isolate* isolate = args.GetIsolate();
 
 
 void init(Local<Object> exports) {
-  NODE_SET_METHOD(exports, "getRandomNumber", getRandomNumberForNode);
-  NODE_SET_METHOD(exports, "setChallengeNumber", setChallengeNumber);
+
+    NODE_SET_METHOD(exports, "setChallengeNumber", setChallengeNumber);
+      NODE_SET_METHOD(exports, "setEthAddress", setEthAddress);
   NODE_SET_METHOD(exports, "setDifficultyTarget", setDifficultyTarget);
   NODE_SET_METHOD(exports, "startMining", startMining);
   NODE_SET_METHOD(exports, "getSolutionsBuffer", getSolutionsBuffer);
   NODE_SET_METHOD(exports, "clearSolutionsBuffer", clearSolutionsBuffer);
+
+  NODE_SET_METHOD(exports, "getRandomNumber", getRandomNumberForNode);
+  NODE_SET_METHOD(exports, "getKeccak256", printKeccak256);
 }
 
 NODE_MODULE(NODE_GYP_MODULE_NAME, init)
