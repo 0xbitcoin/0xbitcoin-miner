@@ -1,0 +1,1 @@
+cmd_Release/obj.target/gpuminer_addon_alpha.node := g++ -shared -pthread -rdynamic -m64  -Wl,-soname=gpuminer_addon_alpha.node -o Release/obj.target/gpuminer_addon_alpha.node -Wl,--start-group Release/obj.target/gpuminer_addon_alpha/cpp/gpumineralpha.o -Wl,--end-group 

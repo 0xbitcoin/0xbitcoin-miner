@@ -303,8 +303,8 @@ $(obj).$(TOOLSET)/%.o: $(obj)/%.s FORCE_DO_CMD
 
 ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
     $(findstring $(join ^,$(prefix)),\
-                 $(join ^,gpumineraddonsimple.target.mk)))),)
-  include gpumineraddonsimple.target.mk
+                 $(join ^,gpuminer_addon_alpha.target.mk)))),)
+  include gpuminer_addon_alpha.target.mk
 endif
 
 quiet_cmd_regen_makefile = ACTION Regenerating $@

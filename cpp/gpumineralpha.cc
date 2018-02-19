@@ -50,6 +50,8 @@ using v8::String;
 using v8::Value;
 using v8::Number;
 
+
+//these are global variable accessible to both threads 
 int difficultyTarget;
 int challengeNumber; //should this be a string ?
 int minerEthAddress;
@@ -158,6 +160,7 @@ int keccak256(int args[])
   //can this entire loop be done in the GPU ?
 
 void mine(){
+  //PLEASE FILL ME IN- MOST IMPORTANT FUNCTION
   while(true) {
 
     //generate random number -- nonce
@@ -175,7 +178,7 @@ void mine(){
   }
 }
 
-//PLEASE FILL ME IN- MOST IMPORTANT FUNCTION
+
 void startMining(const FunctionCallbackInfo<Value>& args) {
 Isolate* isolate = args.GetIsolate();
 

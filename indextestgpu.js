@@ -14,7 +14,8 @@ Run this file with
 */
 
 //import C++ GPU miner code --  /cpp/gpuminer.cc
-const GPUMiner = require('./build/Release/gpumineraddonsimple');
+//const GPUMiner = require('./build/Release/gpuminer-addon-alpha');
+const GPUMiner = require('./build/Release/gpuminer_addon_alpha');
 
 //send data into the miner
 console.log('diff target' ,GPUMiner.setDifficultyTarget(5841053340));
