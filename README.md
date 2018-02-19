@@ -25,7 +25,7 @@ https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&t
 
 References:
 https://github.com/KlausT/ccminer
-
+https://github.com/nicehash/ccminer-sp
 
 
 As of now:
