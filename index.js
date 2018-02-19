@@ -158,6 +158,11 @@ async function handleCommand(result)
     console.log('"config web3provider http://----:####" - Set the web3 provider url for submitting ethereum transactions ')
 
 
+    console.log('"pool mine" - Begin mining into a pool')
+    console.log('"pool list" - List the selected mining pool')
+    console.log('"pool select http://####.com:####" - Select a pool to mine into ')
+
+
     console.log('"mine" - Begin mining ')
 
   //  console.log('\n')
