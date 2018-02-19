@@ -37,16 +37,25 @@ If this does not work, run this file in a terminal with 0xbtcminer-win.exe
 ### Commands
 
       {commands}
-      " help" - Show the help menu
-      " account new" - Create a new mining account
-      " account list" - List all mining accounts
-      " account select 0x####" - Select a primary mining account by address
-      " contract list" - List the selected token contract to mine
-      " contract select 0x####" - Select a PoW token contract to mine
-      " config gasprice #" - Set the gasprice used to submit PoW to the token smartcontract
-      " config cpu_threads #" - Set the number of CPU cores to use for mining
-      " config web3provider http://----:####" - Set the web3 provider url for submitting ethereum transactions
-      " mine" - Begin mining
+      "help" - Show the help menu
+
+      "account new" - Create a new mining account
+      "account list" - List all mining accounts
+      "account select 0x####" - Select a primary mining account by address
+      "account balance" - List the ether and token balance of your selected account
+
+      "contract list" - List the selected token contract to mine
+      "contract select 0x####" - Select a PoW token contract to mine
+
+      "config gasprice #" - Set the gasprice used to submit PoW to the token smartcontract
+      "config cpu_threads #" - Set the number of CPU cores to use for mining
+      "config web3provider http://----:####" - Set the web3 provider url for submitting ethereum transactions
+
+      "pool mine" - Begin mining into a pool
+      "pool list" - List the selected mining pool
+      "pool select http://####.com:####" - Select a pool to mine into
+
+      "mine" - Begin mining
 
 
 
@@ -60,6 +69,13 @@ If this does not work, run this file in a terminal with 0xbtcminer-win.exe
 4. Mine 0xbitcoin tokens with the command 'mine'
 
 Note that it is necessary to fill the mining account (it is an Ethereum account) with a small amount of ether.  Typically 0.005 eth is good enough to get started.  The ether is used for gas to make function calls to the token smart contract when your miner finds a solution to the Proof of Work.  When the gas is spent that means that you have found a solution! If you were the first to find it, you will be rewarded with 0xbitcoin tokens.  
+
+
+
+## Pool Mining
+- You can mine into a pool with the command 'pool mine'
+- When mining into a pool, your gasprice does not matter and you will not pay gas fees
+- Every pool is different so consult each pool owner.  Typically, pools will offer a token withdraw mechanism or automatically send tokens to your address on a periodic basis or when a limit is reached
 
 
 ### Testing
