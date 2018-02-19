@@ -82,7 +82,7 @@ module.exports =  {
             }
         }
 
-        setInterval(function(){self.collectDataFromContract(contractData)},10000);
+        setInterval(function(){self.collectDataFromContract(contractData)},2000);
 
         this.miningLogger.appendToStandardLog("Begin mining for " + minerEthAddress + " gasprice " + vault.getGasPriceGwei() + " threads " + vault.getNumThreads())
 
