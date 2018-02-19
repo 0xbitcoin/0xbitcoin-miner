@@ -51,7 +51,7 @@ using v8::Value;
 using v8::Number;
 
 
-//these are global variable accessible to both threads 
+//these are global variable accessible to both threads
 int difficultyTarget;
 int challengeNumber; //should this be a string ?
 int minerEthAddress;
@@ -163,7 +163,7 @@ void mine(){
   //PLEASE FILL ME IN- MOST IMPORTANT FUNCTION
   while(true) {
 
-    //generate random number -- nonce
+    //generate random number -- nonce -- can we do this in the GPU -- should we ? 
     int nonce = getRandomNumber();
 
     int keccak_args[3] = {nonce, minerEthAddress, challengeNumber};

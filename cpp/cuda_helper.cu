@@ -1,7 +1,7 @@
 #ifndef CUDA_HELPER_H
 #define CUDA_HELPER_H
 
-//These require the cuda libs to be installed on your computer! 
+//These require the cuda libs to be installed
 #include <cuda.h>
 #include <cuda_runtime.h>
 
