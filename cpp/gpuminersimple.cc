@@ -35,7 +35,10 @@ From javascript, we will provide X, Y , and T to this addon and we will read bac
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <ctime>
+
 #include <string>
+#include <thread>
 
 namespace gpuminer {
 
@@ -75,6 +78,8 @@ void setDifficultyTarget(const FunctionCallbackInfo<Value>& args) {
 //what am i doing ?
 int getRandomNumber()
 {
+    srand(time(NULL));
+
     return rand();
 
 }
@@ -108,8 +113,14 @@ void pushSolutionToBuffer(int nonce)
 void getSolutionsBuffer(const FunctionCallbackInfo<Value>& args) {
   Isolate* isolate = args.GetIsolate();
 
+  int nonce = 0;
 
-  args.GetReturnValue().Set(String::NewFromUtf8(isolate, "world"));
+  if( buffered_solutions_count > 0)
+  {
+    nonce = solutions[0]; //get first soln
+  }
+
+  args.GetReturnValue().Set(Number::New(isolate,nonce));
 }
 
 void clearSolutionsBuffer(const FunctionCallbackInfo<Value>& args) {
@@ -141,14 +152,13 @@ int keccak256(int args[])
 
 
 
-//PLEASE FILL ME IN- MOST IMPORTANT FUNCTION
-void startMining(const FunctionCallbackInfo<Value>& args) {
-Isolate* isolate = args.GetIsolate();
-
   //start infinite loop
   // Needs to be VERY FAST and done in the GPU !!  (as much as possible)
-  while(true) {
 
+  //can this entire loop be done in the GPU ?
+
+void mine(){
+  while(true) {
 
     //generate random number -- nonce
     int nonce = getRandomNumber();
@@ -163,6 +173,18 @@ Isolate* isolate = args.GetIsolate();
           pushSolutionToBuffer(nonce);
     }
   }
+}
+
+//PLEASE FILL ME IN- MOST IMPORTANT FUNCTION
+void startMining(const FunctionCallbackInfo<Value>& args) {
+Isolate* isolate = args.GetIsolate();
+
+  //mine in another thread
+  std::thread t1(mine );
+  t1.detach(); //let it operate independently
+
+
+    args.GetReturnValue().Set(String::NewFromUtf8(isolate, "started mining thread"));
 }
 
 

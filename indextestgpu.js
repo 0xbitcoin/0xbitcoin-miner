@@ -17,14 +17,14 @@ Run this file with
 const GPUMiner = require('./build/Release/gpumineraddonsimple');
 
 //send data into the miner
-console.log('diff target' ,GPUMiner.setDifficultyTarget(1000));
+console.log('diff target' ,GPUMiner.setDifficultyTarget(5841053340));
 console.log('challenge number',GPUMiner.setChallengeNumber(2000));
 
 console.log('random number',GPUMiner.getRandomNumber());
 
 
 //start the infinite mining loop which is in c++
-GPUMiner.startMining()
+
 
 setInterval(function(){
   console.log('asking GPU process for solutions...')
@@ -32,8 +32,13 @@ setInterval(function(){
   console.log(gpu_solutions);
 
   var gpu_solutions = GPUMiner.clearSolutionsBuffer()
-},5000)
+},2000)
 
+setTimeout(function(){
+  var response = GPUMiner.startMining()
+  console.log(response)
+
+},0)
 
 
 /*
