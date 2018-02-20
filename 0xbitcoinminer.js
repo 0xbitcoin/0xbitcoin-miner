@@ -101,14 +101,16 @@ module.exports =  {
 
             if( self.mining){
 
+              var addressFrom;
+
               if( self.miningStyle == "pool" ){
-                  ethAddress = miningParameters.poolEthAddress;
+                  addressFrom = miningParameters.poolEthAddress;
               }else{
-                  ethAddress = minerEthAddress;
+                  addressFrom = minerEthAddress;
               }
 
 
-              self.mineCoins(this.web3, miningParameters, ethAddress )
+              self.mineCoins(this.web3, miningParameters, minerEthAddress , addressFrom)
               self.triesThisCycle+=1;
 
               index++;
@@ -162,11 +164,11 @@ module.exports =  {
 
     },
 
-    async submitNewMinedBlock( addressFrom, solution_number,digest_bytes,challenge_number, target, difficulty)
+    async submitNewMinedBlock( addressFrom, minerEthAddress, solution_number,digest_bytes,challenge_number, target, difficulty)
     {
        this.miningLogger.appendToStandardLog("Giving mined solution to network interface " + challenge_number)
 
-       this.networkInterface.queueMiningSolution( addressFrom, solution_number , digest_bytes , challenge_number, target, difficulty)
+       this.networkInterface.queueMiningSolution( addressFrom, minerEthAddress, solution_number , digest_bytes , challenge_number, target, difficulty)
     },
 
 
@@ -180,7 +182,7 @@ module.exports =  {
 
 
     */
-    mineCoins(web3, miningParameters , minerEthAddress)
+    mineCoins(web3, miningParameters , minerEthAddress, addressFrom)
     {
 
 
@@ -190,7 +192,7 @@ module.exports =  {
                var target = miningParameters.miningTarget;
                var difficulty = miningParameters.miningDifficulty;
 
-               var digest =  web3utils.soliditySha3( challenge_number , minerEthAddress, solution_number )
+               var digest =  web3utils.soliditySha3( challenge_number , addressFrom, solution_number )
 
 
               //  console.log(web3utils.hexToBytes('0x0'))
@@ -221,16 +223,16 @@ module.exports =  {
 
                    this.mining = false;
 
-                   this.networkInterface.checkMiningSolution( minerEthAddress, solution_number , web3utils.bytesToHex( digestBytes32 ),challenge_number,miningTarget,
+                   /*this.networkInterface.checkMiningSolution( minerEthAddress, solution_number , web3utils.bytesToHex( digestBytes32 ),challenge_number,miningTarget,
                      function(result){
                       console.log('checked mining soln:' ,result)
-                    })
+                    })*/
 
 
                   }else {
                     console.log('submit mined solution with challenge ', challenge_number)
 
-                    this.submitNewMinedBlock( minerEthAddress, solution_number,   web3utils.bytesToHex( digestBytes32 ) , challenge_number, target, difficulty );
+                    this.submitNewMinedBlock( addressFrom, minerEthAddress, solution_number,   web3utils.bytesToHex( digestBytes32 ) , challenge_number, target, difficulty );
                   }
                }
 
