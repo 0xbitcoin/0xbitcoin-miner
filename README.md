@@ -9,7 +9,7 @@ Solves proof of work to mine supported ERC20 tokens.
 
 ## GPU MINER DEVELOPMENT
 
-- Adding a 'c++ addon' at lib/gpuminer.cc  (PLEASE VIEW THIS FILE) 
+- Adding a 'c++ addon' at lib/gpuminer.cc  (PLEASE VIEW THIS FILE)
 - Use the command 'npm run build' to rebuild it
 - Use the command 'node indextest.js' to run basic tests for it
 
@@ -19,7 +19,7 @@ PREREQS:
 Cuda Toolkit
 https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1604&target_type=runfilelocal
 
- ### BOUNTY AWARDS 
+ ### BOUNTY AWARDS
 1 Ether and 1000 0xBTC tokens are the bounty for important code commits related to this GPU accelerated mining software branch. Therefore if you contribute production code, you will receive compensation. These tokens are situated in the deployers account 0x5294b9f7a71a97b703fa04ba3a415c8a136bdeb1 and were received from kind donations by the community.
 
 
@@ -31,23 +31,24 @@ https://github.com/nicehash/ccminer-sp/blob/master/keccak/cuda_keccak256.cu
 As of now:
 
   Can build the module
-  
+
   Can read and write integers to the c++ module
 
 Next to do:
   1. Integrate the cuda.h library
+    a. add this https://github.com/kashif/node-cuda  (+binding.gyp)
   2. Finish the function to generate a random number
   3. Finish the function to perform a 'keccak'
   4. Write a loop that performs tons of keccaks on random numbers
-  
+
     a. This loop will see if the results are smaller than the 'target'
-    
+
     b. If so, the result will be pushed into an array of solutions resising in the c++ addon
-    
+
   5. The javascript process will poll for the solutions to acquire them and then send them off to the network as normal
-  
-  
-  
+
+
+
 
 
 
