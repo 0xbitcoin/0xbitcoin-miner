@@ -8,6 +8,7 @@ Solves proof of work to mine supported ERC20 tokens.
 
 
 ## GPU MINER DEVELOPMENT
+Join discussiom in the 'development' channel: https://discord.gg/pwC4yx
 
 - Adding a 'c++ addon' at lib/gpuminer.cc  (PLEASE VIEW THIS FILE)
 - Use the command 'npm run build' to rebuild it
