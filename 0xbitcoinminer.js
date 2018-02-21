@@ -80,7 +80,6 @@ module.exports =  {
 
 
       setInterval(function(){ this.printMiningStats()}.bind(this), 5000)
-      setInterval(function(){self.collectMiningParameters(minerEthAddress,miningParameters,this.miningStyle)},2000);
 
 
 
@@ -94,6 +93,9 @@ module.exports =  {
 
 
         let miningParameters = {}; //passed around as a reference and edited globally
+
+        setInterval(function(){self.collectMiningParameters(minerEthAddress,miningParameters,this.miningStyle)},2000);
+
 
         await self.collectMiningParameters(minerEthAddress, miningParameters,this.miningStyle);
 
@@ -123,12 +125,13 @@ module.exports =  {
         this.miningLogger.appendToStandardLog("Begin mining for " + minerEthAddress + " gasprice " + this.vault.getGasPriceGwei() + " threads " + this.vault.getNumThreads())
 
 
+        setInterval(function(){
         console.log("Mining for  "+ minerEthAddress)
-        console.log("Gas price is "+ this.vault.getGasPriceGwei() + ' gwei')
-        console.log("Configured CPU threadcount is "+ this.vault.getNumThreads() )
+        console.log("Gas price is "+ self.vault.getGasPriceGwei() + ' gwei')
+        console.log("Configured CPU threadcount is "+ self.vault.getNumThreads() )
         console.log("Mining Difficulty  "+ miningParameters.miningDifficulty)
         console.log("Difficulty Target  "+ miningParameters.miningTarget)
-
+      },10000)
 
         var threads = this.vault.getNumThreads();
 
