@@ -20,11 +20,8 @@ DEV PREREQS:
 1. npm install -g node-gyp
 2.  Cuda Toolkit
 https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1604&target_type=runfilelocal
-3. MAKE SURE YOU CAN BUILD THIS :
-https://github.com/kashif/node-cuda
-
-
-TRY THIS : https://askubuntu.com/questions/940103/building-ccminer-on-ubuntu-17-04
+  MAKE SURE YOU CAN BUILD THIS : 
+ https://askubuntu.com/questions/940103/building-ccminer-on-ubuntu-17-04
 1. i had to apt-get install libcurl4-openssl-dev
 2. i had to go into the makefile and replace 'nvcc' with 'nvcc -ccbin clang-3.8'
 ---------------------------------

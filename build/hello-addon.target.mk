@@ -10,7 +10,7 @@ $(obj).$(TOOLSET)/$(TARGET)/geni/cuda_helper.o: $(srcdir)/cpp/cuda_helper.cu $(a
 	$(call do_cmd,binding_gyp_hello_addon_target_cuda_on_linux_0)
 
 all_deps += $(obj).$(TOOLSET)/$(TARGET)/geni/cuda_helper.o
-cmd_binding_gyp_hello_addon_target_cuda_on_linux_0 = LD_LIBRARY_PATH=$(builddir)/lib.host:$(builddir)/lib.target:$$LD_LIBRARY_PATH; export LD_LIBRARY_PATH; cd $(srcdir)/.; mkdir -p $(obj).$(TOOLSET)/hello-addon/geni; "nvcc -ccbin clang-3.8" -Xcompiler -fpic -c "$(abspath $<)" -o "$(obj).$(TOOLSET)/hello-addon/geni/cuda_helper.o"
+cmd_binding_gyp_hello_addon_target_cuda_on_linux_0 = LD_LIBRARY_PATH=$(builddir)/lib.host:$(builddir)/lib.target:$$LD_LIBRARY_PATH; export LD_LIBRARY_PATH; cd $(srcdir)/.; mkdir -p $(obj).$(TOOLSET)/hello-addon/geni; nvcc -ccbin clang-3.8 -Xcompiler -fpic -c "$(abspath $<)" -o "$(obj).$(TOOLSET)/hello-addon/geni/cuda_helper.o"
 quiet_cmd_binding_gyp_hello_addon_target_cuda_on_linux_0 = RULE binding_gyp_hello_addon_target_cuda_on_linux_0 $@
 
 $(obj).$(TOOLSET)/$(TARGET)/geni/keccak256.o: obj := $(abs_obj)
@@ -20,7 +20,7 @@ $(obj).$(TOOLSET)/$(TARGET)/geni/keccak256.o: $(srcdir)/cpp/keccak256.cu $(abspa
 	$(call do_cmd,binding_gyp_hello_addon_target_cuda_on_linux_1)
 
 all_deps += $(obj).$(TOOLSET)/$(TARGET)/geni/keccak256.o
-cmd_binding_gyp_hello_addon_target_cuda_on_linux_1 = LD_LIBRARY_PATH=$(builddir)/lib.host:$(builddir)/lib.target:$$LD_LIBRARY_PATH; export LD_LIBRARY_PATH; cd $(srcdir)/.; mkdir -p $(obj).$(TOOLSET)/hello-addon/geni; "nvcc -ccbin clang-3.8" -Xcompiler -fpic -c "$(abspath $<)" -o "$(obj).$(TOOLSET)/hello-addon/geni/keccak256.o"
+cmd_binding_gyp_hello_addon_target_cuda_on_linux_1 = LD_LIBRARY_PATH=$(builddir)/lib.host:$(builddir)/lib.target:$$LD_LIBRARY_PATH; export LD_LIBRARY_PATH; cd $(srcdir)/.; mkdir -p $(obj).$(TOOLSET)/hello-addon/geni; nvcc -ccbin clang-3.8 -Xcompiler -fpic -c "$(abspath $<)" -o "$(obj).$(TOOLSET)/hello-addon/geni/keccak256.o"
 quiet_cmd_binding_gyp_hello_addon_target_cuda_on_linux_1 = RULE binding_gyp_hello_addon_target_cuda_on_linux_1 $@
 
 rule_binding_gyp_hello_addon_target_cuda_on_linux_outputs := \

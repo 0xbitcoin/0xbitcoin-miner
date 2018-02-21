@@ -29,7 +29,7 @@
        {'rule_name': 'cuda on linux',
          'message': "compile cuda file on linux",
          'process_outputs_as_sources': 1,
-         'action': ['nvcc -ccbin clang-3.8','-Xcompiler','-fpic','-c',
+         'action': ['nvcc','-ccbin','clang-3.8','-Xcompiler','-fpic','-c',
             '<@(_inputs)','-o','<@(_outputs)'],
     }]]}],
 
