@@ -64,7 +64,7 @@ If this does not work, run this file in a terminal with 0xbtcminer-win.exe
       "pool list" - List the selected mining pool
       "pool select http://####.com:####" - Select a pool to mine into
 
-      "mine" - Begin mining
+      "mine" - Begin mining solo, directly into the smartcontract
 
 
 
