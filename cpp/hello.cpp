@@ -1,1 +1,1 @@
-#include "keccak256.cu"
+#include "cpp/sha/cuda_sha256d"

@@ -1,8 +1,4 @@
-// https://raw.githubusercontent.com/nicehash/ccminer-sp/master/keccak/cuda_keccak256.cu
-
-
-
-//#include "miner.h"
+#include "miner.h"
 #include <stdint.h>
 #include <memory.h>
 #include "cuda_helper.h"
