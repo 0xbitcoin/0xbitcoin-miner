@@ -5,13 +5,13 @@
 extern "C" {
 #endif
 
-#include <ccminer-config.h>
+#include "ccminer-config.h"
 
 #include <stdbool.h>
 #include <inttypes.h>
 #include <sys/time.h>
 #include <pthread.h>
-#include <jansson.h>
+#include "jansson/jansson.h"
 #include <curl/curl.h>
 
 #ifdef _MSC_VER

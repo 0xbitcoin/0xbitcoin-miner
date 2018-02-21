@@ -6,7 +6,7 @@ TARGET := hello-addon
 $(obj).$(TOOLSET)/$(TARGET)/geni/cuda_sha256d.o: obj := $(abs_obj)
 $(obj).$(TOOLSET)/$(TARGET)/geni/cuda_sha256d.o: builddir := $(abs_builddir)
 $(obj).$(TOOLSET)/$(TARGET)/geni/cuda_sha256d.o: TOOLSET := $(TOOLSET)
-$(obj).$(TOOLSET)/$(TARGET)/geni/cuda_sha256d.o: $(srcdir)/cpp/sha/cuda_sha256d.cu $(abspath\ $<)
+$(obj).$(TOOLSET)/$(TARGET)/geni/cuda_sha256d.o: $(srcdir)/cpp/cuda_sha256d.cu $(abspath\ $<)
 	$(call do_cmd,binding_gyp_hello_addon_target_cuda_on_linux_0)
 
 all_deps += $(obj).$(TOOLSET)/$(TARGET)/geni/cuda_sha256d.o

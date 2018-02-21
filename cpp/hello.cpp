@@ -1,1 +1,1 @@
-#include "cpp/sha/cuda_sha256d"
+#include "./cuda_sha256d.cu"

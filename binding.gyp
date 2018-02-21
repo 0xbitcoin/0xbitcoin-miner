@@ -27,8 +27,8 @@
  "cpp/cpuminer-config.h",
  "cpp/miner.h",
  "cpp/cuda_helper.h",
- 
-    "cpp/sha/cuda_sha256d.cu",
+
+    "cpp/cuda_sha256d.cu",
     "cpp/hello.cpp",
   ],
 
