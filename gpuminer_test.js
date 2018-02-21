@@ -18,7 +18,7 @@ var web3utils =  require('web3-utils');
 
 //import C++ GPU miner code --  /cpp/gpuminer.cc
 //const GPUMiner = require('./build/Release/gpuminer-addon-alpha');
-const GPUMiner = require('./build/Release/gpuminer_addon_alpha');
+const GPUMiner = require('./build/Release/gpuminer_addon');
 
 
 var testNonce = 5566

@@ -13,10 +13,12 @@
 
 //is this correct ?
 //need to format data properly (web3 solidity sha3)
-extern "C" void sha256t_hash(void *output, const void *input)
+extern "C" void sha256s_hash(void *output, const void *input)
 {
 	unsigned char _ALIGN(64) hash[64];
 	SHA256_CTX sha256;
+
+  //only hash one time - right ??
 
   SHA256_Init(&sha256);
   SHA256_Update(&sha256, (unsigned char *)input, 80);

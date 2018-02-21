@@ -15,7 +15,7 @@
 
   "targets": [
 {
- "target_name": "hello-addon",
+ "target_name": "gpuminer_addon",
 
  "sources": [
 
@@ -28,8 +28,8 @@
  "cpp/miner.h",
  "cpp/cuda_helper.h",
 
-     
-    "cpp/hello.cpp",
+
+ "cpp/gpumineralpha.cc",
   ],
 
  'rules': [{

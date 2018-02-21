@@ -29,7 +29,7 @@ From javascript, we will provide X, Y , and T to this addon and we will read bac
 */
 
 #include <node.h>
-#include <nan.h>
+ 
 
 
 #include <stdio.h>
@@ -40,6 +40,9 @@ From javascript, we will provide X, Y , and T to this addon and we will read bac
 
 #include <string>
 #include <thread>
+
+#include "./sha256_0xb.cu"
+
 
 namespace gpuminer {
 
@@ -157,6 +160,13 @@ int keccak256(int args[])
     int nonce = args[0];
     int ethAddress = args[1];
     int challengeNumber = args[2];
+
+
+
+
+    //  sha256s_hash(void *output, const void *input)
+  //   sha256s_hash(hashing_output,hashing_input)
+
 
     //fix me !  I dont actually work :[
 
