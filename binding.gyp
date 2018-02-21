@@ -10,10 +10,19 @@
     [ 'OS=="win"', {'variables': {'obj': 'obj'}},
     {'variables': {'obj': 'o'}}]],
 
+
+
+
   "targets": [
 {
  "target_name": "hello-addon",
- "sources": [ "cpp/hello.cpp", "cpp/cuda_helper.cu","cpp/keccak256.cu"  ],
+
+ "sources": [ "cpp/hello.cpp",
+ "sph/sph_shavite.h",
+ "sph/sph_simd.h",
+ "sph/sph_keccak.h",
+ "cpp/cuda_helper.h",
+ "cpp/keccak256.cu"  ],
 
  'rules': [{
      'extension': 'cu',

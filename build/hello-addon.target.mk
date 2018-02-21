@@ -3,28 +3,17 @@
 TOOLSET := target
 TARGET := hello-addon
 ### Generated for rule binding_gyp_hello_addon_target_cuda_on_linux:
-$(obj).$(TOOLSET)/$(TARGET)/geni/cuda_helper.o: obj := $(abs_obj)
-$(obj).$(TOOLSET)/$(TARGET)/geni/cuda_helper.o: builddir := $(abs_builddir)
-$(obj).$(TOOLSET)/$(TARGET)/geni/cuda_helper.o: TOOLSET := $(TOOLSET)
-$(obj).$(TOOLSET)/$(TARGET)/geni/cuda_helper.o: $(srcdir)/cpp/cuda_helper.cu $(abspath\ $<)
-	$(call do_cmd,binding_gyp_hello_addon_target_cuda_on_linux_0)
-
-all_deps += $(obj).$(TOOLSET)/$(TARGET)/geni/cuda_helper.o
-cmd_binding_gyp_hello_addon_target_cuda_on_linux_0 = LD_LIBRARY_PATH=$(builddir)/lib.host:$(builddir)/lib.target:$$LD_LIBRARY_PATH; export LD_LIBRARY_PATH; cd $(srcdir)/.; mkdir -p $(obj).$(TOOLSET)/hello-addon/geni; nvcc -ccbin clang-3.8 -Xcompiler -fpic -c "$(abspath $<)" -o "$(obj).$(TOOLSET)/hello-addon/geni/cuda_helper.o"
-quiet_cmd_binding_gyp_hello_addon_target_cuda_on_linux_0 = RULE binding_gyp_hello_addon_target_cuda_on_linux_0 $@
-
 $(obj).$(TOOLSET)/$(TARGET)/geni/keccak256.o: obj := $(abs_obj)
 $(obj).$(TOOLSET)/$(TARGET)/geni/keccak256.o: builddir := $(abs_builddir)
 $(obj).$(TOOLSET)/$(TARGET)/geni/keccak256.o: TOOLSET := $(TOOLSET)
 $(obj).$(TOOLSET)/$(TARGET)/geni/keccak256.o: $(srcdir)/cpp/keccak256.cu $(abspath\ $<)
-	$(call do_cmd,binding_gyp_hello_addon_target_cuda_on_linux_1)
+	$(call do_cmd,binding_gyp_hello_addon_target_cuda_on_linux_0)
 
 all_deps += $(obj).$(TOOLSET)/$(TARGET)/geni/keccak256.o
-cmd_binding_gyp_hello_addon_target_cuda_on_linux_1 = LD_LIBRARY_PATH=$(builddir)/lib.host:$(builddir)/lib.target:$$LD_LIBRARY_PATH; export LD_LIBRARY_PATH; cd $(srcdir)/.; mkdir -p $(obj).$(TOOLSET)/hello-addon/geni; nvcc -ccbin clang-3.8 -Xcompiler -fpic -c "$(abspath $<)" -o "$(obj).$(TOOLSET)/hello-addon/geni/keccak256.o"
-quiet_cmd_binding_gyp_hello_addon_target_cuda_on_linux_1 = RULE binding_gyp_hello_addon_target_cuda_on_linux_1 $@
+cmd_binding_gyp_hello_addon_target_cuda_on_linux_0 = LD_LIBRARY_PATH=$(builddir)/lib.host:$(builddir)/lib.target:$$LD_LIBRARY_PATH; export LD_LIBRARY_PATH; cd $(srcdir)/.; mkdir -p $(obj).$(TOOLSET)/hello-addon/geni; nvcc -ccbin clang-3.8 -Xcompiler -fpic -c "$(abspath $<)" -o "$(obj).$(TOOLSET)/hello-addon/geni/keccak256.o"
+quiet_cmd_binding_gyp_hello_addon_target_cuda_on_linux_0 = RULE binding_gyp_hello_addon_target_cuda_on_linux_0 $@
 
 rule_binding_gyp_hello_addon_target_cuda_on_linux_outputs := \
-	$(obj).$(TOOLSET)/$(TARGET)/geni/cuda_helper.o \
 	$(obj).$(TOOLSET)/$(TARGET)/geni/keccak256.o
 
 ### Finished generating for rule: binding_gyp_hello_addon_target_cuda_on_linux
@@ -165,7 +154,7 @@ LIBS := \
 $(obj).target/hello-addon.node: GYP_LDFLAGS := $(LDFLAGS_$(BUILDTYPE))
 $(obj).target/hello-addon.node: LIBS := $(LIBS)
 $(obj).target/hello-addon.node: TOOLSET := $(TOOLSET)
-$(obj).target/hello-addon.node: $(OBJS) $(obj).$(TOOLSET)/$(TARGET)/geni/cuda_helper.o $(obj).$(TOOLSET)/$(TARGET)/geni/keccak256.o FORCE_DO_CMD
+$(obj).target/hello-addon.node: $(OBJS) $(obj).$(TOOLSET)/$(TARGET)/geni/keccak256.o FORCE_DO_CMD
 	$(call do_cmd,solink_module)
 
 all_deps += $(obj).target/hello-addon.node
