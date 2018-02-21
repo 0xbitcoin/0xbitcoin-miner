@@ -78,6 +78,24 @@ Note that it is necessary to fill the mining account (it is an Ethereum account)
 - Every pool is different so consult each pool owner.  Typically, pools will offer a token withdraw mechanism or automatically send tokens to your address on a periodic basis or when a limit is reached
 
 
+
+### Vault Datafiles
+(requires show hidden files and folders)
+
+Stored at:
+
+- Windows
+    '/Users/{user}/Appdata/Roaming/.0xbitcoin'
+
+- Mac
+    '/home/{user}/Library/Preferences/.0xbitcoin'
+
+- Linux
+    '/home/{user}/.0xbitcoin'
+
+
+
+
 ### Testing
 
 npm run test
