@@ -68,7 +68,7 @@ module.exports =  {
       }
 
       console.log('\n' )
-      console.log('Selected mining account:', this.vault.getAccount() )
+      console.log('Selected mining account:', this.eth_account )
       console.log('\n' )
 
 
@@ -94,10 +94,9 @@ module.exports =  {
 
         let miningParameters = {}; //passed around as a reference and edited globally
 
-        setInterval(function(){self.collectMiningParameters(minerEthAddress,miningParameters,this.miningStyle)},2000);
+        setInterval(function(){self.collectMiningParameters(minerEthAddress,miningParameters,self.miningStyle)},2000);
 
-
-        await self.collectMiningParameters(minerEthAddress, miningParameters,this.miningStyle);
+        await self.collectMiningParameters(minerEthAddress, miningParameters,self.miningStyle);
 
        function mineCycle(miningParameters){
          //console.log('mine stuff')
@@ -148,7 +147,7 @@ module.exports =  {
     async collectMiningParameters(minerEthAddress,miningParameters,miningStyle)
     {
 
-      if(miningStyle == "pool")
+      if(miningStyle === "pool")
       {
 
         var parameters = await this.networkInterface.collectMiningParameters(minerEthAddress);
