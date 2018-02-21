@@ -1,5 +1,5 @@
 /*
- * sha256d CUDA implementation.
+ * sha256(-t) CUDA implementation.
  * tpruvot 2017
  */
 
@@ -7,9 +7,9 @@
 #include <stdint.h>
 #include <memory.h>
 
-#include "cpp/cuda_helper.h"
-#include "cpp/miner.h"
+#include "./miner.h"
 
+#include "./cuda_helper.h"
 
 __constant__ static uint32_t __align__(8) c_midstate76[8];
 __constant__ static uint32_t __align__(8) c_dataEnd80[4];
@@ -376,7 +376,7 @@ uint64_t cuda_swab32ll(uint64_t x) {
 
 __global__
 /*__launch_bounds__(256,3)*/
-void sha256d_gpu_hash_shared(const uint32_t threads, const uint32_t startNonce, uint32_t *resNonces)
+void sha256t_gpu_hash_shared(const uint32_t threads, const uint32_t startNonce, uint32_t *resNonces)
 {
 	const uint32_t thread = (blockDim.x * blockIdx.x + threadIdx.x);
 
@@ -416,6 +416,20 @@ void sha256d_gpu_hash_shared(const uint32_t threads, const uint32_t startNonce, 
 		#pragma unroll
 		for (int i=0; i<8; i++) buf[i] = c_H256[i];
 
+		sha256_round_body(dat, buf, s_K);
+
+		// last sha256
+
+		#pragma unroll
+		for (int i=0; i<8; i++) dat[i] = buf[i];
+		dat[8] = 0x80000000;
+		#pragma unroll
+		for (int i=9; i<15; i++) dat[i] = 0;
+		dat[15] = 0x100;
+
+		#pragma unroll
+		for (int i=0; i<8; i++) buf[i] = c_H256[i];
+
 		sha256_round_last(dat, buf, s_K);
 
 		// valid nonces
@@ -429,7 +443,7 @@ void sha256d_gpu_hash_shared(const uint32_t threads, const uint32_t startNonce, 
 }
 
 __host__
-void sha256d_init(int thr_id)
+void sha256t_init(int thr_id)
 {
 	cuda_get_arch(thr_id);
 	cudaMemcpyToSymbol(c_K, cpu_K, sizeof(cpu_K), 0, cudaMemcpyHostToDevice);
@@ -437,14 +451,14 @@ void sha256d_init(int thr_id)
 }
 
 __host__
-void sha256d_free(int thr_id)
+void sha256t_free(int thr_id)
 {
 	if (d_resNonces[thr_id]) cudaFree(d_resNonces[thr_id]);
 	d_resNonces[thr_id] = NULL;
 }
 
 __host__
-void sha256d_setBlock_80(uint32_t *pdata, uint32_t *ptarget)
+void sha256t_setBlock_80(uint32_t *pdata, uint32_t *ptarget)
 {
 	uint32_t _ALIGN(64) in[16], buf[8], end[4];
 	for (int i=0;i<16;i++) in[i] = cuda_swab32(pdata[i]);
@@ -459,16 +473,16 @@ void sha256d_setBlock_80(uint32_t *pdata, uint32_t *ptarget)
 }
 
 __host__
-void sha256d_hash_80(int thr_id, uint32_t threads, uint32_t startNonce, uint32_t *resNonces)
+void sha256t_hash_80(int thr_id, uint32_t threads, uint32_t startNonce, uint32_t *resNonces)
 {
-	const uint32_t threadsperblock = 256;
+	const uint32_t threadsperblock = 128;
 
 	dim3 grid(threads/threadsperblock);
 	dim3 block(threadsperblock);
 
 	CUDA_SAFE_CALL(cudaMemset(d_resNonces[thr_id], 0xFF, 2 * sizeof(uint32_t)));
 	cudaThreadSynchronize();
-	sha256d_gpu_hash_shared <<<grid, block>>> (threads, startNonce, d_resNonces[thr_id]);
+	sha256t_gpu_hash_shared <<<grid, block>>> (threads, startNonce, d_resNonces[thr_id]);
 	cudaThreadSynchronize();
 
 	CUDA_SAFE_CALL(cudaMemcpy(resNonces, d_resNonces[thr_id], 2 * sizeof(uint32_t), cudaMemcpyDeviceToHost));
