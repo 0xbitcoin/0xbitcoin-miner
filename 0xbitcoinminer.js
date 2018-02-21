@@ -76,8 +76,11 @@ module.exports =  {
       this.triesThisCycle = 0;
 
 
+      var minerEthAddress = this.eth_account.address;
+
+
       setInterval(function(){ this.printMiningStats()}.bind(this), 5000)
-      setInterval(function(){self.collectMiningParameters(miningParameters,this.miningStyle)},2000);
+      setInterval(function(){self.collectMiningParameters(minerEthAddress,miningParameters,this.miningStyle)},2000);
 
 
 
@@ -86,14 +89,13 @@ module.exports =  {
         var self = this;
 
 
-        var minerEthAddress = this.eth_account.address;
 
         var ethAddress;
 
 
         let miningParameters = {}; //passed around as a reference and edited globally
 
-        await self.collectMiningParameters(miningParameters,this.miningStyle);
+        await self.collectMiningParameters(minerEthAddress, miningParameters,this.miningStyle);
 
        function mineCycle(miningParameters){
          //console.log('mine stuff')
@@ -140,13 +142,13 @@ module.exports =  {
 
     },
 
-    async collectMiningParameters(miningParameters,miningStyle)
+    async collectMiningParameters(minerEthAddress,miningParameters,miningStyle)
     {
 
       if(miningStyle == "pool")
       {
 
-        var parameters = await this.networkInterface.collectMiningParameters();
+        var parameters = await this.networkInterface.collectMiningParameters(minerEthAddress);
 
 
       }else{
