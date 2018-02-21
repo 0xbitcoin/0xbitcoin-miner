@@ -13,6 +13,21 @@ Run this file with
 
 */
 
+
+/*
+CURRENT ISSUE :
+undefined symbol: device_map
+
+    this is in miner.h : ?
+    extern short device_map[MAX_GPUS];
+
+      this is in cuda_helper ?
+    extern "C" short device_map[MAX_GPUS];
+
+
+    https://github.com/tpruvot/ccminer/search?p=1&q=device_map&type=&utf8=%E2%9C%93  ?
+*/
+
 var web3utils =  require('web3-utils');
 
 
