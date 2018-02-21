@@ -25,7 +25,8 @@ https://github.com/kashif/node-cuda
 
 
 TRY THIS : https://askubuntu.com/questions/940103/building-ccminer-on-ubuntu-17-04
-
+1. i had to apt-get install libcurl4-openssl-dev
+2. i had to go into the makefile and replace 'nvcc' with 'nvcc -ccbin clang-3.8'
 ---------------------------------
 
 
