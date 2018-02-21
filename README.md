@@ -14,11 +14,20 @@ Join discussiom in the 'development' channel: https://discord.gg/pwC4yx
 - Use the command 'npm run build' to rebuild it
 - Use the command 'node indextest.js' to run basic tests for it
 
+----------------------------
 
-PREREQS:
-
-Cuda Toolkit
+DEV PREREQS:
+1. npm install -g node-gyp
+2.  Cuda Toolkit
 https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1604&target_type=runfilelocal
+3. MAKE SURE YOU CAN BUILD THIS :
+https://github.com/kashif/node-cuda
+
+
+TRY THIS : https://askubuntu.com/questions/940103/building-ccminer-on-ubuntu-17-04
+
+---------------------------------
+
 
  ### BOUNTY AWARDS
 1 Ether and 1000 0xBTC tokens are the bounty for important code commits related to this GPU accelerated mining software branch. Therefore if you contribute production code, you will receive compensation. These tokens are situated in the deployers account 0x5294b9f7a71a97b703fa04ba3a415c8a136bdeb1 and were received from kind donations by the community.

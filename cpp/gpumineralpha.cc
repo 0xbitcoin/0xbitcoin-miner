@@ -34,6 +34,7 @@ From javascript, we will provide X, Y , and T to this addon and we will read bac
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <cuda.h>
 
 #include <ctime>
 
