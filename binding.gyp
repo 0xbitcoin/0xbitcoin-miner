@@ -24,9 +24,6 @@
  "sph/sph_simd.h",
  "sph/sph_keccak.h",
 
- "cpp/cpuminer-config.h",
- "cpp/miner.h",
- "cpp/cuda_helper.h",
 
 
  "cpp/gpumineralpha.cc",

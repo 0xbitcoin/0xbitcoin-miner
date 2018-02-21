@@ -41,6 +41,12 @@ From javascript, we will provide X, Y , and T to this addon and we will read bac
 #include <string>
 #include <thread>
 
+// if i add this then i get a conflicting declaration!?
+//int MAX_GPUS = 64;
+//short* device_map=new short[MAX_GPUS]
+
+
+//THIS causes the issue of 'device map'  being undefined in js.. ??
 #include "./sha256_0xb.cu"
 
 
