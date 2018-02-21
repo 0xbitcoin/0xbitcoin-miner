@@ -3,6 +3,15 @@
 
 Solves proof of work to mine supported ERC20 tokens.  
 
+
+## Update 1.3.0 - Pool Mining
+
+The first working pool for 0xBTC has launched and it is loaded as the default pool source for this new update! Simply open the miner, create a new ethereum account within, and run the command 'pool mine' to start mining!  No gas fees required.   
+
+
+
+
+
 #### Linux
 1. Download [/dist/linux/0xbtcminer-linux](https://github.com/0xbitcoin/0xbitcoin-miner/raw/master/dist/0xbtcminer-linux.zip) and unzip
 2. Unzip the project and double click on the file '0xbtcminer-linux' to run
@@ -68,13 +77,13 @@ If this does not work, run this file in a terminal with 0xbtcminer-win.exe
 3. Write down these credentials
 4. Mine 0xbitcoin tokens with the command 'mine'
 
-Note that it is necessary to fill the mining account (it is an Ethereum account) with a small amount of ether.  Typically 0.005 eth is good enough to get started.  The ether is used for gas to make function calls to the token smart contract when your miner finds a solution to the Proof of Work.  When the gas is spent that means that you have found a solution! If you were the first to find it, you will be rewarded with 0xbitcoin tokens.  
+Note that IF SOLO MINING it is necessary to fill the mining account (it is an Ethereum account) with a small amount of ether.  Typically 0.005 eth is good enough to get started.  The ether is used for gas to make function calls to the token smart contract when your miner finds a solution to the Proof of Work.  When the gas is spent that means that you have found a solution! If you were the first to find it, you will be rewarded with 0xbitcoin tokens.  (See the block explorer for typical gas prices at the current moment.)
 
 
 
 ## Pool Mining
-- You can mine into a pool with the command 'pool mine'
-- When mining into a pool, your gasprice does not matter and you will not pay gas fees
+- You can mine into a pool with the command 'pool mine'  
+- When mining into a pool, your gasprice does not matter and you will pay NO GAS FEES :)
 - Every pool is different so consult each pool owner.  Typically, pools will offer a token withdraw mechanism or automatically send tokens to your address on a periodic basis or when a limit is reached
 
 
