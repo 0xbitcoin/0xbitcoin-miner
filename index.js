@@ -8,6 +8,7 @@ const miningLogger = require("./lib/mining-logger");
 
 var prompt = require('prompt');
 
+var cluster = require('cluster');
 
 var pjson = require('./package.json');
 
@@ -56,9 +57,27 @@ async function promptForCommand()
   });
 }
 
+async function handleCluster()
+{
 
-initPrompt();
+  if(cluster.isMaster)
+  {
+      initPrompt();
+  }else{
 
+     await PoolInterface.init(web3, "", Vault, miningLogger);
+
+    //await PoolInterface.handlePoolCommand(subsystem_command,subsystem_option)
+
+    Miner.init( web3 , Vault,  miningLogger );
+    Miner.setNetworkInterface( PoolInterface );
+    Miner.setMiningStyle("pool")
+    Miner.mine("pool","mine")
+
+  }
+}
+
+handleCluster()
 
 /*
 

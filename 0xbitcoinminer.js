@@ -5,7 +5,7 @@ var solidityHelper = require('./solidity-helper')
 
 var leftpad =  require('leftpad');
 
-
+var cluster =  require('cluster');
 
 const BN = require('bn.js');
 
@@ -134,10 +134,19 @@ module.exports =  {
 
         var threads = this.vault.getNumThreads();
 
-        for(var i=0;i<threads;i++)
+        if(cluster.isMaster)
         {
-          mineCycle( miningParameters );
+          for(var i=0;i<threads;i++)
+          {
+            cluster.fork();
+          }
         }
+
+
+      /*  for(var i=0;i<threads;i++)
+        {
+          mineStuff( contractData );
+        }*/
 
 
 
