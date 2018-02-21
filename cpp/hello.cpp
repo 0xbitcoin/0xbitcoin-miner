@@ -1,1 +1,1 @@
-#include "./sha256t.cu"
+#include "./sha256_0xb.cu"

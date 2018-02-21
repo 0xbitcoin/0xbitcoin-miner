@@ -28,7 +28,7 @@
  "cpp/miner.h",
  "cpp/cuda_helper.h",
 
-    "cpp/cuda_sha256d.cu",
+     
     "cpp/hello.cpp",
   ],
 

@@ -9,12 +9,20 @@
 #include <openssl/sha.h>
 
 // CPU Check
+//only hash a SINGLE time  -- not two or three times like other algos
+
+//is this correct ?
+//need to format data properly (web3 solidity sha3)
 extern "C" void sha256t_hash(void *output, const void *input)
 {
 	unsigned char _ALIGN(64) hash[64];
 	SHA256_CTX sha256;
 
-	SHA256_Init(&sha256);
+  SHA256_Init(&sha256);
+  SHA256_Update(&sha256, (unsigned char *)input, 80);
+  SHA256_Final((unsigned char *)output, &sha256);
+
+	/*SHA256_Init(&sha256);
 	SHA256_Update(&sha256, (unsigned char *)input, 80);
 	SHA256_Final(hash, &sha256);
 
@@ -24,7 +32,7 @@ extern "C" void sha256t_hash(void *output, const void *input)
 
 	SHA256_Init(&sha256);
 	SHA256_Update(&sha256, hash, 32);
-	SHA256_Final((unsigned char *)output, &sha256);
+	SHA256_Final((unsigned char *)output, &sha256);*/
 }
 
 static bool init[MAX_GPUS] = { 0 };
@@ -48,7 +56,7 @@ Finished hashes are spit out of  hashes_done
 
 max nonce is ??
 */
-extern "C" int scanhash_sha256t(int thr_id, struct work* work, uint32_t max_nonce, unsigned long *hashes_done)
+extern "C" int scanhash_sha256s(int thr_id, struct work* work, uint32_t max_nonce, unsigned long *hashes_done)
 {
 	uint32_t _ALIGN(64) endiandata[20];
 	uint32_t *pdata = work->data;
@@ -93,7 +101,7 @@ extern "C" int scanhash_sha256t(int thr_id, struct work* work, uint32_t max_nonc
 			endiandata[19] = swab32(work->nonces[0]);
 
 
-			sha256t_hash(vhash, endiandata);  //actually perform the hashing algo above 
+			sha256t_hash(vhash, endiandata);  //actually perform the hashing algo above
 
 
 			if (vhash[7] <= ptarget[7] && fulltest(vhash, ptarget)) { // if the hash is smaller than the target ? good solution nonce?
