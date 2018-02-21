@@ -1,6 +1,6 @@
 /*
  * Keccak 256
- *
+ *https://raw.githubusercontent.com/nicehash/ccminer-sp/master/keccak/keccak256.cu
  */
 
 extern "C"
@@ -9,10 +9,8 @@ extern "C"
 #include "sph/sph_simd.h"
 #include "sph/sph_keccak.h"
 
- #include "miner.h"
+//#include "miner.h"
 }
-
-#include <cstring>
 
 #include "cuda_helper.h"
 

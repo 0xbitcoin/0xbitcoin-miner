@@ -18,9 +18,18 @@
  "target_name": "hello-addon",
 
  "sources": [ "cpp/hello.cpp",
+
+ "cpp/log.h",
+ "cpp/compat.h",
+ "cpp/jansson_config.h",
+ "cpp/jansson.h",
+
+
  "sph/sph_shavite.h",
  "sph/sph_simd.h",
  "sph/sph_keccak.h",
+ "cpp/cpuminer-config.h",
+ "cpp/miner.h",
  "cpp/cuda_helper.h",
  "cpp/keccak256.cu"  ],
 
