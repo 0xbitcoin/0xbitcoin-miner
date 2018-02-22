@@ -163,6 +163,16 @@ Stored at:
 
 npm run test
 
+
+## Credits
+PLEASE CONSIDER DONATING TO:
+
+1. Zegordo (Developed the accelerated CPU Miner)
+
+        ETH address [0x8AE981d92875C88f713600EB7dC4D23FA7E0E621]
+
+
+
 ## Tokens that can be mined using Proof of Work:
 
 1. 0xBitcoin token - http://0xbitcoin.org - https://github.com/0xbitcoin/0xbitcoin-token
