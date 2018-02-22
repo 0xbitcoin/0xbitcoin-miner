@@ -220,7 +220,13 @@ void printKeccak256(const FunctionCallbackInfo<Value>& args)
 
 void mine(){
   //PLEASE FILL ME IN- MOST IMPORTANT FUNCTION
-  while(true) {
+
+  struct work* work;
+  unsigned long *hashes_done;
+  uint32_t max_nonce = 9999999;
+  scanhash_sha256s(1,work, max_nonce,hashes_done);
+
+/*  while(true) {
 
     //generate random number -- nonce -- can we do this in the GPU -- should we ?
     int nonce = getRandomNumber();
@@ -234,7 +240,7 @@ void mine(){
         //  Push the working nonce to an array !!
           pushSolutionToBuffer(nonce);
     }
-  }
+  }*/
 }
 
 

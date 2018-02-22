@@ -10,7 +10,7 @@
 
 int opt_cudaschedule = 1;
 bool opt_benchmark = true;
-int gpu_threads = 2;
+int gpu_threads = 1;
 bool opt_quiet = false;
 //bool work_restart = false;
 
@@ -29,6 +29,8 @@ extern "C" void sha256s_hash(void *output, const void *input)
   SHA256_Init(&sha256);
   SHA256_Update(&sha256, (unsigned char *)input, 80);
   SHA256_Final((unsigned char *)output, &sha256);
+
+//  SHA256_Final(hash, &sha256);
 
 	/*SHA256_Init(&sha256);
 	SHA256_Update(&sha256, (unsigned char *)input, 80);
@@ -66,6 +68,10 @@ max nonce is ??
 */
 extern "C" int scanhash_sha256s(int thr_id, struct work* work, uint32_t max_nonce, unsigned long *hashes_done)
 {
+
+  gpulog(LOG_WARNING, thr_id, "start loopy!", work->nonces[0]);
+
+
 	uint32_t _ALIGN(64) endiandata[20];
 	uint32_t *pdata = work->data;
 	uint32_t *ptarget = work->target;
