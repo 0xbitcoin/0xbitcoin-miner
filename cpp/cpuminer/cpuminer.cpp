@@ -21,8 +21,12 @@ CpuMiner::~CpuMiner()
   // Wait for run() to terminate
   //  This is not very clean but it's the easiest portable way to
   //  exit gracefully if stop() has not been called before the destructor.
-  if (m_threads[0].joinable())
-    std::this_thread::sleep_for(std::chrono::milliseconds(500u));
+  std::this_thread::yield();
+  for (auto&& thr : m_threads)
+  {
+    if (!thr.joinable())
+      std::this_thread::sleep_for(std::chrono::milliseconds(50u));
+  }
 }
 
 void CpuMiner::setChallengeNumber(std::string const& challengeNumber)
