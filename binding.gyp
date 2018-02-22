@@ -1,51 +1,35 @@
 {
-  ## for windows, be sure to do node-gyp rebuild -msvs_version=2013,
-  ## and run under a msvs shell
-
-
-  ## for linux,  node-gyp configure build --target=v8.9.4
-
-  ## for all targets
-  'conditions': [
+'conditions': [
     [ 'OS=="win"', {'variables': {'obj': 'obj'}},
     {'variables': {'obj': 'o'}}]],
 
-
-
-
-  "targets": [
+"targets": [
 {
  "target_name": "gpuminer_addon",
-
  "sources": [
+        "cpp/cuda_sha256d.cu",
+        "cpp/gpumineralpha.cc",
 
-
- "sph/sph_shavite.h",
- "sph/sph_simd.h",
- "sph/sph_keccak.h",
-
-
-
- "cpp/gpumineralpha.cc",
   ],
 
  'rules': [{
      'extension': 'cu',
      'inputs': ['<(RULE_INPUT_PATH)'],
-     'outputs':[ '<(INTERMEDIATE_DIR)/<(RULE_INPUT_ROOT).<(obj)'],
-     'conditions': [
-      [ 'OS=="win"',
-        {'rule_name': 'cuda on windows',
-         'message': "compile cuda file on windows",
-         'process_outputs_as_sources': 0,
-         'action': ['nvcc -c <(_inputs) -o  <(_outputs)'],
-         },
-       {'rule_name': 'cuda on linux',
-         'message': "compile cuda file on linux",
-         'process_outputs_as_sources': 1,
-         'action': ['nvcc','-ccbin','clang-3.8','-Xcompiler','-fpic','-c',
-            '<@(_inputs)','-o','<@(_outputs)'],
-    }]]}],
+     'outputs':[ '<(INTERMEDIATE_DIR)/<(RULE_INPUT_ROOT).o'],
+     'rule_name': 'cuda on linux',
+     'message': "compile cuda file on linux",
+     'process_outputs_as_sources': 1,
+     'action': [
+        'nvcc',
+         '-ccbin', 'clang-3.8',
+	'-Xcompiler',
+	'-fpic',
+	'-c',
+        '-o',
+        '<@(_outputs)',
+        '<@(_inputs)'
+     ],
+}],
 
    'conditions': [
     [ 'OS=="mac"', {
@@ -56,7 +40,7 @@
     [ 'OS=="linux"', {
       'libraries': ['-lcuda', '-lcudart'],
       'include_dirs': ['/usr/local/include'],
-      'library_dirs': ['/usr/local/lib', '/usr/local/cuda/lib64'],
+      'library_dirs': ['/usr/local/lib', '/usr/local/cuda/lib64']
     }],
     [ 'OS=="win"', {
       'conditions': [
@@ -72,8 +56,8 @@
         'cuda_root%': '$(CUDA_PATH)'
       },
       'libraries': [
-        '-l<(cuda_root)/lib/<(arch)/cuda.lib',
-        '-l<(cuda_root)/lib/<(arch)/cudart.lib',
+        '-l<(cuda_root)/lib64/libcuda.lib',
+        '-l<(cuda_root)/lib64/libcudart.lib',
       ],
       "include_dirs": [
         "<(cuda_root)/include",

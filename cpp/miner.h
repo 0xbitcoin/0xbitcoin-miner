@@ -558,7 +558,7 @@ extern double stratum_diff;
 #define MAX_GPUS 16
 //#define MAX_THREADS 32 todo
 extern char* device_name[MAX_GPUS];
-extern short device_map[MAX_GPUS];
+//extern short device_map[MAX_GPUS];
 extern short device_mpcount[MAX_GPUS];
 extern long  device_sm[MAX_GPUS];
 extern uint32_t device_plimit[MAX_GPUS];

@@ -8,6 +8,12 @@
  #include "./cuda_helper.h"
 #include <openssl/sha.h>
 
+int opt_cudaschedule = 1;
+bool opt_benchmark = true;
+int gpu_threads = 2;
+bool opt_quiet = false;
+//bool work_restart = false;
+
 // CPU Check
 //only hash a SINGLE time  -- not two or three times like other algos
 
@@ -72,7 +78,7 @@ extern "C" int scanhash_sha256s(int thr_id, struct work* work, uint32_t max_nonc
 
 	if (!init[thr_id])
 	{
-		cudaSetDevice(device_map[thr_id]);
+//??		cudaSetDevice(device_map[thr_id]);
 		if (opt_cudaschedule == -1 && gpu_threads == 1) {
 			cudaDeviceReset();
 			// reduce cpu usage
@@ -138,7 +144,8 @@ extern "C" int scanhash_sha256s(int thr_id, struct work* work, uint32_t max_nonc
 
 		pdata[19] += throughput;
 
-	} while (!work_restart[thr_id].restart);
+ 	//} while (!work_restart[thr_id].restart);
+} while (false);
 
 	*hashes_done = pdata[19] - first_nonce;
 

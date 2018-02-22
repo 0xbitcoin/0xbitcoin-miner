@@ -4,10 +4,28 @@ Release/obj.target/gpuminer_addon/cpp/gpumineralpha.o: \
  /home/andy/.node-gyp/8.9.4/include/node/v8.h \
  /home/andy/.node-gyp/8.9.4/include/node/v8-version.h \
  /home/andy/.node-gyp/8.9.4/include/node/v8config.h \
- /home/andy/.node-gyp/8.9.4/include/node/node_version.h
+ /home/andy/.node-gyp/8.9.4/include/node/node_version.h \
+ ../cpp/./sha256_0xb.cu ../cpp/././miner.h ../cpp/././ccminer-config.h \
+ ../cpp/././jansson/jansson.h ../cpp/././jansson/jansson_config.h \
+ ../cpp/././compat.h ../cpp/././cuda_helper.h \
+ /home/andy/.node-gyp/8.9.4/include/node/openssl/sha.h \
+ /home/andy/.node-gyp/8.9.4/include/node/openssl/e_os2.h \
+ /home/andy/.node-gyp/8.9.4/include/node/openssl/opensslconf.h \
+ /home/andy/.node-gyp/8.9.4/include/node/openssl/./archs/linux-x86_64/opensslconf.h
 ../cpp/gpumineralpha.cc:
 /home/andy/.node-gyp/8.9.4/include/node/node.h:
 /home/andy/.node-gyp/8.9.4/include/node/v8.h:
 /home/andy/.node-gyp/8.9.4/include/node/v8-version.h:
 /home/andy/.node-gyp/8.9.4/include/node/v8config.h:
 /home/andy/.node-gyp/8.9.4/include/node/node_version.h:
+../cpp/./sha256_0xb.cu:
+../cpp/././miner.h:
+../cpp/././ccminer-config.h:
+../cpp/././jansson/jansson.h:
+../cpp/././jansson/jansson_config.h:
+../cpp/././compat.h:
+../cpp/././cuda_helper.h:
+/home/andy/.node-gyp/8.9.4/include/node/openssl/sha.h:
+/home/andy/.node-gyp/8.9.4/include/node/openssl/e_os2.h:
+/home/andy/.node-gyp/8.9.4/include/node/openssl/opensslconf.h:
+/home/andy/.node-gyp/8.9.4/include/node/openssl/./archs/linux-x86_64/opensslconf.h:
