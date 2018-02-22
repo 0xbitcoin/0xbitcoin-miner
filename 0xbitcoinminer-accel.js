@@ -6,8 +6,11 @@ const BN = require('bn.js');
 
 var tokenContractJSON = require('./contracts/_0xBitcoinToken.json');
 
-const CPUMiner = require('./build/Release/cpuminer');
-const GPUMiner = require('./build/Release/gpuminer');
+var CPUMiner = require('./build/Release/cpuminer');
+
+
+//only load this if selecting 'gpu mine!!!'
+var GPUMiner;
 
 var tokenContract;
 
@@ -20,6 +23,11 @@ module.exports =  {
     async init(web3,  vault, miningLogger)
   //  async init(web3, subsystem_command, vault, networkInterface, miningLogger)
     {
+
+      if(this.useCUDA)
+      {
+        GPUMiner = require('./build/Release/gpuminer');
+      }
 
         process.on('exit', () => {
             console.log("Process exiting... stopping miner");
