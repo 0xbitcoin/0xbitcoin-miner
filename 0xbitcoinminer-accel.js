@@ -12,7 +12,7 @@ const GPUMiner = require('./build/Release/gpuminer');
 var tokenContract;
 
 const PRINT_STATS_TIMEOUT = 5000;
-const COLLECT_MINING_PARAMS_TIMEOUT = 2000;
+const COLLECT_MINING_PARAMS_TIMEOUT = 4000;
 
 
 module.exports =  {
@@ -101,7 +101,6 @@ module.exports =  {
 
         var parameters = await this.networkInterface.collectMiningParameters(minerEthAddress);
 
-
       }else{
 
         var parameters = await this.networkInterface.collectMiningParameters();
@@ -122,18 +121,34 @@ module.exports =  {
 
     async updateCPUAddonParameters(miningParameters){
 
-      var challengeNumber = miningParameters.challengeNumber
-        var miningTarget = miningParameters.miningTarget
-        var miningDifficulty = miningParameters.miningDifficulty
 
-              console.log("New challenge number: " + challengeNumber);
-              CPUMiner.setChallengeNumber(challengeNumber);
+          if(this.challengeNumber != miningParameters.challengeNumber)
+          {
+              this.challengeNumber = miningParameters.challengeNumber
+
+              console.log("New challenge number: " + this.challengeNumber);
+              CPUMiner.setChallengeNumber(this.challengeNumber);
               bResume = true;
+            }
 
-               console.log("New mining target: 0x" + miningTarget.toString(16));
-               CPUMiner.setDifficultyTarget("0x" + miningTarget.toString(16));
+            if(this.miningTarget != miningParameters.miningTarget)
+            {
+                this.miningTarget = miningParameters.miningTarget
 
-               console.log("New difficulty: " + miningDifficulty);
+               console.log("New mining target: 0x" + this.miningTarget.toString(16));
+               CPUMiner.setDifficultyTarget("0x" + this.miningTarget.toString(16));
+             }
+
+             if(this.miningDifficulty != miningParameters.miningDifficulty)
+             {
+
+              this.miningDifficulty = miningParameters.miningDifficulty
+
+               console.log("New difficulty: " + this.miningDifficulty);
+             }
+
+
+
 
                /*
                if (bResume && !this.mining) {
