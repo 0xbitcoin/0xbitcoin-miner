@@ -6,7 +6,6 @@ Solves proof of work to mine supported ERC20 tokens.
 
 
 
-
 ## GPU MINER DEVELOPMENT
 Join discussiom in the 'development' channel: https://discord.gg/pwC4yx
 
@@ -20,7 +19,7 @@ DEV PREREQS:
 1. npm install -g node-gyp
 2.  Cuda Toolkit
 https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1604&target_type=runfilelocal
-  MAKE SURE YOU CAN BUILD THIS : 
+  MAKE SURE YOU CAN BUILD THIS :
  https://askubuntu.com/questions/940103/building-ccminer-on-ubuntu-17-04
 1. i had to apt-get install libcurl4-openssl-dev
 2. i had to go into the makefile and replace 'nvcc' with 'nvcc -ccbin clang-3.8'
@@ -59,6 +58,9 @@ Next to do:
 
 
 
+## Update 1.3.0 - Pool Mining
+
+The first working pool for 0xBTC has launched and it is loaded as the default pool source for this new update! Simply open the miner, create a new ethereum account within, and run the command 'pool mine' to start mining!  No gas fees required.   
 
 
 
@@ -98,16 +100,25 @@ If this does not work, run this file in a terminal with 0xbtcminer-win.exe
 ### Commands
 
       {commands}
-      " help" - Show the help menu
-      " account new" - Create a new mining account
-      " account list" - List all mining accounts
-      " account select 0x####" - Select a primary mining account by address
-      " contract list" - List the selected token contract to mine
-      " contract select 0x####" - Select a PoW token contract to mine
-      " config gasprice #" - Set the gasprice used to submit PoW to the token smartcontract
-      " config cpu_threads #" - Set the number of CPU cores to use for mining
-      " config web3provider http://----:####" - Set the web3 provider url for submitting ethereum transactions
-      " mine" - Begin mining
+      "help" - Show the help menu
+
+      "account new" - Create a new mining account
+      "account list" - List all mining accounts
+      "account select 0x####" - Select a primary mining account by address
+      "account balance" - List the ether and token balance of your selected account
+
+      "contract list" - List the selected token contract to mine
+      "contract select 0x####" - Select a PoW token contract to mine
+
+      "config gasprice #" - Set the gasprice used to submit PoW to the token smartcontract
+      "config cpu_threads #" - Set the number of CPU cores to use for mining
+      "config web3provider http://----:####" - Set the web3 provider url for submitting ethereum transactions
+
+      "pool mine" - Begin mining into a pool
+      "pool list" - List the selected mining pool
+      "pool select http://####.com:####" - Select a pool to mine into
+
+      "mine" - Begin mining solo, directly into the smartcontract
 
 
 
@@ -120,7 +131,32 @@ If this does not work, run this file in a terminal with 0xbtcminer-win.exe
 3. Write down these credentials
 4. Mine 0xbitcoin tokens with the command 'mine'
 
-Note that it is necessary to fill the mining account (it is an Ethereum account) with a small amount of ether.  Typically 0.005 eth is good enough to get started.  The ether is used for gas to make function calls to the token smart contract when your miner finds a solution to the Proof of Work.  When the gas is spent that means that you have found a solution! If you were the first to find it, you will be rewarded with 0xbitcoin tokens.  
+Note that IF SOLO MINING it is necessary to fill the mining account (it is an Ethereum account) with a small amount of ether.  Typically 0.005 eth is good enough to get started.  The ether is used for gas to make function calls to the token smart contract when your miner finds a solution to the Proof of Work.  When the gas is spent that means that you have found a solution! If you were the first to find it, you will be rewarded with 0xbitcoin tokens.  (See the block explorer for typical gas prices at the current moment.)
+
+
+
+## Pool Mining
+- You can mine into a pool with the command 'pool mine'  
+- When mining into a pool, your gasprice does not matter and you will pay NO GAS FEES :)
+- Every pool is different so consult each pool owner.  Typically, pools will offer a token withdraw mechanism or automatically send tokens to your address on a periodic basis or when a limit is reached
+
+
+
+### Vault Datafiles
+(requires show hidden files and folders)
+
+Stored at:
+
+- Windows
+    '/Users/{user}/Appdata/Roaming/.0xbitcoin'
+
+- Mac
+    '/home/{user}/Library/Preferences/.0xbitcoin'
+
+- Linux
+    '/home/{user}/.0xbitcoin'
+
+
 
 
 ### Testing

@@ -1,1 +1,0 @@
-cmd_Release/obj.target/hello-addon.node := g++ -shared -pthread -rdynamic -m64 -L/usr/local/lib -L/usr/local/cuda/lib64  -Wl,-soname=hello-addon.node -o Release/obj.target/hello-addon.node -Wl,--start-group Release/obj.target/hello-addon/cpp/hello.o -Wl,--end-group -lcuda -lcudart

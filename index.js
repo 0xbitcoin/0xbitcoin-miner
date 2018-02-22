@@ -1,6 +1,4 @@
 
-var scrypt = require('scrypt')
-
 const Miner = require("./0xbitcoinminer");
 
 const Vault = require("./lib/vault");
@@ -13,15 +11,13 @@ var prompt = require('prompt');
 
 var pjson = require('./package.json');
 
-
 var Web3 = require('web3')
 
 var NetworkInterface = require("./lib/network-interface");
 
+var PoolInterface = require("./lib/pool-interface");
 
 var web3 = new Web3( );
-
-
 
 
 var running = true;
@@ -117,12 +113,30 @@ async function handleCommand(result)
 
   if(subsystem_name == 'mine')
   {
-    var unlocked = await Vault.init(web3, miningLogger);
+    var unlocked = await Vault.init(web3,miningLogger);
     if(!unlocked)return false;
-    
+
     NetworkInterface.init(web3, Vault, miningLogger);
 
-    Miner.init( web3 ,  subsystem_command, Vault, NetworkInterface, miningLogger );
+    Miner.init( web3, Vault, miningLogger );
+    Miner.setNetworkInterface( NetworkInterface );
+    Miner.setMiningStyle("solo")
+    Miner.mine(subsystem_command,subsystem_option)
+  }
+
+  if(subsystem_name == 'pool')
+  {
+    var unlocked = await Vault.init(web3,miningLogger);
+    if(!unlocked)return false;
+
+    await PoolInterface.init(web3, subsystem_command, Vault, miningLogger);
+
+    await PoolInterface.handlePoolCommand(subsystem_command,subsystem_option)
+
+    Miner.init( web3 , Vault,  miningLogger );
+    Miner.setNetworkInterface( PoolInterface );
+    Miner.setMiningStyle("pool")
+    Miner.mine(subsystem_command,subsystem_option)
   }
 
   if(subsystem_name == 'help')
@@ -142,6 +156,11 @@ async function handleCommand(result)
     console.log('"config gasprice #" - Set the gasprice used to submit PoW to the token smartcontract ')
     console.log('"config cpu_threads #" - Set the number of CPU cores to use for mining ')
     console.log('"config web3provider http://----:####" - Set the web3 provider url for submitting ethereum transactions ')
+
+
+    console.log('"pool mine" - Begin mining into a pool')
+    console.log('"pool list" - List the selected mining pool')
+    console.log('"pool select http://####.com:####" - Select a pool to mine into ')
 
 
     console.log('"mine" - Begin mining ')
