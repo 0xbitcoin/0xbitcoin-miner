@@ -51,7 +51,7 @@ console.log('random number',GPUMiner.getRandomNumber());
 
 console.log('keccak hash should be ', web3utils.soliditySha3(testNonce,ethAddress,challengeNumber) , GPUMiner.getKeccak256(testNonce,ethAddress,challengeNumber));
 
-
+console.log('hashtest ', GPUMiner.testHashFunction(12345))
 //start the infinite mining loop which is in c++
 
 

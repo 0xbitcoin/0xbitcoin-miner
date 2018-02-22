@@ -93,6 +93,22 @@ void setEthAddress(const FunctionCallbackInfo<Value>& args) {
 }
 
 
+void testHashFunction(const FunctionCallbackInfo<Value>& args) {
+  Isolate* isolate = args.GetIsolate();
+
+  int arg0 = args[0]->IntegerValue();
+
+
+  int *inputs = new int[3];
+  int *outputs = new int[10];
+
+  inputs[0] = arg0;
+
+  //cuda
+  sha256s_hash(outputs,inputs);
+
+  args.GetReturnValue().Set(outputs[0]);
+}
 
 
 
@@ -237,12 +253,16 @@ Isolate* isolate = args.GetIsolate();
 
 void init(Local<Object> exports) {
 
+
+
     NODE_SET_METHOD(exports, "setChallengeNumber", setChallengeNumber);
       NODE_SET_METHOD(exports, "setEthAddress", setEthAddress);
   NODE_SET_METHOD(exports, "setDifficultyTarget", setDifficultyTarget);
   NODE_SET_METHOD(exports, "startMining", startMining);
   NODE_SET_METHOD(exports, "getSolutionsBuffer", getSolutionsBuffer);
   NODE_SET_METHOD(exports, "clearSolutionsBuffer", clearSolutionsBuffer);
+
+  NODE_SET_METHOD(exports, "testHashFunction", testHashFunction);
 
   NODE_SET_METHOD(exports, "getRandomNumber", getRandomNumberForNode);
   NODE_SET_METHOD(exports, "getKeccak256", printKeccak256);
