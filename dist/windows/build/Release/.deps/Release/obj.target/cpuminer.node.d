@@ -1,0 +1,1 @@
+cmd_Release/obj.target/cpuminer.node := g++ -shared -pthread -rdynamic -m64  -Wl,-soname=cpuminer.node -o Release/obj.target/cpuminer.node -Wl,--start-group Release/obj.target/cpuminer/cpp/cpuminer/addon.o Release/obj.target/cpuminer/cpp/cpuminer/cpuminer.o Release/obj.target/cpuminer/cpp/cpuminer/solver.o Release/obj.target/cpuminer/cpp/cpuminer/sha3.o -Wl,--end-group 
