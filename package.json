@@ -30,7 +30,7 @@
   },
   "pkg": {
     "scripts": "node_modules/scrypt/index.js",
-    "assets": ["build/**/*.node"]
+    "assets": [ ]
   },
   "devDependencies": {
     "mocha": "^5.0.0"
