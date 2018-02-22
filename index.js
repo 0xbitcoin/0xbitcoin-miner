@@ -1,5 +1,5 @@
 
-const Miner = require("./0xbitcoinminer");
+const Miner = require("./0xbitcoinminer-accel");
 
 const Vault = require("./lib/vault");
 
@@ -133,10 +133,17 @@ async function handleCommand(result)
 
     await PoolInterface.handlePoolCommand(subsystem_command,subsystem_option)
 
-    Miner.init( web3 , Vault,  miningLogger );
-    Miner.setNetworkInterface( PoolInterface );
-    Miner.setMiningStyle("pool")
-    Miner.mine(subsystem_command,subsystem_option)
+
+
+      if( subsystem_command == "mine" ){
+        Miner.init( web3 , Vault,  miningLogger );
+        Miner.setNetworkInterface( PoolInterface );
+        Miner.setMiningStyle("pool")
+        Miner.mine(subsystem_command,subsystem_option)
+      }
+
+
+
   }
 
   if(subsystem_name == 'help')

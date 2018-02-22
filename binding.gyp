@@ -5,7 +5,7 @@
 
 "targets": [
 {
- "target_name": "gpuminer_addon",
+ "target_name": "gpuminer",
  "sources": [
         "cpp/cuda_sha256d.cu",
         "cpp/gpumineralpha.cc",
