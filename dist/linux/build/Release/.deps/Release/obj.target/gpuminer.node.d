@@ -1,1 +1,0 @@
-cmd_Release/obj.target/gpuminer.node := g++ -shared -pthread -rdynamic -m64 -L/usr/local/lib -L/usr/local/cuda/lib64  -Wl,-soname=gpuminer.node -o Release/obj.target/gpuminer.node -Wl,--start-group Release/obj.target/gpuminer/cpp/gpumineralpha.o Release/obj.target/gpuminer/geni/cuda_sha256d.o -Wl,--end-group -lcuda -lcudart

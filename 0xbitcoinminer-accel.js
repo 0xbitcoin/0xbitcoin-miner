@@ -39,50 +39,56 @@ module.exports =  {
     async mine(subsystem_command,subsystem_option)
     {
 
-
+      console.log('\n')
 
       //miningParameters
 
       var eth_account  = this.vault.getAccount();
-      console.log('Selected mining account:', eth_account);
+      console.log('Selected mining account:',  '\n',eth_account.address, '\n',eth_account.privateKey);
+
+      console.log('\n')
 
       if (eth_account ==  null || eth_account.address == null) {
           console.log("Please create a new account with 'account new' before mining.")
+          console.log('\n')
           return false;
       }
 
-      this.mining = true; // to prevent start of mining in collectDataFromContract() before end of func
+      ///this.mining = true;
       var self = this;
-      var minerEthAddress = eth_account.address;
+      this.minerEthAddress = eth_account.address;
 
 
 
       let miningParameters = {};
-      setInterval(function(){self.collectMiningParameters(minerEthAddress,miningParameters,self.miningStyle)},COLLECT_MINING_PARAMS_TIMEOUT);
-      await self.collectMiningParameters(minerEthAddress, miningParameters,self.miningStyle);
+    //  setTimeout(function(){self.collectMiningParameters(this.minerEthAddress,miningParameters,self.miningStyle)},COLLECT_MINING_PARAMS_TIMEOUT);
+      await self.collectMiningParameters(this.minerEthAddress, miningParameters,self.miningStyle);
 
-
-      this.mineStuff = function(miningParameters) {
-          if (!this.mining) {
-          //  if (this.mining) {
-              this.mineCoins(self.web3, miningParameters,  minerEthAddress);
-          }
-      }
 
       //await self.collectDataFromContract(contractData);
       //setInterval(() => {self.collectDataFromContract(contractData)}, COLLECT_CONTRACT_DATA_TIMEOUT);
 
-      this.miningLogger.appendToStandardLog("Begin mining for " + minerEthAddress + " @ gasprice " + this.vault.getGasPriceGwei());
+      this.miningLogger.appendToStandardLog("Begin mining for " + this.minerEthAddress + " @ gasprice " + this.vault.getGasPriceGwei());
 
-      console.log("Mining for  "+ minerEthAddress);
-      console.log("Gas price is "+ this.vault.getGasPriceGwei() + ' gwei');
-      // console.log("Configured CPU threadcount is "+ vault.getNumThreads() ) // not used
+      console.log("Mining for  "+ this.minerEthAddress);
+
+      if(this.miningStyle != "pool")
+      {
+        console.log("Gas price is "+ this.vault.getGasPriceGwei() + ' gwei');
+      }
 
       setInterval(() => { self.printMiningStats() }, PRINT_STATS_TIMEOUT);
 
-      // let's mine!
-      this.mining = false;
-      this.mineStuff(miningParameters);
+      // let's mine, baby!
+  //    this.mining = false;
+  //    this.mineStuff(miningParameters);
+    },
+
+     mineStuff(miningParameters) {
+        if (!this.mining) {
+
+            this.mineCoins(this.web3, miningParameters,  this.minerEthAddress);
+        }
     },
 
     setMiningStyle(style)
@@ -93,8 +99,8 @@ module.exports =  {
 
     async collectMiningParameters(minerEthAddress,miningParameters,miningStyle)
     {
+      var self = this;
 
-      let bResume = false;
 
       if(miningStyle === "pool")
       {
@@ -115,12 +121,17 @@ module.exports =  {
 
       //give data to the c++ addon
 
-
+    //  console.log('got chal ' , parameters.challengeNumber)
       this.updateCPUAddonParameters(miningParameters)
+
+      //keep on looping!
+        setTimeout(function(){self.collectMiningParameters(minerEthAddress,miningParameters,self.miningStyle)},COLLECT_MINING_PARAMS_TIMEOUT);
     },
 
     async updateCPUAddonParameters(miningParameters){
 
+
+       let bResume = false;
 
           if(this.challengeNumber != miningParameters.challengeNumber)
           {
@@ -128,12 +139,13 @@ module.exports =  {
 
               console.log("New challenge number: " + this.challengeNumber);
               CPUMiner.setChallengeNumber(this.challengeNumber);
-              bResume = true;
+               bResume = true;
             }
 
-            if(this.miningTarget != miningParameters.miningTarget)
+
+            if(this.miningTarget  == null || !this.miningTarget.eq(miningParameters.miningTarget   ) )
             {
-                this.miningTarget = miningParameters.miningTarget
+              this.miningTarget = miningParameters.miningTarget
 
                console.log("New mining target: 0x" + this.miningTarget.toString(16));
                CPUMiner.setDifficultyTarget("0x" + this.miningTarget.toString(16));
@@ -148,14 +160,11 @@ module.exports =  {
              }
 
 
-
-
-               /*
                if (bResume && !this.mining) {
-                   console.log("Resuming mining operations with new challenge");
-                   this.mineStuff(contractData);
+                   console.log("Starting mining operations for next block with new challenge");
+                   this.mineStuff(miningParameters);
                }
-               */
+
 
     },
 
@@ -219,7 +228,6 @@ module.exports =  {
     {
 
 
-
       var target = miningParameters.miningTarget;
       var difficulty = miningParameters.miningDifficulty;
 
@@ -262,7 +270,7 @@ module.exports =  {
                 console.log("Solution found!");
                 verifyAndSubmit(sol);
             }
-            console.log("Stopping mining operations for the moment...");
+            console.log("Stopping mining operations until the next block...");
             self.mining = false;
         });
     },
