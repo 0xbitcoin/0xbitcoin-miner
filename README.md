@@ -56,6 +56,7 @@ Next to do:
 
 
 
+ 
 
 
 ## Update 1.3.0 - Pool Mining
