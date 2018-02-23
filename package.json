@@ -24,13 +24,14 @@
     "nan": "^2.8.0",
     "node-localstorage": "^1.3.0",
     "prompt": "^1.0.0",
+    "qrcode-terminal": "^0.11.0",
     "web3": "^1.0.0-beta.29",
     "web3-eth": "^1.0.0-beta.20",
     "web3-utils": "^1.0.0-beta.30"
   },
   "pkg": {
     "scripts": "node_modules/scrypt/index.js",
-    "assets": [ ]
+    "assets": []
   },
   "devDependencies": {
     "mocha": "^5.0.0"
