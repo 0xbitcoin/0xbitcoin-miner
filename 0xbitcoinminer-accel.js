@@ -279,7 +279,7 @@ module.exports =  {
                 verifyAndSubmit(sol);
             }
             console.log("Stopping mining operations until the next block...");
-            self.mining = false;
+          //  self.mining = false;
         });
     },
 

@@ -99,7 +99,7 @@ void CpuMiner::solutionFound(Solver::bytes_t const& solution)
     m_bSolutionFound = true;
   }
 
-  stop();
+  //stop();  //keep going 
 }
 
 void CpuMiner::set(void (Solver::*fn)(std::string const&), std::string const& p)
