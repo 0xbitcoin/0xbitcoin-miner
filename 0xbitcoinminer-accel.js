@@ -260,7 +260,7 @@ module.exports =  {
             if (digestBigNumber.lte(miningParameters.miningTarget)) {
                 console.log('Submit mined solution for challenge ', challenge_number);
               //  self.submitNewMinedBlock(minerEthAddress, solution_number, digest, challenge_number);
-                  self.submitNewMinedBlock( addressFrom, minerEthAddress, solution_number,digest,challenge_number, target, difficulty)
+                  await self.submitNewMinedBlock( addressFrom, minerEthAddress, solution_number,digest,challenge_number, target, difficulty)
 
             } else {
                 console.error("Verification failed!\n",
