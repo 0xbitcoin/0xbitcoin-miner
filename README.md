@@ -12,7 +12,7 @@ This new build uses a C++ addon to accelerate the CPU mining one-thousand fold. 
 
 #### Official Releases Downloads
 
-[Download Packaged Releases](https://github.com/0xbitcoin/0xbitcoin-miner/raw/master/RELEASES.md)
+[Download Packaged Releases](https://github.com/0xbitcoin/0xbitcoin-miner/blob/master/RELEASES.md)
 
 
 
