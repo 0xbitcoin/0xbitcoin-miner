@@ -232,7 +232,7 @@ module.exports =  {
     },
 
     // contractData , -> miningParameters
-    mineCoins(web3, miningParameters, minerEthAddress)
+      mineCoins(web3, miningParameters, minerEthAddress)
     {
 
 
@@ -260,7 +260,7 @@ module.exports =  {
             if (digestBigNumber.lte(miningParameters.miningTarget)) {
                 console.log('Submit mined solution for challenge ', challenge_number);
               //  self.submitNewMinedBlock(minerEthAddress, solution_number, digest, challenge_number);
-                  await self.submitNewMinedBlock( addressFrom, minerEthAddress, solution_number,digest,challenge_number, target, difficulty)
+                    self.submitNewMinedBlock( addressFrom, minerEthAddress, solution_number,digest,challenge_number, target, difficulty)
 
             } else {
                 console.error("Verification failed!\n",
