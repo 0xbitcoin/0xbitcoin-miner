@@ -107,6 +107,8 @@ module.exports =  {
 
     async collectMiningParameters(minerEthAddress,miningParameters,miningStyle)
     {
+
+      console.log('collect params ')
       var self = this;
 
 
@@ -129,14 +131,16 @@ module.exports =  {
 
       //give data to the c++ addon
 
+
     //  console.log('got chal ' , parameters.challengeNumber)
-      this.updateCPUAddonParameters(miningParameters)
+     await  this.updateCPUAddonParameters(miningParameters)
 
       //keep on looping!
         setTimeout(function(){self.collectMiningParameters(minerEthAddress,miningParameters,self.miningStyle)},COLLECT_MINING_PARAMS_TIMEOUT);
     },
 
     async updateCPUAddonParameters(miningParameters){
+
 
 
        let bResume = false;
@@ -170,7 +174,17 @@ module.exports =  {
 
                if (bResume && !this.mining) {
                    console.log("Starting mining operations for next block with new challenge");
-                   this.mineStuff(miningParameters);
+
+                   try
+                   {
+                     this.mineStuff(miningParameters);
+
+                   }catch(e)
+                   {
+                     console.log(e)
+                   }
+
+
                }
 
 
@@ -276,10 +290,16 @@ module.exports =  {
         CPUMiner.run( (err, sol) => {
             if (sol) {
                 console.log("Solution found!");
+
+                try{
                 verifyAndSubmit(sol);
+                }catch(e)
+                {
+                  console.log(e)
+                }
             }
-            console.log("Stopping mining operations until the next block...");
-          //  self.mining = false;
+          //  console.log("Stopping mining operations until the next block...");
+          self.mining = false;
         });
     },
 
