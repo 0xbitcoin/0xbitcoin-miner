@@ -10,15 +10,15 @@ Solves proof of work to mine supported ERC20 tokens.
 This new build uses a C++ addon to accelerate the CPU mining one-thousand fold.  Pool mining has been temporarily removed for maintenance and will come back in 1.5 among other updates.
 
 
-#### Official Releases Downloads
+### Official Releases Downloads
 
 [Download Packaged Releases](https://github.com/0xbitcoin/0xbitcoin-miner/blob/master/RELEASES.md)
 
 
 
-## Building from Source
+### Building from Source
 
-### Setup (Windows/Linux)
+#### Setup (Windows/Linux)
 1. Install NodeJS 8.9
 2. Run 'npm install yarn -g' to install yarn package manager
 3. Clone/download the project
@@ -26,7 +26,7 @@ This new build uses a C++ addon to accelerate the CPU mining one-thousand fold. 
 5. Run the command 'npm run build' to build C files with node-gyp
 6. Start the miner with 'node index.js'
 
-### Setup (Mac)
+#### Setup (Mac)
 1. Install Homebrew & NodeJS 8.9
 2. Run 'brew install yarn' to install yarn package manager
 3. Clone/download this project
@@ -74,7 +74,7 @@ Note that IF SOLO MINING it is necessary to fill the mining account (it is an Et
 
 
 
-## Pool Mining
+### Pool Mining
 - You can mine into a pool with the command 'pool mine'  
 - When mining into a pool, your gasprice does not matter and you will pay NO GAS FEES  
 - Every pool is different so consult each pool owner.  Typically, pools will offer a token withdraw mechanism or automatically send tokens to your address on a periodic basis or when a limit is reached
