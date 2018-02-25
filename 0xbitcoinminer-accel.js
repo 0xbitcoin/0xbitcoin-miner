@@ -108,7 +108,7 @@ module.exports =  {
     async collectMiningParameters(minerEthAddress,miningParameters,miningStyle)
     {
 
-      console.log('collect params ')
+  //    console.log('collect parameters.. ')
       var self = this;
 
 
