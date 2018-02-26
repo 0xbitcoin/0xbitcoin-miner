@@ -259,7 +259,7 @@ module.exports =  {
     {
         this.miningLogger.appendToStandardLog("Giving mined solution to network interface " + challenge_number);
 
-        this.networkInterface.queueMiningSolution(addressFrom, solution_number , digest_bytes , challenge_number)
+        this.networkInterface.queueMiningSolution(addressFrom, minerEthAddress, solution_number , digest_bytes , challenge_number, target, difficulty)
     },
 
     // contractData , -> miningParameters
