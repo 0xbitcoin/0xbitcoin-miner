@@ -41,6 +41,7 @@ async function initPrompt()
 async function promptForCommand()
 {
   return new Promise(function (fulfilled,rejected) {
+    console.log('\n')
     prompt.start();
     prompt.get(['command'], async function (err, result) {
 
@@ -123,7 +124,7 @@ async function handleCommand(result)
     var unlocked = await Vault.init(web3,miningLogger);
     if(!unlocked)return false;
 
-     
+
     NetworkInterface.init(web3, Vault, miningLogger);
 
     Miner.init( web3, Vault, miningLogger );
