@@ -198,7 +198,7 @@ module.exports =  {
 
 
                if (bResume && !this.mining) {
-                   console.log("Starting mining operations for next block with new challenge");
+                   console.log("Restarting mining operations");
 
                    try
                    {
@@ -314,6 +314,8 @@ module.exports =  {
         }
 
         self.mining = true;
+        console.log('MINING:',self.mining)
+        CPUMiner.stop();
         CPUMiner.run( (err, sol) => {
             if (sol) {
                 console.log("Solution found!");
@@ -327,6 +329,7 @@ module.exports =  {
             }
           //  console.log("Stopping mining operations until the next block...");
           self.mining = false;
+          console.log('MINING:',self.mining)
         });
     },
 
