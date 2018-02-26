@@ -100,9 +100,7 @@ module.exports =  {
 
       setInterval(() => { self.printMiningStats() }, PRINT_STATS_TIMEOUT);
 
-      // let's mine, baby!
-  //    this.mining = false;
-  //    this.mineStuff(miningParameters);
+
     },
 
      mineStuff(miningParameters) {
@@ -288,7 +286,7 @@ module.exports =  {
 
         const verifyAndSubmit = (solution_number) => {
             const challenge_number = miningParameters.challengeNumber;
-            const digest = web3utils.sha3(challenge_number + minerEthAddress.substring(2) + solution_number.substring(2));
+            const digest = web3utils.sha3(challenge_number + addressFrom.substring(2) + solution_number.substring(2));
             const digestBigNumber = web3utils.toBN(digest);
             if (digestBigNumber.lte(miningParameters.miningTarget)) {
                 console.log('Submit mined solution for challenge ', challenge_number);
