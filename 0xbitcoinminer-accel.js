@@ -163,10 +163,12 @@ module.exports =  {
        let bResume = false;
 
 
-        if(miningStyle == 'pool')
+        if(miningStyle == 'pool' && this.challengeNumber != null)
         {
           //if we are in a pool, keep mining again because our soln probably didnt solve the whole block and we want shares
-           bResume = true;
+        //   bResume = true;
+          CPUMiner.setChallengeNumber(this.challengeNumber);
+         bResume = true;
         }
 
 
@@ -315,7 +317,7 @@ module.exports =  {
 
         self.mining = true;
         console.log('MINING:',self.mining)
-        CPUMiner.stop();
+       CPUMiner.stop();
         CPUMiner.run( (err, sol) => {
             if (sol) {
                 console.log("Solution found!");
@@ -341,7 +343,10 @@ module.exports =  {
 
     printMiningStats()
     {
-        console.log('Hash rate: ' + parseInt(CPUMiner.hashes() / PRINT_STATS_TIMEOUT) + " kH/s");
+
+      var hashes = CPUMiner.hashes();
+      console.log('hashes:', hashes )
+        console.log('Hash rate: ' + parseInt( hashes / PRINT_STATS_TIMEOUT) + " kH/s");
     }
 
 }
