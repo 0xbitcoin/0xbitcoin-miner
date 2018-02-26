@@ -144,7 +144,7 @@ module.exports =  {
           //give data to the c++ addon
 
 
-          await this.updateCPUAddonParameters(miningParameters)
+          await this.updateCPUAddonParameters(miningParameters,miningStyle)
 
     }catch(e)
     {
@@ -156,11 +156,19 @@ module.exports =  {
         setTimeout(function(){self.collectMiningParameters(minerEthAddress,miningParameters,self.miningStyle)},COLLECT_MINING_PARAMS_TIMEOUT);
     },
 
-    async updateCPUAddonParameters(miningParameters){
+    async updateCPUAddonParameters(miningParameters,miningStyle){
 
 
 
        let bResume = false;
+
+
+        if(miningStyle == 'pool')
+        {
+          //if we are in a pool, keep mining again because our soln probably didnt solve the whole block and we want shares
+           bResume = true;
+        }
+
 
           if(this.challengeNumber != miningParameters.challengeNumber)
           {
@@ -292,6 +300,8 @@ module.exports =  {
                 console.log('Submit mined solution for challenge ', challenge_number);
               //  self.submitNewMinedBlock(minerEthAddress, solution_number, digest, challenge_number);
                     self.submitNewMinedBlock( addressFrom, minerEthAddress, solution_number,digest,challenge_number, target, difficulty)
+
+
 
             } else {
                 console.error("Verification failed!\n",
