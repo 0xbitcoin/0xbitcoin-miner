@@ -89,7 +89,10 @@ async function handleCommand(result)
 
   if(subsystem_name == 'account')
   {
+    if(subsystem_command === 'new' || subsystem_command === 'list' )
+    {
     Vault.requirePassword(true) //for encryption of private key !
+    }
 
     var unlocked = await Vault.init(web3,miningLogger);
     if(!unlocked)return false;
@@ -120,10 +123,12 @@ async function handleCommand(result)
     var unlocked = await Vault.init(web3,miningLogger);
     if(!unlocked)return false;
 
+     
     NetworkInterface.init(web3, Vault, miningLogger);
 
     Miner.init( web3, Vault, miningLogger );
     Miner.setNetworkInterface( NetworkInterface );
+
     Miner.setMiningStyle("solo")
     Miner.mine(subsystem_command,subsystem_option)
   }

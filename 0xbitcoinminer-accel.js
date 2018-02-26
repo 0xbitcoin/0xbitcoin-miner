@@ -51,15 +51,33 @@ module.exports =  {
 
       //miningParameters
 
-      var eth_account  = this.vault.getAccount();
-      console.log('Selected mining account:',  '\n',eth_account.address, '\n',eth_account.privateKey);
 
-      console.log('\n')
+      if(this.miningStyle == "solo")
+      {
+
+          //if solo mining need a full account
+          var eth_account  = this.vault.getFullAccount();
+
+          if( eth_account.accountType == "readOnly" )
+          {
+            console.log('The account ',  eth_account.address, ' does not have an associated private key.  Please select another account or mine to a pool.');
+            console.log('\n')
+            return;
+          }
+
+      }else if( this.miningStyle == "pool" )
+      {
+        var eth_account  = this.vault.getAccount();
+      }
+
 
       if (eth_account ==  null || eth_account.address == null) {
-          console.log("Please create a new account with 'account new' before mining.")
+          console.log("Please create a new account with 'account new' before solo mining.")
           console.log('\n')
           return false;
+      }else{
+        console.log('Selected mining account:',  '\n',eth_account.address );
+        console.log('\n')
       }
 
       ///this.mining = true;
@@ -68,13 +86,8 @@ module.exports =  {
 
 
 
-      let miningParameters = {};
-    //  setTimeout(function(){self.collectMiningParameters(this.minerEthAddress,miningParameters,self.miningStyle)},COLLECT_MINING_PARAMS_TIMEOUT);
-      await self.collectMiningParameters(this.minerEthAddress, miningParameters,self.miningStyle);
-
-
-      //await self.collectDataFromContract(contractData);
-      //setInterval(() => {self.collectDataFromContract(contractData)}, COLLECT_CONTRACT_DATA_TIMEOUT);
+       let miningParameters = {};
+       await self.collectMiningParameters(this.minerEthAddress, miningParameters,self.miningStyle);
 
       this.miningLogger.appendToStandardLog("Begin mining for " + this.minerEthAddress + " @ gasprice " + this.vault.getGasPriceGwei());
 
