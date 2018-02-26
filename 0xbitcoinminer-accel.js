@@ -111,29 +111,35 @@ module.exports =  {
   //    console.log('collect parameters.. ')
       var self = this;
 
-
-      if(miningStyle === "pool")
+      try
       {
+          if(miningStyle === "pool")
+          {
 
-        var parameters = await this.networkInterface.collectMiningParameters(minerEthAddress);
+            var parameters = await this.networkInterface.collectMiningParameters(minerEthAddress);
 
-      }else{
+          }else{
 
-        var parameters = await this.networkInterface.collectMiningParameters();
+            var parameters = await this.networkInterface.collectMiningParameters();
 
-      }
+          }
 
-      //console.log('collected mining params ', parameters)
-      miningParameters.miningDifficulty = parameters.miningDifficulty;
-      miningParameters.challengeNumber = parameters.challengeNumber;
-      miningParameters.miningTarget = parameters.miningTarget;
-      miningParameters.poolEthAddress = parameters.poolEthAddress;
+          //console.log('collected mining params ', parameters)
+          miningParameters.miningDifficulty = parameters.miningDifficulty;
+          miningParameters.challengeNumber = parameters.challengeNumber;
+          miningParameters.miningTarget = parameters.miningTarget;
+          miningParameters.poolEthAddress = parameters.poolEthAddress;
 
-      //give data to the c++ addon
+          //give data to the c++ addon
 
 
-    //  console.log('got chal ' , parameters.challengeNumber)
-     await  this.updateCPUAddonParameters(miningParameters)
+          await this.updateCPUAddonParameters(miningParameters)
+
+    }catch(e)
+    {
+      console.log(e)
+    }
+
 
       //keep on looping!
         setTimeout(function(){self.collectMiningParameters(minerEthAddress,miningParameters,self.miningStyle)},COLLECT_MINING_PARAMS_TIMEOUT);
