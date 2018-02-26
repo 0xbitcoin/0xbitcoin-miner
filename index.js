@@ -89,6 +89,8 @@ async function handleCommand(result)
 
   if(subsystem_name == 'account')
   {
+    Vault.requirePassword(true) //for encryption of private key !
+
     var unlocked = await Vault.init(web3,miningLogger);
     if(!unlocked)return false;
 
@@ -113,6 +115,8 @@ async function handleCommand(result)
 
   if(subsystem_name == 'mine')
   {
+    Vault.requirePassword(true) //for encryption of private key !
+
     var unlocked = await Vault.init(web3,miningLogger);
     if(!unlocked)return false;
 
