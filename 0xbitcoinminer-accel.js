@@ -127,7 +127,7 @@ module.exports =  {
           if(miningStyle === "pool")
           {
 
-            var parameters = await this.networkInterface.collectMiningParameters(minerEthAddress);
+            var parameters = await this.networkInterface.collectMiningParameters(minerEthAddress,miningParameters);
 
           }else{
 
