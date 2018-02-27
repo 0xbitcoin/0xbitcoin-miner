@@ -4,10 +4,10 @@
 Solves proof of work to mine supported ERC20 tokens.  
 
 
- 
-#### Update 1.5.11 - 1000X CPU Pool Mining
 
-This new build uses the C++ addon to accelerate the CPU mining one-thousand fold.  Pool mining been added and this can be accomplished with the command 'pool mine'.  You can select a different pool with 'pool select http://...'.  Keep in mind that this update will migrate all vault data to a new and improved version so be sure to back up your private keys.
+### Update 1.5.11 - 1000X CPU Pool Mining
+
+This new build uses the C++ addon to accelerate the CPU mining one-thousand fold.  Pool mining with the command 'pool mine'.  Select a different pool with 'pool select http://...'.  Keep in mind that this update will migrate all vault data to a new and improved version so be sure to back up your private keys.
 
 ### Official Releases Downloads
 
