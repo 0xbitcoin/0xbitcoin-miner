@@ -21,7 +21,7 @@
      'process_outputs_as_sources': 1,
      'action': [
         'nvcc',
-         '-ccbin', 'clang-3.8',
+         '-ccbin', 'gcc',
 	'-Xcompiler',
 	'-fpic',
 	'-c',

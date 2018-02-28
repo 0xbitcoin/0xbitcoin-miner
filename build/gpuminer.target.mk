@@ -10,7 +10,7 @@ $(obj).$(TOOLSET)/$(TARGET)/geni/cuda_sha256d.o: $(srcdir)/cpp/cuda_sha256d.cu $
 	$(call do_cmd,binding_gyp_gpuminer_target_cuda_on_linux_0)
 
 all_deps += $(obj).$(TOOLSET)/$(TARGET)/geni/cuda_sha256d.o
-cmd_binding_gyp_gpuminer_target_cuda_on_linux_0 = LD_LIBRARY_PATH=$(builddir)/lib.host:$(builddir)/lib.target:$$LD_LIBRARY_PATH; export LD_LIBRARY_PATH; cd $(srcdir)/.; mkdir -p $(obj).$(TOOLSET)/gpuminer/geni; nvcc -ccbin clang-3.8 -Xcompiler -fpic -c -o "$(obj).$(TOOLSET)/gpuminer/geni/cuda_sha256d.o" "$(abspath $<)"
+cmd_binding_gyp_gpuminer_target_cuda_on_linux_0 = LD_LIBRARY_PATH=$(builddir)/lib.host:$(builddir)/lib.target:$$LD_LIBRARY_PATH; export LD_LIBRARY_PATH; cd $(srcdir)/.; mkdir -p $(obj).$(TOOLSET)/gpuminer/geni; nvcc -ccbin gcc -Xcompiler -fpic -c -o "$(obj).$(TOOLSET)/gpuminer/geni/cuda_sha256d.o" "$(abspath $<)"
 quiet_cmd_binding_gyp_gpuminer_target_cuda_on_linux_0 = RULE binding_gyp_gpuminer_target_cuda_on_linux_0 $@
 
 rule_binding_gyp_gpuminer_target_cuda_on_linux_outputs := \

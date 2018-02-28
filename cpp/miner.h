@@ -12,7 +12,7 @@ extern "C" {
 #include <sys/time.h>
 #include <pthread.h>
 #include "jansson/jansson.h"
-#include <curl/curl.h>
+#include <curl/curl.h>  //sudo apt-get install libcurl4-openssl-dev
 
 #ifdef _MSC_VER
 #undef HAVE_ALLOCA_H
