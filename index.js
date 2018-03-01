@@ -13,6 +13,9 @@ var pjson = require('./package.json');
 
 var Web3 = require('web3')
 
+var ContractInterface = require("./contracts/DeployedContractInfo")
+
+
 var NetworkInterface = require("./lib/network-interface");
 
 var PoolInterface = require("./lib/pool-interface");
@@ -134,6 +137,37 @@ async function handleCommand(result)
     Miner.mine(subsystem_command,subsystem_option)
   }
 
+
+
+  //mining test
+  if(subsystem_name == 'test' && subsystem_command == 'mine')
+  {
+    Vault.requirePassword(true) //for encryption of private key !
+
+
+    var infura_provider_url = 'https://ropsten.infura.io/gmXEVo5luMPUGPqg6mhy';
+    var ropsten_contract_address = ContractInterface.networks.testnet.contracts._0xbitcointoken.blockchain_address
+
+    Vault.setWeb3ProviderUrl(infura_provider_url);
+    Vault.selectContract(ropsten_contract_address);
+
+      web3.setProvider(infura_provider_url)
+
+    var unlocked = await Vault.init(web3,miningLogger);
+    if(!unlocked)return false;
+
+      web3.setProvider(infura_provider_url)
+        Vault.selectContract(ropsten_contract_address);
+
+    NetworkInterface.init(web3, Vault, miningLogger);
+
+    Miner.init( web3, Vault, miningLogger );
+    Miner.setNetworkInterface( NetworkInterface );
+
+    Miner.setMiningStyle("solo")
+    Miner.mine(subsystem_command,subsystem_option)
+  }
+
   if(subsystem_name == 'pool')
   {
     var unlocked = await Vault.init(web3,miningLogger);
@@ -179,7 +213,7 @@ async function handleCommand(result)
     console.log('"pool list" - List the selected mining pool')
     console.log('"pool select http://####.com:####" - Select a pool to mine into ')
 
-
+    console.log('"test mine" - Begin mining on Ropsten ')
     console.log('"mine" - Begin mining ')
 
   //  console.log('\n')

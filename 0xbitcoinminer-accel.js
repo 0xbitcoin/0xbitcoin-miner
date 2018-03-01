@@ -4,6 +4,8 @@ var leftpad =  require('leftpad');
 
 const BN = require('bn.js');
 
+var debugLogger = require('./lib/debug-logger')
+
 var tokenContractJSON = require('./contracts/_0xBitcoinToken.json');
 
 var CPUMiner = require('./build/Release/cpuminer');
@@ -54,11 +56,11 @@ module.exports =  {
 
       if(this.miningStyle == "solo")
       {
-
           //if solo mining need a full account
           var eth_account  = this.vault.getFullAccount();
 
-          if( eth_account.accountType == "readOnly" )
+
+          if( eth_account.accountType == "readOnly" ||  eth_account.privateKey == null || typeof eth_account.privateKey == 'undefined ' )
           {
             console.log('The account ',  eth_account.address, ' does not have an associated private key.  Please select another account or mine to a pool.');
             console.log('\n')
@@ -316,7 +318,9 @@ module.exports =  {
         }
 
         self.mining = true;
-        console.log('MINING:',self.mining)
+
+        debugLogger.log('MINING:',self.mining)
+
        CPUMiner.stop();
         CPUMiner.run( (err, sol) => {
             if (sol) {
@@ -331,7 +335,9 @@ module.exports =  {
             }
           //  console.log("Stopping mining operations until the next block...");
           self.mining = false;
-          console.log('MINING:',self.mining)
+
+         debugLogger.log('MINING:',self.mining)
+
         });
     },
 
