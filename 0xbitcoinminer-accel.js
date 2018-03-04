@@ -8,11 +8,11 @@ var debugLogger = require('./lib/debug-logger')
 
 var tokenContractJSON = require('./contracts/_0xBitcoinToken.json');
 
-var CPUMiner = require('./build/Release/cpuminer');
+var CPPMiner = require('./build/Release/cpuminer');
 
 
 //only load this if selecting 'gpu mine!!!'
-var GPUMiner;
+
 
 var tokenContract;
 
@@ -28,15 +28,11 @@ module.exports =  {
     async init(web3,  vault, miningLogger)
   //  async init(web3, subsystem_command, vault, networkInterface, miningLogger)
     {
-
-      if(hardwareType == "cuda")
-      {
-        GPUMiner = require('./build/Release/gpuminer');
-      }
+        CPPMiner.setHardwareType(hardwareType);
 
         process.on('exit', () => {
             console.log("Process exiting... stopping miner");
-            CPUMiner.stop();
+            CPPMiner.stop();
         });
 
         tokenContract =  new web3.eth.Contract(tokenContractJSON.abi,vault.getTokenContractAddress());
@@ -172,7 +168,7 @@ module.exports =  {
         {
           //if we are in a pool, keep mining again because our soln probably didnt solve the whole block and we want shares
         //   bResume = true;
-          CPUMiner.setChallengeNumber(this.challengeNumber);
+          CPPMiner.setChallengeNumber(this.challengeNumber);
          bResume = true;
         }
 
@@ -182,7 +178,7 @@ module.exports =  {
               this.challengeNumber = miningParameters.challengeNumber
 
               console.log("New challenge number: " + this.challengeNumber);
-              CPUMiner.setChallengeNumber(this.challengeNumber);
+              CPPMiner.setChallengeNumber(this.challengeNumber);
                bResume = true;
             }
 
@@ -192,7 +188,7 @@ module.exports =  {
               this.miningTarget = miningParameters.miningTarget
 
                console.log("New mining target: 0x" + this.miningTarget.toString(16));
-               CPUMiner.setDifficultyTarget("0x" + this.miningTarget.toString(16));
+               CPPMiner.setDifficultyTarget("0x" + this.miningTarget.toString(16));
              }
 
              if(this.miningDifficulty != miningParameters.miningDifficulty)
@@ -255,7 +251,7 @@ module.exports =  {
       }
 
 
-        CPUMiner.setMinerAddress(addressFrom);
+        CPPMiner.setMinerAddress(addressFrom);
 
         var self = this;
 
@@ -284,8 +280,8 @@ module.exports =  {
 
         debugLogger.log('MINING:',self.mining)
 
-       CPUMiner.stop();
-        CPUMiner.run( (err, sol) => {
+       CPPMiner.stop();
+        CPPMiner.run( (err, sol) => {
             if (sol) {
                 console.log("Solution found!");
 
@@ -320,7 +316,7 @@ module.exports =  {
     printMiningStats()
     {
 
-      var hashes = CPUMiner.hashes();
+      var hashes = CPPMiner.hashes();
       console.log('hashes:', hashes )
         console.log('Hash rate: ' + parseInt( hashes / PRINT_STATS_TIMEOUT) + " kH/s");
     }

@@ -189,7 +189,7 @@ async function handleCommand(result)
 
         if(subsystem_command == 'gpumine')
         {
-          Miner.setHardwareType('cuda') ;
+           Miner.setHardwareType('cuda') ;
         }
 
         Miner.init( web3 , Vault,  miningLogger );

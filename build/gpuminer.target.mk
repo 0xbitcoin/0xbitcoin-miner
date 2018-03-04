@@ -2,13 +2,6 @@
 
 TOOLSET := target
 TARGET := gpuminer
-### Generated for rule binding_gyp_gpuminer_target_cuda_on_linux:
-rule_binding_gyp_gpuminer_target_cuda_on_linux_outputs :=
-
-### Finished generating for rule: binding_gyp_gpuminer_target_cuda_on_linux
-
-### Finished generating for all rules
-
 DEFS_Debug := \
 	'-DNODE_GYP_MODULE_NAME=gpuminer' \
 	'-DUSING_UV_SHARED=1' \
@@ -37,6 +30,9 @@ CFLAGS_C_Debug :=
 
 # Flags passed to only C++ files.
 CFLAGS_CC_Debug := \
+	-march=native \
+	-O3 \
+	-std=c++17 \
 	-fno-rtti \
 	-fno-exceptions \
 	-std=gnu++0x
@@ -46,9 +42,7 @@ INCS_Debug := \
 	-I/home/andy/.node-gyp/8.9.4/src \
 	-I/home/andy/.node-gyp/8.9.4/deps/uv/include \
 	-I/home/andy/.node-gyp/8.9.4/deps/v8/include \
-	-I$(srcdir)/node_modules/nan \
-	-I/usr/local/include \
-	-I/usr/local/cuda/include
+	-I$(srcdir)/node_modules/nan
 
 DEFS_Release := \
 	'-DNODE_GYP_MODULE_NAME=gpuminer' \
@@ -75,6 +69,9 @@ CFLAGS_C_Release :=
 
 # Flags passed to only C++ files.
 CFLAGS_CC_Release := \
+	-march=native \
+	-O3 \
+	-std=c++17 \
 	-fno-rtti \
 	-fno-exceptions \
 	-std=gnu++0x
@@ -84,9 +81,7 @@ INCS_Release := \
 	-I/home/andy/.node-gyp/8.9.4/src \
 	-I/home/andy/.node-gyp/8.9.4/deps/uv/include \
 	-I/home/andy/.node-gyp/8.9.4/deps/v8/include \
-	-I$(srcdir)/node_modules/nan \
-	-I/usr/local/include \
-	-I/usr/local/cuda/include
+	-I$(srcdir)/node_modules/nan
 
 OBJS := \
 	$(obj).target/$(TARGET)/cpp/gpuminer/addon.o \
@@ -94,9 +89,6 @@ OBJS := \
 
 # Add to the list of files we specially track dependencies for.
 all_deps += $(OBJS)
-
-# Make sure our actions/rules run before any of us.
-$(OBJS): | $(rule_binding_gyp_gpuminer_target_cuda_on_linux_outputs)
 
 # CFLAGS et al overrides must be target-local.
 # See "Target-specific Variable Values" in the GNU Make manual.
@@ -128,29 +120,17 @@ $(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj)/%.cpp FORCE_DO_CMD
 
 # End of this set of suffix rules
 ### Rules for final target.
-# Build our special outputs first.
-$(obj).target/gpuminer.node: | $(rule_binding_gyp_gpuminer_target_cuda_on_linux_outputs)
-
-# Preserve order dependency of special output on deps.
-$(rule_binding_gyp_gpuminer_target_cuda_on_linux_outputs): | 
-
 LDFLAGS_Debug := \
 	-pthread \
 	-rdynamic \
-	-m64 \
-	-L/usr/local/lib \
-	-L/usr/local/cuda/lib64
+	-m64
 
 LDFLAGS_Release := \
 	-pthread \
 	-rdynamic \
-	-m64 \
-	-L/usr/local/lib \
-	-L/usr/local/cuda/lib64
+	-m64
 
-LIBS := \
-	-lcuda \
-	-lcudart
+LIBS :=
 
 $(obj).target/gpuminer.node: GYP_LDFLAGS := $(LDFLAGS_$(BUILDTYPE))
 $(obj).target/gpuminer.node: LIBS := $(LIBS)
