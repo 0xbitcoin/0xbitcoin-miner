@@ -1,10 +1,17 @@
+/*
+  Header file to declare prototypes
+
+*/
+
+
+
 #ifndef  _CPUMINER_H_
 #define  _CPUMINER_H_
 
 #include "solver.h"
 
 #include <thread>
-
+#include <string>
 
 class CpuMiner
 {
@@ -30,6 +37,7 @@ private:
 
   void solutionFound(Solver::bytes_t const& solution);
 
+  //set a var in the solver !!
 private:
   void set(void (Solver::*fn)(std::string const&), std::string const& p);
 
@@ -40,6 +48,8 @@ private:
   std::mutex m_solution_mutex;
   Solver::bytes_t m_solution;
   bool m_bSolutionFound;
+
+  std::string m_hardwareType;
 
   volatile bool m_bExit;
 };

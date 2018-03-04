@@ -4,7 +4,7 @@
 #include <random>
 #include <thread>
 
-//allow print out 
+//allow print out
 #include <iostream>
 using namespace std;
 
@@ -14,8 +14,11 @@ CpuMiner::CpuMiner() noexcept :
   m_solution(Solver::UINT256_LENGTH),
   m_bSolutionFound(false),
   m_bExit(false)
+
 {
 }
+
+
 
 CpuMiner::~CpuMiner()
 {
@@ -35,7 +38,12 @@ CpuMiner::~CpuMiner()
 void CpuMiner::setHardwareType(std::string const& hardwareType)
 {
   cout << "Setting hardware type";
-  //set(&Solver::setChallenge, hardwareType);
+
+    //HALP
+   m_hardwareType = hardwareType;
+
+//  cout << m_hardwareType;
+
 }
 
 
