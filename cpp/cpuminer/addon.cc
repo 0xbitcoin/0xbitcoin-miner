@@ -71,6 +71,14 @@ namespace miner {
     info.GetReturnValue().SetUndefined();
   }
 
+  NAN_METHOD(setHardwareType) {
+    MaybeLocal<v8::String> inp = Nan::To<v8::String>(info[0]);
+    if (!inp.IsEmpty()) {
+      cpuminer->setHardwareType(std::string(*Nan::Utf8String(inp.ToLocalChecked())));
+    }
+    info.GetReturnValue().SetUndefined();
+  }
+
   NAN_METHOD(setChallengeNumber) {
     MaybeLocal<v8::String> inp = Nan::To<v8::String>(info[0]);
     if (!inp.IsEmpty()) {
@@ -110,6 +118,11 @@ namespace miner {
     Set(target
       , New<v8::String>("stop").ToLocalChecked()
       , New<v8::FunctionTemplate>(stop)->GetFunction());
+
+    Set(target
+      , New<v8::String>("setHardwareType").ToLocalChecked()
+      , New<v8::FunctionTemplate>(setHardwareType)->GetFunction()
+    );
 
     Set(target
       , New<v8::String>("setChallengeNumber").ToLocalChecked()

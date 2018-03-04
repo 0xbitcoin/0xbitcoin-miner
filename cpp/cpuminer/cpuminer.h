@@ -17,6 +17,8 @@ public:
   void setDifficultyTarget(std::string const& difficultyTarget);
   void setMinerAddress(std::string const& minerAddress);
 
+  void setHardwareType(std::string const& hardwareType);
+
 public:
   void run();
   void stop();
