@@ -3,18 +3,7 @@
 TOOLSET := target
 TARGET := gpuminer
 ### Generated for rule binding_gyp_gpuminer_target_cuda_on_linux:
-$(obj).$(TOOLSET)/$(TARGET)/geni/cuda_sha256d.o: obj := $(abs_obj)
-$(obj).$(TOOLSET)/$(TARGET)/geni/cuda_sha256d.o: builddir := $(abs_builddir)
-$(obj).$(TOOLSET)/$(TARGET)/geni/cuda_sha256d.o: TOOLSET := $(TOOLSET)
-$(obj).$(TOOLSET)/$(TARGET)/geni/cuda_sha256d.o: $(srcdir)/cpp/cuda_sha256d.cu $(abspath\ $<)
-	$(call do_cmd,binding_gyp_gpuminer_target_cuda_on_linux_0)
-
-all_deps += $(obj).$(TOOLSET)/$(TARGET)/geni/cuda_sha256d.o
-cmd_binding_gyp_gpuminer_target_cuda_on_linux_0 = LD_LIBRARY_PATH=$(builddir)/lib.host:$(builddir)/lib.target:$$LD_LIBRARY_PATH; export LD_LIBRARY_PATH; cd $(srcdir)/.; mkdir -p $(obj).$(TOOLSET)/gpuminer/geni; nvcc -ccbin gcc -Xcompiler -fpic -c -o "$(obj).$(TOOLSET)/gpuminer/geni/cuda_sha256d.o" "$(abspath $<)"
-quiet_cmd_binding_gyp_gpuminer_target_cuda_on_linux_0 = RULE binding_gyp_gpuminer_target_cuda_on_linux_0 $@
-
-rule_binding_gyp_gpuminer_target_cuda_on_linux_outputs := \
-	$(obj).$(TOOLSET)/$(TARGET)/geni/cuda_sha256d.o
+rule_binding_gyp_gpuminer_target_cuda_on_linux_outputs :=
 
 ### Finished generating for rule: binding_gyp_gpuminer_target_cuda_on_linux
 
@@ -53,10 +42,11 @@ CFLAGS_CC_Debug := \
 	-std=gnu++0x
 
 INCS_Debug := \
-	-I/home/andy/.node-gyp/8.9.0/include/node \
-	-I/home/andy/.node-gyp/8.9.0/src \
-	-I/home/andy/.node-gyp/8.9.0/deps/uv/include \
-	-I/home/andy/.node-gyp/8.9.0/deps/v8/include \
+	-I/home/andy/.node-gyp/8.9.4/include/node \
+	-I/home/andy/.node-gyp/8.9.4/src \
+	-I/home/andy/.node-gyp/8.9.4/deps/uv/include \
+	-I/home/andy/.node-gyp/8.9.4/deps/v8/include \
+	-I$(srcdir)/node_modules/nan \
 	-I/usr/local/include \
 	-I/usr/local/cuda/include
 
@@ -90,15 +80,17 @@ CFLAGS_CC_Release := \
 	-std=gnu++0x
 
 INCS_Release := \
-	-I/home/andy/.node-gyp/8.9.0/include/node \
-	-I/home/andy/.node-gyp/8.9.0/src \
-	-I/home/andy/.node-gyp/8.9.0/deps/uv/include \
-	-I/home/andy/.node-gyp/8.9.0/deps/v8/include \
+	-I/home/andy/.node-gyp/8.9.4/include/node \
+	-I/home/andy/.node-gyp/8.9.4/src \
+	-I/home/andy/.node-gyp/8.9.4/deps/uv/include \
+	-I/home/andy/.node-gyp/8.9.4/deps/v8/include \
+	-I$(srcdir)/node_modules/nan \
 	-I/usr/local/include \
 	-I/usr/local/cuda/include
 
 OBJS := \
-	$(obj).target/$(TARGET)/cpp/gpumineralpha.o
+	$(obj).target/$(TARGET)/cpp/gpuminer/addon.o \
+	$(obj).target/$(TARGET)/cpp/gpuminer/gpuminer.o
 
 # Add to the list of files we specially track dependencies for.
 all_deps += $(OBJS)
@@ -117,12 +109,21 @@ $(OBJS): GYP_CXXFLAGS := $(DEFS_$(BUILDTYPE)) $(INCS_$(BUILDTYPE))  $(CFLAGS_$(B
 $(obj).$(TOOLSET)/$(TARGET)/%.o: $(srcdir)/%.cc FORCE_DO_CMD
 	@$(call do_cmd,cxx,1)
 
+$(obj).$(TOOLSET)/$(TARGET)/%.o: $(srcdir)/%.cpp FORCE_DO_CMD
+	@$(call do_cmd,cxx,1)
+
 # Try building from generated source, too.
 
 $(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj).$(TOOLSET)/%.cc FORCE_DO_CMD
 	@$(call do_cmd,cxx,1)
 
+$(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj).$(TOOLSET)/%.cpp FORCE_DO_CMD
+	@$(call do_cmd,cxx,1)
+
 $(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj)/%.cc FORCE_DO_CMD
+	@$(call do_cmd,cxx,1)
+
+$(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj)/%.cpp FORCE_DO_CMD
 	@$(call do_cmd,cxx,1)
 
 # End of this set of suffix rules
@@ -154,7 +155,7 @@ LIBS := \
 $(obj).target/gpuminer.node: GYP_LDFLAGS := $(LDFLAGS_$(BUILDTYPE))
 $(obj).target/gpuminer.node: LIBS := $(LIBS)
 $(obj).target/gpuminer.node: TOOLSET := $(TOOLSET)
-$(obj).target/gpuminer.node: $(OBJS) $(obj).$(TOOLSET)/$(TARGET)/geni/cuda_sha256d.o FORCE_DO_CMD
+$(obj).target/gpuminer.node: $(OBJS) FORCE_DO_CMD
 	$(call do_cmd,solink_module)
 
 all_deps += $(obj).target/gpuminer.node

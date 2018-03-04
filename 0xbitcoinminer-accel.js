@@ -19,6 +19,9 @@ var tokenContract;
 const PRINT_STATS_TIMEOUT = 5000;
 const COLLECT_MINING_PARAMS_TIMEOUT = 4000;
 
+var hardwareType = 'cpu'; //default
+
+
 
 module.exports =  {
 
@@ -26,7 +29,7 @@ module.exports =  {
   //  async init(web3, subsystem_command, vault, networkInterface, miningLogger)
     {
 
-      if(this.useCUDA)
+      if(hardwareType == "cuda")
       {
         GPUMiner = require('./build/Release/gpuminer');
       }
@@ -219,51 +222,11 @@ module.exports =  {
 
     },
 
-    ///refactor
-  /*
 
-   async collectDataFromContract(contractData)
-    {
-        try {
-            const miningDifficultyString = await tokenContract.methods.getMiningDifficulty().call();
-            const miningDifficulty = parseInt(miningDifficultyString);
 
-            const miningTargetString = await tokenContract.methods.getMiningTarget().call();
-            const miningTarget = web3utils.toBN(miningTargetString)
 
-            const challengeNumber = await tokenContract.methods.getChallengeNumber().call();
 
-            let bResume = false;
 
-            if (!contractData.challengeNumber || contractData.challengeNumber != challengeNumber) {
-                console.log("New challenge number: " + challengeNumber);
-                CPUMiner.setChallengeNumber(challengeNumber);
-                bResume = true;
-            }
-            if (!contractData.miningTarget || contractData.miningTarget.cmp(miningTarget) != 0) {
-                console.log("New mining target: 0x" + miningTarget.toString(16));
-                CPUMiner.setDifficultyTarget("0x" + miningTarget.toString(16));
-            }
-            if (!contractData.miningDifficulty || contractData.miningDifficulty != miningDifficulty) {
-                console.log("New difficulty: " + miningDifficulty);
-            }
-
-            contractData.challengeNumber = challengeNumber;
-            contractData.miningTarget = miningTarget;
-            contractData.miningDifficulty = miningDifficulty;
-
-            if (bResume && !this.mining) {
-                console.log("Resuming mining operations with new challenge");
-                this.mineStuff(contractData);
-            }
-
-        } catch (e) {
-            console.error("cannot retrieve contract info", e);
-        }
-        return contractData;
-    },
-
-    */
 
     async submitNewMinedBlock( addressFrom, minerEthAddress, solution_number,digest_bytes,challenge_number, target, difficulty)
 
@@ -339,6 +302,13 @@ module.exports =  {
          debugLogger.log('MINING:',self.mining)
 
         });
+    },
+
+
+    setHardwareType(type)
+    {
+      hardwareType = type;
+      console.log('Set hardware type: ', type)
     },
 
 

@@ -7,11 +7,11 @@
 {
  "target_name": "gpuminer",
  "sources": [
-        "cpp/cuda_sha256d.cu",
-        "cpp/gpumineralpha.cc",
+        "cpp/gpuminer/addon.cc",
+        "cpp/gpuminer/gpuminer.cpp",
 
   ],
-
+  "include_dirs": ["<!(node -e \"require('nan')\")"],
  'rules': [{
      'extension': 'cu',
      'inputs': ['<(RULE_INPUT_PATH)'],

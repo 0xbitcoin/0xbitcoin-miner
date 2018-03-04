@@ -38,10 +38,10 @@ CFLAGS_CC_Debug := \
 	-std=gnu++0x
 
 INCS_Debug := \
-	-I/home/andy/.node-gyp/8.9.0/include/node \
-	-I/home/andy/.node-gyp/8.9.0/src \
-	-I/home/andy/.node-gyp/8.9.0/deps/uv/include \
-	-I/home/andy/.node-gyp/8.9.0/deps/v8/include \
+	-I/home/andy/.node-gyp/8.9.4/include/node \
+	-I/home/andy/.node-gyp/8.9.4/src \
+	-I/home/andy/.node-gyp/8.9.4/deps/uv/include \
+	-I/home/andy/.node-gyp/8.9.4/deps/v8/include \
 	-I$(srcdir)/node_modules/nan
 
 DEFS_Release := \
@@ -77,10 +77,10 @@ CFLAGS_CC_Release := \
 	-std=gnu++0x
 
 INCS_Release := \
-	-I/home/andy/.node-gyp/8.9.0/include/node \
-	-I/home/andy/.node-gyp/8.9.0/src \
-	-I/home/andy/.node-gyp/8.9.0/deps/uv/include \
-	-I/home/andy/.node-gyp/8.9.0/deps/v8/include \
+	-I/home/andy/.node-gyp/8.9.4/include/node \
+	-I/home/andy/.node-gyp/8.9.4/src \
+	-I/home/andy/.node-gyp/8.9.4/deps/uv/include \
+	-I/home/andy/.node-gyp/8.9.4/deps/v8/include \
 	-I$(srcdir)/node_modules/nan
 
 OBJS := \
