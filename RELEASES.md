@@ -1,9 +1,14 @@
+** Be sure to read the README document that either comes with the miners or any instructions on the page where you download it! This will answer many beginner questions. For quickest answers to any problems you may encounter, visit #Support on the Discord: https://discord.gg/An8sBP
+**
+
+Links and Descriptions of the newest, best miners are now listed together in this continually-updated thread.
+https://www.reddit.com/r/0xbitcoin/comments/8o06dk/links_to_the_newestbest_miners_for_nvidia_amd/
+
+-- Historical Links Below --
 
 # 0xBitcoin ERC20 Token Miner
 
 Solves proof of work to mine supported ERC20 tokens.
-
-
 
 ## Releases
 
