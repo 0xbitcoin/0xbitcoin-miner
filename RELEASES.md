@@ -6,13 +6,17 @@
 Now listed together in this continually-updated thread.
 https://www.reddit.com/r/0xbitcoin/comments/8o06dk/links_to_the_newestbest_miners_for_nvidia_amd/
 
-# COSMIC V4.0a Public Test (nVidia/CUDA): https://www.reddit.com/r/0xbitcoin/comments/8qsjwf/cosmic_v40a_public_test_the_easytouse_0xbitcoin/ - CUDA Miner for Windows 64-bit with a full GUI, in active development. Currently for Pool mining only, but Solo mining is planned. Approximately the same speeds as 3.4t, perhaps slightly faster. See comment below post for version details. Selectable auto-donation (1.5% default). Author: LtTofu on the Discord
+# COSMIC V4.0a Public Test (nVidia/CUDA): 
+https://www.reddit.com/r/0xbitcoin/comments/8qsjwf/cosmic_v40a_public_test_the_easytouse_0xbitcoin/ - CUDA Miner for Windows 64-bit with a full GUI, in active development. Currently for Pool mining only, but Solo mining is planned. Approximately the same speeds as 3.4t, perhaps slightly faster. See comment below post for version details. Selectable auto-donation (1.5% default). Author: LtTofu on the Discord
 
-# COSMiC v3.4 and Newer (nVidia/CUDA): https://bitbucket.org/LieutenantTofu/cosmic-v3/ - CUDA Miner in active development. See comment below post for version details. Selectable auto-donation (1%, 1.5%, 2%). Supports Pool/Solo mining. Author: LtTofu on the Discord
+# COSMiC v3.4 and Newer (nVidia/CUDA): 
+https://bitbucket.org/LieutenantTofu/cosmic-v3/ - CUDA Miner in active development. See comment below post for version details. Selectable auto-donation (1%, 1.5%, 2%). Supports Pool/Solo mining. Author: LtTofu on the Discord
 
-# 0xBitcoin-Miner (PoolOnly) 2.10.4+, Gaiden/Nabiki (nVidia/CUDA): https://github.com/azlehria - CUDA miners in active development. Has a fixed 2.5% devfee. Supports pool mining only at this time. Author: @Azlehria on the Discord
+# 0xBitcoin-Miner (PoolOnly) 2.10.4+, Gaiden/Nabiki (nVidia/CUDA): 
+https://github.com/azlehria - CUDA miners in active development. Has a fixed 2.5% devfee. Supports pool mining only at this time. Author: @Azlehria on the Discord
 
-# Mining-Visualizer (MVis)' TokenMiner (AMD/OpenCL): https://github.com/mining-visualizer/MVis-tokenminer Miner for AMD cards/OpenCL devices. Mines on CUDA cards too, but is slower than the native CUDA miners. 1% devfee in pool mode. Supports Solo and CPU mining. Author: Mining-Visualizer on the Discord
+# Mining-Visualizer (MVis)' TokenMiner (AMD/OpenCL): 
+https://github.com/mining-visualizer/MVis-tokenminer Miner for AMD cards/OpenCL devices. Mines on CUDA cards too, but is slower than the native CUDA miners. 1% devfee in pool mode. Supports Solo and CPU mining. Author: Mining-Visualizer on the Discord
 
 
 
