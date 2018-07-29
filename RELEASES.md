@@ -18,9 +18,8 @@ https://github.com/azlehria - CUDA miners in active development. Has a fixed 2.5
 * Mining-Visualizer (MVis)' TokenMiner (AMD/OpenCL): 
 https://github.com/mining-visualizer/MVis-tokenminer Miner for AMD cards/OpenCL devices. Mines on CUDA cards too, but is slower than the native CUDA miners. 1% devfee in pool mode. Supports Solo and CPU mining. Author: Mining-Visualizer on the Discord
 
-
-
-
+* SoliditySHA3Miner v1.1.0.0 (nVidia/AMD/Intel(iGPU)/CPU):
+https://github.com/lwYeo/SoliditySHA3Miner All-in-one (nVidia, AMD, Intel & CPU) console miner with API (ccMiner and JSON). Active development, 2% devfee in both pool and solo mode (minimum 1.5%). Supports mixed GPU & iGPU mining in a single instance. Currently only CPU supports KingMaking. Author: Amano7 on the Discord.
 
 # Historical Links: these miners are out-of-date.
 
