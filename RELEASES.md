@@ -1,14 +1,17 @@
 ## GPU Mining Software for 0xBTC and EIP918 Tokens 
 
-* SoliditySHA3Miner (Windows/Linux)(nVidia OR AMD)
+* SoliditySHA3Miner (Windows/Linux)(nVidia OR AMD):
+
 https://github.com/lwYeo/SoliditySHA3Miner/releases
 
 
 * COSMIC Miner (Windows)(nVidia/CUDA): 
+
  https://bitbucket.org/LieutenantTofu/cosmic-v3/downloads/
  
 
 * Mining-Visualizer (MVis)' TokenMiner (Windows)(AMD/OpenCL): 
+
 https://github.com/mining-visualizer/MVis-tokenminer/releases
 
 
