@@ -15,7 +15,7 @@ https://github.com/lwYeo/SoliditySHA3Miner/releases
 https://github.com/mining-visualizer/MVis-tokenminer/releases
 
 
-![image](blob:https://imgur.com/9688713e-f01e-415e-9e5c-ee3c1fa57516)
+![image](https://i.imgur.com/SbUAuoa.gif)
 
 
 ### Be sure to read the README documents
