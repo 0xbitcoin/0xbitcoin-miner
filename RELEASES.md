@@ -16,11 +16,11 @@ https://github.com/mining-visualizer/MVis-tokenminer/releases
 
 
 
-# Be sure to read the README document
-... that either comes with the miners or any instructions on the page where you download it! This will answer many beginner questions. For quickest answers to any problems you may encounter:
+### Be sure to read the README documents
+That either comes with the miners or any instructions on the page where you download it! This will answer many beginner questions. For quickest answers to any problems you may encounter:
 * visit #Support on the Discord: https://discord.gg/An8sBP
 
-# Links To/Descriptions Of The Newest Miners:
+### Links To/Descriptions Of The Newest Miners:
 Now listed together in this continually-updated thread.
 * https://www.reddit.com/r/0xbitcoin/comments/8o06dk/links_to_the_newestbest_miners_for_nvidia_amd/
 
@@ -28,7 +28,7 @@ Now listed together in this continually-updated thread.
 
 
 
-# Historical Links: these miners are out-of-date.
+### Historical Links: these miners are out-of-date.
 
 * 0xBitcoin ERC20 Token Miner
 Solves proof of work to mine supported ERC20 tokens.
