@@ -50,32 +50,7 @@ You must create a file called 'miner-config.json' in the same directory as index
 "gas_price_gwei":1000,
 "cpu_thread_count": 1,
 "web3provider": ""
-
-### Deprecated Commands
-
-      {commands}
-      "help" - Show the help menu
-
-      "mine" - Begin mining  
-
-
-      "account new" - Create a new mining account
-      "account list" - List all mining accounts
-      "account select 0x####" - Select a primary mining account by address
-      "account balance" - List the ether and token balance of your selected account
-
-      "pool mine" - Begin mining into a pool
-      "pool list" - List the selected mining pool
-      "pool select http://####.com:####" - Select a pool to mine into
-
-      "contract list" - List the selected token contract to mine
-      "contract select 0x####" - Select a PoW token contract to mine
-
-      "config gasprice #" - Set the gasprice used to submit PoW to the token smartcontract
-      "config cpu_threads #" - Set the number of CPU cores to use for mining
-      "config web3provider http://----:####" - Set the web3 provider url for submitting ethereum transactions
-
-
+ 
 ---------------
 
 ### Getting Started

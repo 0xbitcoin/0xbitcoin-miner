@@ -22,7 +22,7 @@ const COLLECT_MINING_PARAMS_TIMEOUT = 4000;
 
 module.exports =  {
 
-    async init(contractAddress, web3, miningLogger, networkInterface)
+    async init(contractAddress, web3, miningLogger )
   //  async init(web3, subsystem_command, vault, networkInterface, miningLogger)
     {
 
@@ -40,15 +40,14 @@ module.exports =  {
 
         this.miningLogger = miningLogger;
 
-        this.setNetworkInterface(networkInterface);
 
 
     },
 
-    async mine(minerAccountAddress, miningStyle, minerPrivateKey, poolURL, gasPriceGwei)
+    async mine(miningStyle, minerAccountAddress, minerPrivateKey, poolURL, gasPriceGwei)
     {
 
-      console.log('\n')
+      this.miningStyle = miningStyle;
 
       //miningParameters
 
@@ -85,7 +84,7 @@ module.exports =  {
 
 
        let miningParameters = {};
-       await self.initMiningProcedure(minerAccountAddress, miningStyle);
+       await self.initMiningProcedure(miningStyle, minerAccountAddress );
 
       self.miningLogger.appendToStandardLog("Begin mining for " + minerAccountAddress + " with gasprice " +  gasPriceGwei );
 
@@ -107,7 +106,7 @@ module.exports =  {
 
 
 
-    async initMiningProcedure(minerEthAddress,miningParameters,miningStyle)
+    async initMiningProcedure(miningStyle, minerEthAddress,miningParameters )
     {
 
   //    console.log('collect parameters.. ')
@@ -116,9 +115,20 @@ module.exports =  {
       try
       {
 
-
+          if(miningStyle == "solo")
+          {
             var parameters = await this.networkInterface.collectMiningParameters();
+          }
 
+          else if(miningStyle == "pool")
+          {
+            console.log('collecting mining params from pool ')
+            var parameters = await this.poolInterface.collectMiningParameters(minerEthAddress,miningParameters );
+            console.log('collected mining params from pool ')
+          }
+          else {
+            console.error(' no mining style !', miningStyle)
+          }
 
           //console.log('collected mining params ', parameters)
           //miningParameters.miningDifficulty = parameters.miningDifficulty;
@@ -139,7 +149,7 @@ module.exports =  {
 
 
       //keep on looping!
-        setTimeout(function(){self.initMiningProcedure(minerEthAddress,miningParameters,self.miningStyle)},COLLECT_MINING_PARAMS_TIMEOUT);
+        setTimeout(function(){self.initMiningProcedure(miningStyle, minerEthAddress,miningParameters  )},COLLECT_MINING_PARAMS_TIMEOUT);
     },
 
     async refreshCPUMinerWithParameters(minerEthAddress, miningParameters,miningStyle){
@@ -203,51 +213,7 @@ module.exports =  {
 
     },
 
-    ///refactor
-  /*
 
-   async collectDataFromContract(contractData)
-    {
-        try {
-            const miningDifficultyString = await tokenContract.methods.getMiningDifficulty().call();
-            const miningDifficulty = parseInt(miningDifficultyString);
-
-            const miningTargetString = await tokenContract.methods.getMiningTarget().call();
-            const miningTarget = web3utils.toBN(miningTargetString)
-
-            const challengeNumber = await tokenContract.methods.getChallengeNumber().call();
-
-            let bResume = false;
-
-            if (!contractData.challengeNumber || contractData.challengeNumber != challengeNumber) {
-                console.log("New challenge number: " + challengeNumber);
-                CPUMiner.setChallengeNumber(challengeNumber);
-                bResume = true;
-            }
-            if (!contractData.miningTarget || contractData.miningTarget.cmp(miningTarget) != 0) {
-                console.log("New mining target: 0x" + miningTarget.toString(16));
-                CPUMiner.setDifficultyTarget("0x" + miningTarget.toString(16));
-            }
-            if (!contractData.miningDifficulty || contractData.miningDifficulty != miningDifficulty) {
-                console.log("New difficulty: " + miningDifficulty);
-            }
-
-            contractData.challengeNumber = challengeNumber;
-            contractData.miningTarget = miningTarget;
-            contractData.miningDifficulty = miningDifficulty;
-
-            if (bResume && !this.mining) {
-                console.log("Resuming mining operations with new challenge");
-                this.mineStuff(contractData);
-            }
-
-        } catch (e) {
-            console.error("cannot retrieve contract info", e);
-        }
-        return contractData;
-    },
-
-    */
 
     async submitNewMinedBlock( addressFrom, minerEthAddress, solution_number,digest_bytes,challenge_number, target, difficulty)
 
@@ -255,7 +221,18 @@ module.exports =  {
     {
         this.miningLogger.appendToStandardLog("Giving mined solution to network interface " + challenge_number);
 
-        this.networkInterface.queueMiningSolution(addressFrom, minerEthAddress, solution_number , digest_bytes , challenge_number, target, difficulty)
+
+        if(this.miningStyle == "solo")
+        {
+          this.networkInterface.queueMiningSolution(addressFrom, minerEthAddress, solution_number , digest_bytes , challenge_number, target, difficulty)
+        }
+
+        if(this.miningStyle == "pool")
+        {
+          this.poolInterface.queueMiningSolution(addressFrom, minerEthAddress, solution_number , digest_bytes , challenge_number, target, difficulty);
+        }
+
+
     },
 
     // contractData , -> miningParameters
@@ -330,6 +307,12 @@ module.exports =  {
     {
         this.networkInterface = netInterface;
     },
+
+    setPoolInterface(poolInterface)
+    {
+        this.poolInterface = poolInterface;
+    },
+
 
     printMiningStats()
     {
