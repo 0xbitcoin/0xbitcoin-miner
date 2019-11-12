@@ -44,7 +44,7 @@ You must create a file called 'miner-config.json' in the same directory as index
 
 If you do not have a public address or private key, use Metamask or another Etherum wallet to make them.
 
-REMINDER: You >can< set the web3provider to a ropsten, mainnet, or other type of test-network provider and the software will still work. If solo mining (not to a pool) just be sure to define the correct contract address for that network and be suure your account has a small amount of ether (or test-ether).
+REMINDER: You >can< set the web3provider to a ropsten, mainnet, or other type of test-network provider and the software will still work. If solo mining (not to a pool) just be sure to define the correct contract address for that network and be sure your account has a small amount of ether (or test-ether).
 
     "mining_account_public_address":"0x111111",
     "mining_account_private_key":"1234567",
