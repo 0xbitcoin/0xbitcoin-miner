@@ -22,7 +22,7 @@ const COLLECT_MINING_PARAMS_TIMEOUT = 4000;
 
 module.exports =  {
 
-    async init(web3,  vault, miningLogger)
+    async init(contractAddress, web3, miningLogger)
   //  async init(web3, subsystem_command, vault, networkInterface, miningLogger)
     {
 
@@ -36,17 +36,16 @@ module.exports =  {
             CPUMiner.stop();
         });
 
-        tokenContract =  new web3.eth.Contract(tokenContractJSON.abi,vault.getTokenContractAddress());
+        tokenContract =  new web3.eth.Contract(tokenContractJSON.abi, contractAddress );
 
         this.miningLogger = miningLogger;
-        this.vault = vault;
 
 
 
 
     },
 
-    async mine(subsystem_command,subsystem_option)
+    async mine(minerAccountAddress, miningStyle, minerPrivateKey, poolURL, gasPriceGwei)
     {
 
       console.log('\n')
@@ -54,71 +53,65 @@ module.exports =  {
       //miningParameters
 
 
-      if(this.miningStyle == "solo")
+      console.log('Selected mining account:',  '\n',minerAccountAddress  );
+      console.log('\n')
+      console.log('Selected mining style:',  '\n',miningStyle  );
+      console.log('\n')
+
+      if(miningStyle == "solo")
       {
-          //if solo mining need a full account
-          var eth_account  = this.vault.getFullAccount();
 
-
-          if( eth_account.accountType == "readOnly" ||  eth_account.privateKey == null || typeof eth_account.privateKey == 'undefined ' )
-          {
-            console.log('The account ',  eth_account.address, ' does not have an associated private key.  Please select another account or mine to a pool.');
-            console.log('\n')
-            return;
-          }
-
-      }else if( this.miningStyle == "pool" )
-      {
-        var eth_account  = this.vault.getAccount();
-      }
-
-
-      if (eth_account ==  null || eth_account.address == null) {
-          console.log("Please create a new account with 'account new' before solo mining.")
-          console.log('\n')
-          return false;
-      }else{
-        console.log('Selected mining account:',  '\n',eth_account.address );
+        console.log('Selected mining contract:',  tokenContract.address  );
         console.log('\n')
+          console.log("Gas price is "+ gasPriceGwei + ' gwei');
+            console.log('\n')
+
+      }else if(miningStyle == "pool" )
+      {
+
+        console.log('Selected mining pool:',  '\n',poolURL  );
+        console.log('\n')
+
+
+      }else
+      {
+        console.error('ERROR: no mining style configured. Styles: solo, pool')
+        return
       }
 
-      ///this.mining = true;
-      var self = this;
-      this.minerEthAddress = eth_account.address;
+
+        var self = this;
 
 
 
        let miningParameters = {};
-       await self.collectMiningParameters(this.minerEthAddress, miningParameters,self.miningStyle);
+       await self.initMiningProcedure(minerAccountAddress, miningStyle);
 
-      this.miningLogger.appendToStandardLog("Begin mining for " + this.minerEthAddress + " @ gasprice " + this.vault.getGasPriceGwei());
+      self.miningLogger.appendToStandardLog("Begin mining for " + minerAccountAddress + " @ gasprice " + this.vault.getGasPriceGwei());
 
-      console.log("Mining for  "+ this.minerEthAddress);
+      console.log("Mining for  "+ minerAccountAddress);
 
-      if(this.miningStyle != "pool")
-      {
-        console.log("Gas price is "+ this.vault.getGasPriceGwei() + ' gwei');
-      }
+
 
       setInterval(() => { self.printMiningStats() }, PRINT_STATS_TIMEOUT);
 
 
     },
 
-     mineStuff(miningParameters) {
+     mineStuff(miningParameters, minerEthAddress, miningStyle) {
         if (!this.mining) {
 
-            this.mineCoins(this.web3, miningParameters,  this.minerEthAddress);
+            this.mineCoins(this.web3, miningParameters,   minerEthAddress, miningStyle);
         }
     },
 
-    setMiningStyle(style)
+  /*  setMiningStyle(style)
     {
         this.miningStyle = style;
     },
+*/
 
-
-    async collectMiningParameters(minerEthAddress,miningParameters,miningStyle)
+    async initMiningProcedure(minerEthAddress,miningParameters,miningStyle)
     {
 
   //    console.log('collect parameters.. ')
@@ -126,27 +119,22 @@ module.exports =  {
 
       try
       {
-          if(miningStyle === "pool")
-          {
 
-            var parameters = await this.networkInterface.collectMiningParameters(minerEthAddress,miningParameters);
 
-          }else{
+            var parameters = await this.networkInterface.initMiningProcedure();
 
-            var parameters = await this.networkInterface.collectMiningParameters();
-
-          }
 
           //console.log('collected mining params ', parameters)
-          miningParameters.miningDifficulty = parameters.miningDifficulty;
-          miningParameters.challengeNumber = parameters.challengeNumber;
-          miningParameters.miningTarget = parameters.miningTarget;
-          miningParameters.poolEthAddress = parameters.poolEthAddress;
+          //miningParameters.miningDifficulty = parameters.miningDifficulty;
+        //  miningParameters.challengeNumber = parameters.challengeNumber;
+      //    miningParameters.miningTarget = parameters.miningTarget;
+        //  miningParameters.poolEthAddress = parameters.poolEthAddress;
 
           //give data to the c++ addon
 
 
-          await this.updateCPUAddonParameters(miningParameters,miningStyle)
+          //starts mining
+          await this.refreshCPUMinerWithParameters(minerEthAddress, parameters,miningStyle)
 
     }catch(e)
     {
@@ -155,10 +143,10 @@ module.exports =  {
 
 
       //keep on looping!
-        setTimeout(function(){self.collectMiningParameters(minerEthAddress,miningParameters,self.miningStyle)},COLLECT_MINING_PARAMS_TIMEOUT);
+        setTimeout(function(){self.initMiningProcedure(minerEthAddress,miningParameters,self.miningStyle)},COLLECT_MINING_PARAMS_TIMEOUT);
     },
 
-    async updateCPUAddonParameters(miningParameters,miningStyle){
+    async refreshCPUMinerWithParameters(minerEthAddress, miningParameters,miningStyle){
 
 
 
@@ -206,7 +194,7 @@ module.exports =  {
 
                    try
                    {
-                     this.mineStuff(miningParameters);
+                     this.mineStuff(miningParameters, minerEthAddress, miningStyle);
 
                    }catch(e)
                    {
@@ -275,7 +263,7 @@ module.exports =  {
     },
 
     // contractData , -> miningParameters
-      mineCoins(web3, miningParameters, minerEthAddress)
+      mineCoins(web3, miningParameters, minerEthAddress, poolEthAddress, miningStyle)
     {
 
 
@@ -285,8 +273,8 @@ module.exports =  {
 
       var addressFrom;
 
-      if( this.miningStyle == "pool" ){
-          addressFrom = miningParameters.poolEthAddress;
+      if(  miningStyle == "pool" ){
+          addressFrom =  poolEthAddress;
       }else{
           addressFrom = minerEthAddress;
       }

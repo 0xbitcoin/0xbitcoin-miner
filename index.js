@@ -1,15 +1,17 @@
 
 const Miner = require("./0xbitcoinminer-accel");
 
-const Vault = require("./lib/vault");
+//const Vault = require("./lib/vault");
 
 
 const miningLogger = require("./lib/mining-logger");
 
-var prompt = require('prompt');
+//var prompt = require('prompt');
 
 
 var pjson = require('./package.json');
+var minerconfig = require('./miner-config.json');
+var minerConfigContent = JSON.parse(minerconfig)
 
 var Web3 = require('web3')
 
@@ -28,9 +30,41 @@ var running = true;
 console.log('Welcome to 0xBitcoin Miner!')
 console.log('Version: ',pjson.version)
 console.log('\n')
-console.log('Type a command to get started.  Type "help" for a list of commands.')
-console.log('\n')
 
+
+function loadConfig()
+{
+  console.log('loaded config: ', minerConfigContent  )
+
+  minerConfigContent
+  NetworkInterface
+
+}
+
+
+async function initMining()
+{
+  console.log('init mining'  )
+
+
+  NetworkInterface.init(web3,   miningLogger);
+
+  Miner.init( minerConfigContent.contract_address, web3,  miningLogger );
+  Miner.setNetworkInterface( NetworkInterface );
+
+  Miner.setMiningStyle("solo")
+  Miner.mine()
+
+
+}
+
+
+loadConfig();
+initMining();
+
+//console.log('Type a command to get started.  Type "help" for a list of commands.')
+//console.log('\n')
+/*
 async function initPrompt()
 {
 
@@ -58,10 +92,8 @@ async function promptForCommand()
 
     });
   });
-}
+}*/
 
-
-initPrompt();
 
 
 /*
@@ -78,7 +110,7 @@ var subsystem_option =  process.argv[4] ;
 
 */
 
-
+/*
 async function handleCommand(result)
 {
 
@@ -221,6 +253,7 @@ async function handleCommand(result)
 
     console.log('\n\n')
   }
+  */
 
 
 }

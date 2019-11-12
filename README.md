@@ -5,9 +5,10 @@ Solves proof of work to mine supported ERC20 tokens.
 
 
 
-### Update 1.5.23 - 1000X CPU Pool Mining
+### Update 1.6 - Config Files For Days
 
-This new build uses the C++ addon to accelerate the CPU mining one-thousand fold.  Pool mine with the command 'pool mine'.  Select a different pool with 'pool select http://...'.  Keep in mind that this update will migrate all vault data to a new and improved version so be sure to back up your private keys.  1.5.20 fixes bugs with solo mining and adds 'test mine' command.
+This new build uses miner-config.js for setting parameters and no longer has an active command line.  If you do not have an Ethereum account, it is recommended that you use Metamask to generate one.
+
 
 ### Official Releases Downloads
 
@@ -23,7 +24,8 @@ This new build uses the C++ addon to accelerate the CPU mining one-thousand fold
 3. Clone/download the project
 4. Open a terminal, cd into the project folder and run 'yarn' to install dependencies
 5. Run the command 'npm run build' to build C files with node-gyp
-6. Start the miner with 'node index.js'
+6. Set up the config file 'mining-config.json'
+7. Start the miner with 'node index.js'
 
 #### Setup (Mac)
 1. Install Homebrew & NodeJS 8.9
@@ -31,19 +33,38 @@ This new build uses the C++ addon to accelerate the CPU mining one-thousand fold
 3. Clone/download this project
 4. Open a terminal, cd into the project folder and run 'yarn'
 5. Run the command 'npm run build' to build C files with node-gyp
-6. Start the miner with 'node index.js'
+6. Set up the config file 'miner-config.json'
+7. Start the miner with 'node index.js'
 
 
 
-### Commands
+## Miner-Config.js File
+
+"mining_account_public_address":"xyz",
+"mining_account_private_key":"xyz",
+"miningStyle":"solo",
+"contract_address":"xyz@123",
+"pool_url":"",
+"gasprice_gwei":1000,
+"cpu_thread_count": 1,
+"web3provider": ""
+
+### Deprecated Commands
 
       {commands}
       "help" - Show the help menu
+
+      "mine" - Begin mining  
+
 
       "account new" - Create a new mining account
       "account list" - List all mining accounts
       "account select 0x####" - Select a primary mining account by address
       "account balance" - List the ether and token balance of your selected account
+
+      "pool mine" - Begin mining into a pool
+      "pool list" - List the selected mining pool
+      "pool select http://####.com:####" - Select a pool to mine into
 
       "contract list" - List the selected token contract to mine
       "contract select 0x####" - Select a PoW token contract to mine
@@ -51,14 +72,6 @@ This new build uses the C++ addon to accelerate the CPU mining one-thousand fold
       "config gasprice #" - Set the gasprice used to submit PoW to the token smartcontract
       "config cpu_threads #" - Set the number of CPU cores to use for mining
       "config web3provider http://----:####" - Set the web3 provider url for submitting ethereum transactions
-
-      "pool mine" - Begin mining into a pool
-      "pool list" - List the selected mining pool
-      "pool select http://####.com:####" - Select a pool to mine into
-
-      "mine" - Begin mining solo, directly into the smartcontract
-
-
 
 
 ---------------
@@ -74,26 +87,9 @@ Note that IF SOLO MINING it is necessary to fill the mining account (it is an Et
 
 
 ### Pool Mining
-- You can mine into a pool with the command 'pool mine'  
 - When mining into a pool, your gasprice does not matter and you will pay NO GAS FEES  
 - Every pool is different so consult each pool owner.  Typically, pools will offer a token withdraw mechanism or automatically send tokens to your address on a periodic basis or when a limit is reached
 
-
-
-### Vault Datafiles
-
-(requires 'show hidden files and folders')
-
-Stored at:
-
-- Windows
-    '/Users/{user}/Appdata/Roaming/.0xbitcoin'
-
-- Mac
-    '/home/{user}/Library/Preferences/.0xbitcoin'
-
-- Linux
-    '/home/{user}/.0xbitcoin'
 
 
 

@@ -143,7 +143,7 @@ cmd_alink_thin = rm -f $@ && $(AR.$(TOOLSET)) crsT $@ $(filter %.o,$^)
 # special "figure out circular dependencies" flags around the entire
 # input list during linking.
 quiet_cmd_link = LINK($(TOOLSET)) $@
-cmd_link = $(LINK.$(TOOLSET)) $(GYP_LDFLAGS) $(LDFLAGS.$(TOOLSET)) -o $@ -Wl,--start-group $(LD_INPUTS) -Wl,--end-group $(LIBS)
+cmd_link = $(LINK.$(TOOLSET)) $(GYP_LDFLAGS) $(LDFLAGS.$(TOOLSET)) -o $@ -Wl,--start-group $(LD_INPUTS) $(LIBS) -Wl,--end-group
 
 # We support two kinds of shared objects (.so):
 # 1) shared_library, which is just bundling together many dependent libraries
@@ -306,15 +306,10 @@ ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
                  $(join ^,cpuminer.target.mk)))),)
   include cpuminer.target.mk
 endif
-ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
-    $(findstring $(join ^,$(prefix)),\
-                 $(join ^,gpuminer.target.mk)))),)
-  include gpuminer.target.mk
-endif
 
 quiet_cmd_regen_makefile = ACTION Regenerating $@
-cmd_regen_makefile = cd $(srcdir); /home/andy/.nvm/versions/node/v8.9.0/lib/node_modules/npm/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "--toplevel-dir=." -I/home/andy/dev/0xbitcoin-miner/build/config.gypi -I/home/andy/.nvm/versions/node/v8.9.0/lib/node_modules/npm/node_modules/node-gyp/addon.gypi -I/home/andy/.node-gyp/8.9.0/include/node/common.gypi "--depth=." "-Goutput_dir=." "--generator-output=build" "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/home/andy/.node-gyp/8.9.0" "-Dnode_gyp_dir=/home/andy/.nvm/versions/node/v8.9.0/lib/node_modules/npm/node_modules/node-gyp" "-Dnode_lib_file=/home/andy/.node-gyp/8.9.0/<(target_arch)/node.lib" "-Dmodule_root_dir=/home/andy/dev/0xbitcoin-miner" "-Dnode_engine=v8" binding.gyp
-Makefile: $(srcdir)/../../.nvm/versions/node/v8.9.0/lib/node_modules/npm/node_modules/node-gyp/addon.gypi $(srcdir)/../../.node-gyp/8.9.0/include/node/common.gypi $(srcdir)/build/config.gypi $(srcdir)/binding.gyp
+cmd_regen_makefile = cd $(srcdir); /home/lubuntu/.nvm/versions/node/v8.12.0/lib/node_modules/npm/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "--toplevel-dir=." -I/home/lubuntu/dev/0xbitcoin-miner/build/config.gypi -I/home/lubuntu/.nvm/versions/node/v8.12.0/lib/node_modules/npm/node_modules/node-gyp/addon.gypi -I/home/lubuntu/.node-gyp/8.12.0/include/node/common.gypi "--depth=." "-Goutput_dir=." "--generator-output=build" "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/home/lubuntu/.node-gyp/8.12.0" "-Dnode_gyp_dir=/home/lubuntu/.nvm/versions/node/v8.12.0/lib/node_modules/npm/node_modules/node-gyp" "-Dnode_lib_file=/home/lubuntu/.node-gyp/8.12.0/<(target_arch)/node.lib" "-Dmodule_root_dir=/home/lubuntu/dev/0xbitcoin-miner" "-Dnode_engine=v8" binding.gyp
+Makefile: $(srcdir)/../../.nvm/versions/node/v8.12.0/lib/node_modules/npm/node_modules/node-gyp/addon.gypi $(srcdir)/build/config.gypi $(srcdir)/binding.gyp $(srcdir)/../../.node-gyp/8.12.0/include/node/common.gypi
 	$(call do_cmd,regen_makefile)
 
 # "all" is a concatenation of the "all" targets from all the included

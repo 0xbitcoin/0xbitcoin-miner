@@ -8,8 +8,8 @@
             },
       "testnet": {
               "contracts": {
-                "_0xbitcointoken": {"name":"0xBitcoinToken", "blockchain_address":"0x74960bcac083ed732215229811c8b8a353c7e4ba"}
+                "_0xbitcointoken": {"name":"0xBitcoinToken", "blockchain_address":"0x4fb6715cf6118746c1f08f1d739e17f2b12aaba8"}
               }
-            } 
+            }
     }
 }
