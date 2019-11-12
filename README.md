@@ -40,26 +40,33 @@ This new build uses miner-config.js for setting parameters and no longer has an 
 
 ## Miner-Config.js File
 
-You must create a file called 'miner-config.json' in the same directory as index.js.  Duplicate 'miner-config-sample.json' and rename it.
+You must create a file called 'miner-config.json' in the same directory as index.js.  Duplicate 'miner-config-sample.json' and rename it.  
 
-"mining_account_public_address":"xyz",
-"mining_account_private_key":"xyz",
-"mining_style":"solo",
-"contract_address":"xyz@123",
-"pool_url":"",
-"gas_price_gwei":1000,
-"cpu_thread_count": 1,
-"web3provider": ""
- 
+If you do not have a public address or private key, use Metamask or another Etherum wallet to make them.
+
+REMINDER: You >can< set the web3provider to a ropsten, mainnet, or other type of test-network provider and the software will still work. If solo mining (not to a pool) just be sure to define the correct contract address for that network and be suure your account has a small amount of ether (or test-ether).
+
+    "mining_account_public_address":"0x111111",
+    "mining_account_private_key":"1234567",
+    "mining_style":"solo" OR "pool",
+    "contract_address":"0xb6...",
+    "pool_url":"http://tokenminingpool.com:8080",
+    "gas_price_gwei":10,
+    "cpu_thread_count": 1,
+    "web3provider": "https://infura.io/...."
+
 ---------------
 
 ### Getting Started
-1. Build a new mining account with 'account new'
-2. View the private key with 'account list'
-3. Write down these credentials
-4. Mine 0xbitcoin tokens with the command 'mine'
+1. Duplicate the 'miner-config-sample.json' file and rename it to 'miner-config.json'
+2. Set the parameters in this file appropriately
+3. In the console, run the command 'node index.js' to start mining
 
-Note that IF SOLO MINING it is necessary to fill the mining account (it is an Ethereum account) with a small amount of ether.  Typically 0.005 eth is good enough to get started.  The ether is used for gas to make function calls to the token smart contract when your miner finds a solution to the Proof of Work.  When the gas is spent that means that you have found a solution! If you were the first to find it, you will be rewarded with 0xbitcoin tokens.  (See the block explorer for typical gas prices at the current moment.)
+
+### Pool Mining
+- IF SOLO MINING it is necessary to fill the mining account (it is an Ethereum account) with a small amount of ether.  
+- Typically 0.005 eth is good enough to get started.  The ether is used for gas to make function calls to the token smart contract when your miner finds a solution to the Proof of Work.  
+- When the gas is spent that means that you have found a solution! If you were the first to find it, you will be rewarded with 0xbitcoin tokens.  (See the block explorer for typical gas prices at the current moment.)
 
 
 
