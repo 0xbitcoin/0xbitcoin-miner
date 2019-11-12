@@ -83,8 +83,12 @@ module.exports =  {
 
 
 
-       let miningParameters = {};
-       await self.initMiningProcedure(miningStyle, minerAccountAddress );
+       let miningParameters = {
+         challengeNumber: '',
+         miningTarget: ''
+       };
+
+       await self.initMiningProcedure(miningStyle, minerAccountAddress,miningParameters );
 
       self.miningLogger.appendToStandardLog("Begin mining for " + minerAccountAddress + " with gasprice " +  gasPriceGwei );
 
@@ -112,19 +116,21 @@ module.exports =  {
   //    console.log('collect parameters.. ')
       var self = this;
 
+    //  var parameters;
+
       try
       {
 
           if(miningStyle == "solo")
           {
-            var parameters = await this.networkInterface.collectMiningParameters();
+              miningParameters = await this.networkInterface.collectMiningParameters();
           }
 
           else if(miningStyle == "pool")
           {
-            console.log('collecting mining params from pool ')
-            var parameters = await this.poolInterface.collectMiningParameters(minerEthAddress,miningParameters );
-            console.log('collected mining params from pool ')
+          //  console.log('collecting mining params from pool ')
+              miningParameters = await this.poolInterface.collectMiningParameters(minerEthAddress,miningParameters );
+            // console.log('collected mining params from pool ')
           }
           else {
             console.error(' no mining style !', miningStyle)
@@ -140,7 +146,7 @@ module.exports =  {
 
 
           //starts mining
-          await this.refreshCPUMinerWithParameters(minerEthAddress, parameters,miningStyle)
+          await this.refreshCPUMinerWithParameters(miningStyle , minerEthAddress, miningParameters)
 
     }catch(e)
     {
@@ -149,10 +155,10 @@ module.exports =  {
 
 
       //keep on looping!
-        setTimeout(function(){self.initMiningProcedure(miningStyle, minerEthAddress,miningParameters  )},COLLECT_MINING_PARAMS_TIMEOUT);
+        setTimeout(function(){self.initMiningProcedure(miningStyle, minerEthAddress, miningParameters  )},COLLECT_MINING_PARAMS_TIMEOUT);
     },
 
-    async refreshCPUMinerWithParameters(minerEthAddress, miningParameters,miningStyle){
+    async refreshCPUMinerWithParameters(miningStyle, minerEthAddress, miningParameters ){
 
 
 
@@ -200,6 +206,8 @@ module.exports =  {
 
                    try
                    {
+                     console.log( "started mining with params: ", miningParameters)
+
                      this.mineStuff(miningParameters, minerEthAddress, miningStyle);
 
                    }catch(e)
