@@ -22,7 +22,7 @@ const COLLECT_MINING_PARAMS_TIMEOUT = 4000;
 
 module.exports =  {
 
-    async init(contractAddress, web3, miningLogger)
+    async init(contractAddress, web3, miningLogger, networkInterface)
   //  async init(web3, subsystem_command, vault, networkInterface, miningLogger)
     {
 
@@ -40,7 +40,7 @@ module.exports =  {
 
         this.miningLogger = miningLogger;
 
-
+        this.setNetworkInterface(networkInterface);
 
 
     },
@@ -63,8 +63,8 @@ module.exports =  {
 
         console.log('Selected mining contract:',  tokenContract.address  );
         console.log('\n')
-          console.log("Gas price is "+ gasPriceGwei + ' gwei');
-            console.log('\n')
+        console.log("Gas price is "+ gasPriceGwei + ' gwei');
+        console.log('\n')
 
       }else if(miningStyle == "pool" )
       {
@@ -87,7 +87,7 @@ module.exports =  {
        let miningParameters = {};
        await self.initMiningProcedure(minerAccountAddress, miningStyle);
 
-      self.miningLogger.appendToStandardLog("Begin mining for " + minerAccountAddress + " @ gasprice " + this.vault.getGasPriceGwei());
+      self.miningLogger.appendToStandardLog("Begin mining for " + minerAccountAddress + " with gasprice " +  gasPriceGwei );
 
       console.log("Mining for  "+ minerAccountAddress);
 
@@ -105,11 +105,7 @@ module.exports =  {
         }
     },
 
-  /*  setMiningStyle(style)
-    {
-        this.miningStyle = style;
-    },
-*/
+
 
     async initMiningProcedure(minerEthAddress,miningParameters,miningStyle)
     {
@@ -121,7 +117,7 @@ module.exports =  {
       {
 
 
-            var parameters = await this.networkInterface.initMiningProcedure();
+            var parameters = await this.networkInterface.collectMiningParameters();
 
 
           //console.log('collected mining params ', parameters)

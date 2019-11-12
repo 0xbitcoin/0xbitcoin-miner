@@ -10,8 +10,8 @@ const miningLogger = require("./lib/mining-logger");
 
 
 var pjson = require('./package.json');
-var minerconfig = require('./miner-config.json');
-var minerConfigContent = JSON.parse(minerconfig)
+var minerConfig = require('./miner-config.json');
+
 
 var Web3 = require('web3')
 
@@ -34,10 +34,16 @@ console.log('\n')
 
 function loadConfig()
 {
-  console.log('loaded config: ', minerConfigContent  )
+  console.log('loaded config: ', minerConfig   )
 
-  minerConfigContent
-  NetworkInterface
+  web3.setProvider(minerConfig.web3provider)
+
+  //NetworkInterface
+
+  NetworkInterface.init(web3, miningLogger, minerConfig.contract_address, minerConfig.gas_price_gwei, minerConfig.mining_account_private_key);
+
+
+  Miner.init( minerConfig.contract_address, web3,  miningLogger, NetworkInterface );
 
 }
 
@@ -46,14 +52,7 @@ async function initMining()
 {
   console.log('init mining'  )
 
-
-  NetworkInterface.init(web3,   miningLogger);
-
-  Miner.init( minerConfigContent.contract_address, web3,  miningLogger );
-  Miner.setNetworkInterface( NetworkInterface );
-
-  Miner.setMiningStyle("solo")
-  Miner.mine()
+  Miner.mine(minerConfig.mining_account_public_address,minerConfig.mining_style,minerConfig.mining_account_private_key,minerConfig.pool_url,minerConfig.gas_price_gwei )
 
 
 }
@@ -253,8 +252,8 @@ async function handleCommand(result)
 
     console.log('\n\n')
   }
-  */
 
 
-}
+
+}  */
 //init();

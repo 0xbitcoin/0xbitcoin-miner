@@ -24,7 +24,7 @@ This new build uses miner-config.js for setting parameters and no longer has an 
 3. Clone/download the project
 4. Open a terminal, cd into the project folder and run 'yarn' to install dependencies
 5. Run the command 'npm run build' to build C files with node-gyp
-6. Set up the config file 'mining-config.json'
+6. Set up the config file 'miner-config.json' (duplicate miner-config-sample as a reference)
 7. Start the miner with 'node index.js'
 
 #### Setup (Mac)
@@ -33,19 +33,21 @@ This new build uses miner-config.js for setting parameters and no longer has an 
 3. Clone/download this project
 4. Open a terminal, cd into the project folder and run 'yarn'
 5. Run the command 'npm run build' to build C files with node-gyp
-6. Set up the config file 'miner-config.json'
+6. Set up the config file 'miner-config.json' (duplicate miner-config-sample as a reference)
 7. Start the miner with 'node index.js'
 
 
 
 ## Miner-Config.js File
 
+You must create a file called 'miner-config.json' in the same directory as index.js.  Duplicate 'miner-config-sample.json' and rename it.
+
 "mining_account_public_address":"xyz",
 "mining_account_private_key":"xyz",
-"miningStyle":"solo",
+"mining_style":"solo",
 "contract_address":"xyz@123",
 "pool_url":"",
-"gasprice_gwei":1000,
+"gas_price_gwei":1000,
 "cpu_thread_count": 1,
 "web3provider": ""
 
