@@ -63,16 +63,18 @@ REMINDER: You >can< set the web3provider to a ropsten, mainnet, or other type of
 3. In the console, run the command 'node index.js' to start mining
 
 
+
 ### Pool Mining
+- When mining into a pool, your gasprice does not matter and you will pay NO GAS FEES  
+- Every pool is different so consult each pool owner.  Typically, pools will offer a token withdraw mechanism or automatically send tokens to your address on a periodic basis or when a limit is reached
+
+
+### Solo Mining
 - IF SOLO MINING it is necessary to fill the mining account (it is an Ethereum account) with a small amount of ether.  
 - Typically 0.005 eth is good enough to get started.  The ether is used for gas to make function calls to the token smart contract when your miner finds a solution to the Proof of Work.  
 - When the gas is spent that means that you have found a solution! If you were the first to find it, you will be rewarded with 0xbitcoin tokens.  (See the block explorer for typical gas prices at the current moment.)
 
 
-
-### Pool Mining
-- When mining into a pool, your gasprice does not matter and you will pay NO GAS FEES  
-- Every pool is different so consult each pool owner.  Typically, pools will offer a token withdraw mechanism or automatically send tokens to your address on a periodic basis or when a limit is reached
 
 
 
