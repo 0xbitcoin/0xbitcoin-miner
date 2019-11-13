@@ -1,7 +1,7 @@
 
 # 0xBitcoin ERC20 Token Miner
 
-Solves proof of work to mine supported ERC20 tokens.  
+Solves proof of work to mine supported ERC20 tokens.  This is a CPU miner. (See Releases for links to GPU miners.)
 
 
 
