@@ -53,7 +53,7 @@ REMINDER: You >can< set the web3provider to a ropsten, mainnet, or other type of
     "pool_url":"http://tokenminingpool.com:8080",
     "gas_price_gwei":10,
     "cpu_thread_count": 1,
-    "web3provider": "https://infura.io/...."
+    "web3provider": "https://infura.io/API/apikey...."
 
 ---------------
 
