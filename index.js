@@ -51,7 +51,7 @@ function loadConfig()
 
 async function initMining()
 {
-  console.log('init mining'  )
+ 
 
   Miner.mine(minerConfig.mining_style,minerConfig.mining_account_public_address,minerConfig.mining_account_private_key,minerConfig.pool_url,minerConfig.gas_price_gwei )
 

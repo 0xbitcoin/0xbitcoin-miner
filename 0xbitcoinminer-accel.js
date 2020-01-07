@@ -44,8 +44,21 @@ module.exports =  {
 
     },
 
+
+    async mineSolo(minerAccountAddress, minerPrivateKey,  gasPriceGwei)
+    {
+      await this.mine('solo',minerAccountAddress, minerPrivateKey, null, gasPriceGwei )
+    },
+
+    async mineForPool(poolEthAddress,   poolURL)
+    {
+      await this.mine('pool',poolEthAddress, '0x0', poolURL, 0 )
+    },
+
+
     async mine(miningStyle, minerAccountAddress, minerPrivateKey, poolURL, gasPriceGwei)
     {
+      console.log('init mining'  )
 
       this.miningStyle = miningStyle;
 
@@ -128,9 +141,17 @@ module.exports =  {
 
           else if(miningStyle == "pool")
           {
+
+            //not working right ?
+
           //  console.log('collecting mining params from pool ')
               miningParameters = await this.poolInterface.collectMiningParameters(minerEthAddress,miningParameters );
             // console.log('collected mining params from pool ')
+
+              console.log('MINING FOR POOL ', miningParameters)
+
+
+              minerEthAddress = miningParameters.poolEthAddress;
           }
           else {
             console.error(' no mining style !', miningStyle)
