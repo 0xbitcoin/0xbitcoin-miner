@@ -45,16 +45,6 @@ module.exports =  {
     },
 
 
-    async mineSolo(minerAccountAddress, minerPrivateKey,  gasPriceGwei)
-    {
-      await this.mine('solo',minerAccountAddress, minerPrivateKey, null, gasPriceGwei )
-    },
-
-    async mineForPool(poolEthAddress,   poolURL)
-    {
-      await this.mine('pool',poolEthAddress, '0x0', poolURL, 0 )
-    },
-
 
     async mine(miningStyle, minerAccountAddress, minerPrivateKey, poolURL, gasPriceGwei)
     {
@@ -114,10 +104,10 @@ module.exports =  {
 
     },
 
-     mineStuff(miningParameters, minerEthAddress, miningStyle) {
+     mineStuff(miningParameters, minerEthAddress, poolEthAddress, miningStyle) {
         if (!this.mining) {
 
-            this.mineCoins(this.web3, miningParameters,   minerEthAddress, miningStyle);
+            this.mineCoins(this.web3, miningParameters,   minerEthAddress, poolEthAddress, miningStyle);
         }
     },
 
@@ -137,11 +127,14 @@ module.exports =  {
           if(miningStyle == "solo")
           {
               miningParameters = await this.networkInterface.collectMiningParameters();
+                var hashingEthAddress = minerEthAddress;
+
+            this.miningStyle = 'solo'
           }
 
           else if(miningStyle == "pool")
           {
-
+            this.miningStyle = 'pool'
             //not working right ?
 
           //  console.log('collecting mining params from pool ')
@@ -151,7 +144,8 @@ module.exports =  {
               console.log('MINING FOR POOL ', miningParameters)
 
 
-              minerEthAddress = miningParameters.poolEthAddress;
+              //minerEthAddress = miningParameters.poolEthAddress;
+              var poolEthAddress = miningParameters.poolEthAddress;
           }
           else {
             console.error(' no mining style !', miningStyle)
@@ -167,7 +161,7 @@ module.exports =  {
 
 
           //starts mining
-          await this.refreshCPUMinerWithParameters(miningStyle , minerEthAddress, miningParameters)
+          await this.refreshCPUMinerWithParameters(miningStyle , minerEthAddress, poolEthAddress, miningParameters)
 
     }catch(e)
     {
@@ -179,7 +173,7 @@ module.exports =  {
         setTimeout(function(){self.initMiningProcedure(miningStyle, minerEthAddress, miningParameters  )},COLLECT_MINING_PARAMS_TIMEOUT);
     },
 
-    async refreshCPUMinerWithParameters(miningStyle, minerEthAddress, miningParameters ){
+    async refreshCPUMinerWithParameters(miningStyle, minerEthAddress, poolEthAddress, miningParameters ){
 
 
 
@@ -229,7 +223,7 @@ module.exports =  {
                    {
                      console.log( "started mining with params: ", miningParameters)
 
-                     this.mineStuff(miningParameters, minerEthAddress, miningStyle);
+                     this.mineStuff(miningParameters, minerEthAddress, poolEthAddress, miningStyle);
 
                    }catch(e)
                    {
@@ -244,28 +238,28 @@ module.exports =  {
 
 
 
-    async submitNewMinedBlock( addressFrom, minerEthAddress, solution_number,digest_bytes,challenge_number, target, difficulty)
+    async submitNewMinedBlock(blockData)
 
     //async submitNewMinedBlock(addressFrom, solution_number, digest_bytes, challenge_number)
     {
-        this.miningLogger.appendToStandardLog("Giving mined solution to network interface " + challenge_number);
+        this.miningLogger.appendToStandardLog("Giving mined solution to network interface " + blockData.challenge_number);
 
 
         if(this.miningStyle == "solo")
         {
-          this.networkInterface.queueMiningSolution(addressFrom, minerEthAddress, solution_number , digest_bytes , challenge_number, target, difficulty)
+          this.networkInterface.queueMiningSolution(blockData)
         }
 
         if(this.miningStyle == "pool")
         {
-          this.poolInterface.queueMiningSolution(addressFrom, minerEthAddress, solution_number , digest_bytes , challenge_number, target, difficulty);
+          this.poolInterface.queueMiningSolution(blockData);
         }
 
 
     },
 
     // contractData , -> miningParameters
-      mineCoins(web3, miningParameters, minerEthAddress, poolEthAddress, miningStyle)
+      mineCoins(web3, miningParameters, minerEthAddress, poolEthAddress,  miningStyle)
     {
 
 
@@ -273,27 +267,39 @@ module.exports =  {
       var difficulty = miningParameters.miningDifficulty;
 
 
-      var addressFrom;
+      var hashingEthAddress;
 
       if(  miningStyle == "pool" ){
-          addressFrom =  poolEthAddress;
+          hashingEthAddress =  poolEthAddress;
       }else{
-          addressFrom = minerEthAddress;
+          hashingEthAddress = minerEthAddress;
       }
 
 
-        CPUMiner.setMinerAddress(addressFrom);
+
+        CPUMiner.setMinerAddress(hashingEthAddress);
 
         var self = this;
 
         const verifyAndSubmit = (solution_number) => {
             const challenge_number = miningParameters.challengeNumber;
-            const digest = web3utils.sha3(challenge_number + addressFrom.substring(2) + solution_number.substring(2));
+            const digest = web3utils.sha3(challenge_number + hashingEthAddress.substring(2) + solution_number.substring(2));
             const digestBigNumber = web3utils.toBN(digest);
             if (digestBigNumber.lte(miningParameters.miningTarget)) {
                 console.log('Submit mined solution for challenge ', challenge_number);
               //  self.submitNewMinedBlock(minerEthAddress, solution_number, digest, challenge_number);
-                    self.submitNewMinedBlock( addressFrom, minerEthAddress, solution_number,digest,challenge_number, target, difficulty)
+
+              var blockData = {
+                 hashingEthAddress: hashingEthAddress,
+                 minerEthAddress: minerEthAddress,
+                 poolEthAddress: poolEthAddress,
+                 solution_number: solution_number,
+                 challenge_digest: digest,
+                 challenge_number: challenge_number,
+                 target:  target,
+                 difficulty:  difficulty
+              }
+              self.submitNewMinedBlock(blockData)
 
 
 
