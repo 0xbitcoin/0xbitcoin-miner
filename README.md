@@ -1,13 +1,14 @@
 
 # 0xBitcoin ERC20 Token Miner
 
-Solves proof of work to mine supported ERC20 tokens.  
+Solves proof of work to mine supported ERC20 tokens.  This is a CPU miner. (See Releases for links to GPU miners.)
 
 
 
-### Update 1.5.23 - 1000X CPU Pool Mining
+### Update 1.6 - Config Files For Days
 
-This new build uses the C++ addon to accelerate the CPU mining one-thousand fold.  Pool mine with the command 'pool mine'.  Select a different pool with 'pool select http://...'.  Keep in mind that this update will migrate all vault data to a new and improved version so be sure to back up your private keys.  1.5.20 fixes bugs with solo mining and adds 'test mine' command.
+This new build uses miner-config.js for setting parameters and no longer has an active command line.  If you do not have an Ethereum account, it is recommended that you use Metamask to generate one.
+
 
 ### Official Releases Downloads
 
@@ -23,7 +24,8 @@ This new build uses the C++ addon to accelerate the CPU mining one-thousand fold
 3. Clone/download the project
 4. Open a terminal, cd into the project folder and run 'yarn' to install dependencies
 5. Run the command 'npm run build' to build C files with node-gyp
-6. Start the miner with 'node index.js'
+6. Set up the config file 'miner-config.json' (duplicate miner-config-sample as a reference)
+7. Start the miner with 'node index.js'
 
 #### Setup (Mac)
 1. Install Homebrew & NodeJS 8.9
@@ -31,69 +33,49 @@ This new build uses the C++ addon to accelerate the CPU mining one-thousand fold
 3. Clone/download this project
 4. Open a terminal, cd into the project folder and run 'yarn'
 5. Run the command 'npm run build' to build C files with node-gyp
-6. Start the miner with 'node index.js'
+6. Set up the config file 'miner-config.json' (duplicate miner-config-sample as a reference)
+7. Start the miner with 'node index.js'
 
 
 
-### Commands
+## Miner-Config.js File
 
-      {commands}
-      "help" - Show the help menu
+You must create a file called 'miner-config.json' in the same directory as index.js.  Duplicate 'miner-config-sample.json' and rename it.  
 
-      "account new" - Create a new mining account
-      "account list" - List all mining accounts
-      "account select 0x####" - Select a primary mining account by address
-      "account balance" - List the ether and token balance of your selected account
+If you do not have a public address or private key, use Metamask or another Etherum wallet to make them.
 
-      "contract list" - List the selected token contract to mine
-      "contract select 0x####" - Select a PoW token contract to mine
+REMINDER: You >can< set the web3provider to a ropsten, mainnet, or other type of test-network provider and the software will still work. If solo mining (not to a pool) just be sure to define the correct contract address for that network and be sure your account has a small amount of ether (or test-ether).
 
-      "config gasprice #" - Set the gasprice used to submit PoW to the token smartcontract
-      "config cpu_threads #" - Set the number of CPU cores to use for mining
-      "config web3provider http://----:####" - Set the web3 provider url for submitting ethereum transactions
-
-      "pool mine" - Begin mining into a pool
-      "pool list" - List the selected mining pool
-      "pool select http://####.com:####" - Select a pool to mine into
-
-      "mine" - Begin mining solo, directly into the smartcontract
-
-
-
+    "mining_account_public_address":"0x111111",
+    "mining_account_private_key":"1234567",
+    "mining_style":"solo" OR "pool",
+    "contract_address":"0xb6...",
+    "pool_url":"http://tokenminingpool.com:8080",
+    "gas_price_gwei":10,
+    "cpu_thread_count": 1,
+    "web3provider": "https://infura.io/API/apikey...."
 
 ---------------
 
 ### Getting Started
-1. Build a new mining account with 'account new'
-2. View the private key with 'account list'
-3. Write down these credentials
-4. Mine 0xbitcoin tokens with the command 'mine'
-
-Note that IF SOLO MINING it is necessary to fill the mining account (it is an Ethereum account) with a small amount of ether.  Typically 0.005 eth is good enough to get started.  The ether is used for gas to make function calls to the token smart contract when your miner finds a solution to the Proof of Work.  When the gas is spent that means that you have found a solution! If you were the first to find it, you will be rewarded with 0xbitcoin tokens.  (See the block explorer for typical gas prices at the current moment.)
+1. Duplicate the 'miner-config-sample.json' file and rename it to 'miner-config.json'
+2. Set the parameters in this file appropriately
+3. In the console, run the command 'node index.js' to start mining
 
 
 
 ### Pool Mining
-- You can mine into a pool with the command 'pool mine'  
 - When mining into a pool, your gasprice does not matter and you will pay NO GAS FEES  
 - Every pool is different so consult each pool owner.  Typically, pools will offer a token withdraw mechanism or automatically send tokens to your address on a periodic basis or when a limit is reached
 
 
+### Solo Mining
+- IF SOLO MINING it is necessary to fill the mining account (it is an Ethereum account) with a small amount of ether.  
+- Typically 0.005 eth is good enough to get started.  The ether is used for gas to make function calls to the token smart contract when your miner finds a solution to the Proof of Work.  
+- When the gas is spent that means that you have found a solution! If you were the first to find it, you will be rewarded with 0xbitcoin tokens.  (See the block explorer for typical gas prices at the current moment.)
 
-### Vault Datafiles
 
-(requires 'show hidden files and folders')
 
-Stored at:
-
-- Windows
-    '/Users/{user}/Appdata/Roaming/.0xbitcoin'
-
-- Mac
-    '/home/{user}/Library/Preferences/.0xbitcoin'
-
-- Linux
-    '/home/{user}/.0xbitcoin'
 
 
 
