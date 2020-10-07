@@ -25,7 +25,7 @@ This new build uses miner-config.js for setting parameters and no longer has an 
 4. Open a terminal, cd into the project folder and run 'yarn' to install dependencies
 5. Run the command 'npm run build' to build C files with node-gyp
 6. Set up the config file 'miner-config.json' (duplicate miner-config-sample as a reference)
-7. Start the miner with 'node index.js'
+7. Start the miner with 'npm run miner'
 
 #### Setup (Mac)
 1. Install Homebrew & NodeJS 8.9

@@ -7,6 +7,7 @@
   "description": "Find hashes, get money.",
   "main": "index.js",
   "scripts": {
+    "miner": "node index.js",
     "build": "node-gyp configure build --target=v8.9.4",
     "package": "pkg index.js ",
     "test": "./node_modules/mocha/bin/mocha"
