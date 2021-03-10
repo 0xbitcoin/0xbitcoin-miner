@@ -16,7 +16,7 @@
 #ifndef __SOLVER__
 #define __SOLVER__
 
-#include "openCLSolver.h"
+#include "OpenCLSolver.h"
 
 #ifdef __linux__
 #	define EXPORT

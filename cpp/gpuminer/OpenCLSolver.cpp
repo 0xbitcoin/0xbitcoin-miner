@@ -11,7 +11,9 @@
    limitations under the License.
 */
 
-#include "openCLSolver.h"
+
+
+#include "OpenCLSolver.h"
 
 namespace OpenCLSolver
 {

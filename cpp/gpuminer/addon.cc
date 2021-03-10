@@ -6,30 +6,19 @@
  * MIT License <https://github.com/nodejs/nan/blob/master/LICENSE.md>
  ********************************************************************/
 
-/*
-
-  This is the glue between Node and C 
-
-  This file needs to be fixed up! 
-
-
-*/
-
-
-
 #include <nan.h>
 
-#include "OpenClSolver.h"
-
+#include "gpuminer.h"
+ 
 
 namespace miner {
 
   using namespace Nan;
 
 
-  OpenCLSolver::OpenCLSolver* gpuminer = nullptr;
+  ::GpuMiner* gpuminer = nullptr;
 
-/*
+
   //call C++ dtors:
   void cleanup(void* p) {
     delete reinterpret_cast<GpuMiner*>(p);
@@ -106,14 +95,13 @@ namespace miner {
 
   // Get the number of hashes performed until now
   //  and reset it to 0
-  NAN_METHOD(hashes) {
-    uint32_t const value = Solver::hashes;
-    Solver::hashes = 0;
+  //ADD THIS BACK IN LATER 
+ /* NAN_METHOD(hashes) {
+    uint32_t const value = OpenCLSolver::hashes;
+    OpenCLSolver::hashes = 0;
     info.GetReturnValue().Set(value);
-  }
+  }*/ 
 
-
-*/
   // Defines the functions our add-on will export
   NAN_MODULE_INIT(Init) {
     Set(target
@@ -144,11 +132,10 @@ namespace miner {
       , New<v8::FunctionTemplate>(hashes)->GetFunction()
     );
 
-    gpuminer = new OpenCLSolver::OpenCLSolver;
+    gpuminer = new GpuMiner;
 
     node::AtExit(cleanup, gpuminer);
   }
-
 
   NODE_MODULE(gpumining, Init)
 

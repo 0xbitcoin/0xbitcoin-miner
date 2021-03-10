@@ -44,6 +44,14 @@ namespace OpenCLSolver
 
 		void InitializeDevice(DeviceCL *device, bool isKingMaking, const char *errorMessage);
 
+		/*
+		Target:
+		MidState:
+		Message:
+
+		
+		*/
+
 		void PushHigh64Target(DeviceCL device, cl_ulong *high64Target, const char *errorMessage);
 		void PushTarget(DeviceCL device, byte32_t *target, const char *errorMessage);
 		void PushMidState(DeviceCL device, sponge_ut *midState, const char *errorMessage);
