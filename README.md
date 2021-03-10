@@ -1,7 +1,7 @@
 
 # 0xBitcoin ERC20 Token Miner
 
-Solves proof of work to mine supported ERC20 tokens.  This is a CPU miner. (See Releases for links to GPU miners.)
+Solves proof of work to mine supported ERC20 tokens.  This is a CPU/GPU miner. (See Releases for links to GPU miners.)
 
 
 
@@ -19,10 +19,10 @@ This new build uses miner-config.js for setting parameters and no longer has an 
 ### Building from Source
 
 
-Prerequisites
-1. Install OpenCL 
-a. Ubuntu: sudo apt install ocl-icd-opencl-dev  
-(->  /usr/lib/x86_64-linux-gnu/libOpenCL.so)
+#### Prerequisites
+1. Install OpenCL Headers 
+a. Ubuntu 20 (EASY): sudo apt install ocl-icd-opencl-dev  
+(headers will be at ->  /usr/lib/x86_64-linux-gnu/libOpenCL.so)
 
 #### Setup (Windows/Linux)
 1. Install NodeJS 10 (nvm install 10)
