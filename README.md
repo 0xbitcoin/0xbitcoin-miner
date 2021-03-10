@@ -89,9 +89,10 @@ REMINDER: You >can< set the web3provider to a ropsten, mainnet, or other type of
 
 
 ## Dev TODO:
-See node-opencl 
-https://github.com/mikeseven/node-opencl
+* cpp/gpuminer/addon.cc is complete 
+* cpp/cpuminer/gpuminer.cpp is basically complete 
 
+1. need to bind gpuminer.cpp to solver.cpp now 
 
 
 
