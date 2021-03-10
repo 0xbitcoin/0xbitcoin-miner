@@ -19,22 +19,28 @@ This new build uses miner-config.js for setting parameters and no longer has an 
 ### Building from Source
 
 #### Setup (Windows/Linux)
-1. Install NodeJS 8.9
-2. Run 'npm install yarn -g' to install yarn package manager
-3. Clone/download the project
-4. Open a terminal, cd into the project folder and run 'yarn' to install dependencies
-5. Run the command 'npm run build' to build C files with node-gyp
+1. Install NodeJS 10 (nvm install 10)
+2. Clone/download the project
+3. Open a terminal, cd into the project folder and run 'npm install' to install dependencies
+4. Run the command 'npm run build' to build C files with node-gyp
 6. Set up the config file 'miner-config.json' (duplicate miner-config-sample as a reference)
 7. Start the miner with 'npm run miner'
 
 #### Setup (Mac)
-1. Install Homebrew & NodeJS 8.9
+1. Install Homebrew & NodeJS 10
 2. Run 'brew install yarn' to install yarn package manager
 3. Clone/download this project
 4. Open a terminal, cd into the project folder and run 'yarn'
-5. Run the command 'npm run build' to build C files with node-gyp
+5. Run the command 'yarn build' to build C files with node-gyp
 6. Set up the config file 'miner-config.json' (duplicate miner-config-sample as a reference)
 7. Start the miner with 'node index.js'
+
+
+### NOT WORKING ?
+Make sure you have build-essential installed to compile C code and make sure you have python3.
+
+Try these commands:
+> node-gyp rebuild
 
 
 
