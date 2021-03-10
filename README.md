@@ -18,6 +18,12 @@ This new build uses miner-config.js for setting parameters and no longer has an 
 
 ### Building from Source
 
+
+Prerequisites
+1. Install OpenCL 
+a. Ubuntu: sudo apt install ocl-icd-opencl-dev  
+(->  /usr/lib/x86_64-linux-gnu/libOpenCL.so)
+
 #### Setup (Windows/Linux)
 1. Install NodeJS 10 (nvm install 10)
 2. Clone/download the project
@@ -81,6 +87,10 @@ REMINDER: You >can< set the web3provider to a ropsten, mainnet, or other type of
 - When the gas is spent that means that you have found a solution! If you were the first to find it, you will be rewarded with 0xbitcoin tokens.  (See the block explorer for typical gas prices at the current moment.)
 
 
+
+## Dev TODO:
+See node-opencl 
+https://github.com/mikeseven/node-opencl
 
 
 
