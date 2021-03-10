@@ -27,9 +27,9 @@ namespace miner {
   using namespace Nan;
 
 
-  ::GpuMiner* gpuminer = nullptr;
+  OpenCLSolver::OpenCLSolver* gpuminer = nullptr;
 
-
+/*
   //call C++ dtors:
   void cleanup(void* p) {
     delete reinterpret_cast<GpuMiner*>(p);
@@ -112,6 +112,8 @@ namespace miner {
     info.GetReturnValue().Set(value);
   }
 
+
+*/
   // Defines the functions our add-on will export
   NAN_MODULE_INIT(Init) {
     Set(target
@@ -142,11 +144,12 @@ namespace miner {
       , New<v8::FunctionTemplate>(hashes)->GetFunction()
     );
 
-    gpuminer = new GpuMiner;
+    gpuminer = new OpenCLSolver::OpenCLSolver;
 
     node::AtExit(cleanup, gpuminer);
   }
 
-  NODE_MODULE(cpumining, Init)
+
+  NODE_MODULE(gpumining, Init)
 
 }
