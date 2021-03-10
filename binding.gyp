@@ -20,6 +20,8 @@
         'NOCL_REALEASE_DRIVER_ISSUES'
       ],
       'sources': [
+        'cpp/gpuminer/addon.cc',
+        'cpp/gpuminer/OpenClSolver.h',
         'cpp/gpuminer2/addon.cpp',
         'cpp/gpuminer2/types.cpp',
         'cpp/gpuminer2/common.cpp',
