@@ -21,21 +21,8 @@
       ],
       'sources': [
         'cpp/gpuminer/addon.cc',
-        'cpp/gpuminer/OpenClSolver.h',
-        'cpp/gpuminer2/addon.cpp',
-        'cpp/gpuminer2/types.cpp',
-        'cpp/gpuminer2/common.cpp',
-        'cpp/gpuminer2/commandqueue.cpp',
-        'cpp/gpuminer2/context.cpp',
-        'cpp/gpuminer2/device.cpp',
-        'cpp/gpuminer2/event.cpp',
-        'cpp/gpuminer2/kernel.cpp',
-        'cpp/gpuminer2/memobj.cpp',
-        'cpp/gpuminer2/pipe.cpp',
-        'cpp/gpuminer2/platform.cpp',
-        'cpp/gpuminer2/program.cpp',
-        'cpp/gpuminer2/sampler.cpp',
-        'cpp/gpuminer2/svm.cpp'
+        'cpp/gpuminer/OpenClSolver.h' 
+       
       ],
       'include_dirs' : [
         "<!(node -e \"require('nan')\")",
