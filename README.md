@@ -1,7 +1,7 @@
 
 # 0xBitcoin ERC20 Token Miner
 
-Solves proof of work to mine supported ERC20 tokens.  This is a CPU miner. (See Releases for links to GPU miners.)
+Solves proof of work to mine supported ERC20 tokens.  This is a CPU/GPU miner. (See Releases for links to GPU miners.)
 
 
 
@@ -17,6 +17,12 @@ This new build uses miner-config.js for setting parameters and no longer has an 
 
 
 ### Building from Source
+
+
+#### Prerequisites
+1. Install OpenCL Headers 
+a. Ubuntu 20 (EASY): sudo apt install ocl-icd-opencl-dev  
+(headers will be at ->  /usr/lib/x86_64-linux-gnu/libOpenCL.so)
 
 #### Setup (Windows/Linux)
 1. Install NodeJS 10 (nvm install 10)
@@ -82,6 +88,11 @@ REMINDER: You >can< set the web3provider to a ropsten, mainnet, or other type of
 
 
 
+## Dev TODO:
+* cpp/gpuminer/addon.cc is complete 
+* cpp/cpuminer/gpuminer.cpp is basically complete 
+
+1. need to bind gpuminer.cpp to solver.cpp now 
 
 
 
