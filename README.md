@@ -1,6 +1,8 @@
 
 # 0xBitcoin ERC20 Token Miner
 
+LICENSE GPL
+
 Solves proof of work to mine supported ERC20 tokens.  This is a CPU miner. (See Releases for links to GPU miners.)
 
 
