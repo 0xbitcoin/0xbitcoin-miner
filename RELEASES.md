@@ -26,9 +26,8 @@ That either comes with the miners or any instructions on the page where you down
 Now listed together in this continually-updated thread.
 * https://www.reddit.com/r/0xbitcoin/comments/8o06dk/links_to_the_newestbest_miners_for_nvidia_amd/
 
-
-
-
+* SoliditySHA3Miner v1.1.0.0 (nVidia/AMD/Intel(iGPU)/CPU):
+https://github.com/lwYeo/SoliditySHA3Miner All-in-one (nVidia, AMD, Intel & CPU) console miner with API (ccMiner and JSON). Active development, 2% devfee in both pool and solo mode (minimum 1.5%). Supports mixed GPU & iGPU mining in a single instance. Currently only CPU supports KingMaking. Author: Amano7 on the Discord.
 
 ### Historical Links: these miners are out-of-date.
 
